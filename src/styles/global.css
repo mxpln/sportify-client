@@ -18,3 +18,33 @@ a {
 ul {
   list-style-type: none;
 }
+
+.menu-list {
+  margin: 5px 0px;
+  display:flex;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
+.divider-section {
+padding : 10px 0;
+}
+
+.text-list {
+  /* color:red; */
+  font-weight: 400;
+  position: relative;
+  left: -15px;
+}
+
+.date-picker-container {
+  display: flex;
+}
+
+.search-bar-home {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+

@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-
 import UserContext from "../Auth/UserContext";
 import { withRouter } from "react-router-dom";
 import apiHandler from "../../api/apiHandler";
+import TextField from '@material-ui/core/TextField';
+import SubmitBtn from "../buttons/SubmitBtn";
+
+
+
 
 class FormSignin extends Component {
   static contextType = UserContext;
@@ -41,14 +45,29 @@ class FormSignin extends Component {
       });
   };
 
+
+
   render() {
+
     return (
       <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" />
-        <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="password" />
-        <button>Submit</button>
+       {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
+
+       <label htmlFor="email"></label>
+       <TextField id="email" name="email" label="Email" variant="outlined" />
+
+        {/* <label htmlFor="email">Email</label>
+        <input type="email" id="email" name="email" /> */}
+
+        <label htmlFor="password"></label>
+       <TextField id="password" name="password" label="Mot de passe" variant="outlined" />
+
+        {/* <label htmlFor="password">Password</label>
+        <input type="password" id="password" name="password" /> */}
+
+        <SubmitBtn />
+
+  
       </form>
     );
   }
