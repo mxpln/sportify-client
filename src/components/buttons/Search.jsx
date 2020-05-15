@@ -16,7 +16,7 @@ export default function ComboBox() {
       options={sports}
       getOptionLabel={(option) => option.title}
       style={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Rechercher sport..." variant="outlined" />}
+      renderInput={(params) => <TextField {...params} label="Sport..." variant="outlined" />}
     />
 </div>
 

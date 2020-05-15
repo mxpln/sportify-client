@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import apiHandler from "../../api/apiHandler";
 import TextField from '@material-ui/core/TextField';
 import SubmitBtn from "../buttons/SubmitBtn";
+import Password from "../buttons/Password";
 
 
 
@@ -14,7 +15,10 @@ class FormSignin extends Component {
   state = {
     email: "",
     password: "",
+
   };
+
+
 
   handleChange = (event) => {
     const key = event.target.name;
@@ -53,14 +57,17 @@ class FormSignin extends Component {
       <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
        {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
 
+      
        <label htmlFor="email"></label>
        <TextField id="email" name="email" label="Email" variant="outlined" />
 
         {/* <label htmlFor="email">Email</label>
         <input type="email" id="email" name="email" /> */}
 
-        <label htmlFor="password"></label>
-       <TextField id="password" name="password" label="Mot de passe" variant="outlined" />
+        <Password />
+
+        {/* <label htmlFor="password"></label>
+       <TextField id="password" name="password" label="Mot de passe" variant="outlined" /> */}
 
         {/* <label htmlFor="password">Password</label>
         <input type="password" id="password" name="password" /> */}

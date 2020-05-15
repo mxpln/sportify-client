@@ -5,14 +5,15 @@ import DatePicker from "../components/buttons/DatePicker";
 import Level from "../components/buttons/Level";
 import TeamSelector from "../components/buttons/TeamSelector";
 import FavoriteSportsFilter from "../components/buttons/FavoriteSportsFilter";
-
+import MyMap from "../components/buttons/MyMap";
+import Toggle from "../components/buttons/Toggle"
+import ViewsFilter from "../components/buttons/ViewsFilter"
 
 
 
 const Home = (props) => {
   return (
     <div>
-      <h1>Home Page ∆</h1>
     
 <div className="search-bar-home">
       <Search />
@@ -20,9 +21,23 @@ const Home = (props) => {
       <Level />
       <TeamSelector />
       <FavoriteSportsFilter />
-</div>
-      
 
+      <div className="test-mathias">
+      <Toggle />
+      
+      <MyMap />
+      </div>
+
+    
+
+    
+     
+      
+      
+    
+    
+      
+      </div>
     </div>
   );
 };

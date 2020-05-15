@@ -45,6 +45,55 @@ padding : 10px 0;
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+}
+
+.flex {
+  display:flex;
+}
+
+.app-bar {
+  background-color: white;
+  color: black;
+}
+
+.avatar-group {
+  position: relative;
+  /* top: -8px; */
+  left: 12px;
+}
+
+.avatar-group-btn {
+  position: relative;
+  left: 52px;
+  /* top: -8px; */
+}
+
+.card-image {
+  width: 90%;
+  height: 200px;
+  margin: 0 auto;
+  border-radius:4px 20px 4px 20px;
+}
+
+.flex-card {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 
+.card-margin {
+  margin:10px;
+}
+
+.home-toggle-btn {
+  position:relative;
+  top: -520px;
+  left:700px;
+  background-color: red;
+}
+
+.div-home-toggle {
+  width: 600px;
+  height: 200px;
+}

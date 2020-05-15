@@ -6,6 +6,8 @@ export default class MyEvents extends Component {
         return (
             <div>
                 <ViewsFilter />
+
+                {/* <h1>test</h1> */}
             </div>
         )
     }
