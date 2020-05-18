@@ -22,7 +22,8 @@ export default class SearchPlace extends Component {
     render() {
         return (
           <>
-            <div>               
+            <div>   
+                        
             <LocationAutoComplete onSelect={this.handlePlace}/>
         
             </div>

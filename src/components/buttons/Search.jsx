@@ -1,17 +1,12 @@
-import React from 'react';
+import React, { Component, useCallback } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-
-
-
-
-export default function ComboBox() {
-  
+const Search = ({clbk}) => {
   return (
-
     <div>
     <Autocomplete
+      onChange= {clbk}
       id="combo-box-demo"
       options={sports}
       getOptionLabel={(option) => option.title}
@@ -22,7 +17,9 @@ export default function ComboBox() {
 
 
   );
-}
+  }
+
+
 
 const sports= [
 {title : "Aérobic"},
@@ -194,3 +191,6 @@ const sports= [
 {title:"Zen Hakko Kaï"},
 {title:"Zumba"},
 ];
+
+export default Search;
+

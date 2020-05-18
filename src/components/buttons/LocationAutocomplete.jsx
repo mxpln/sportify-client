@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import TextField from '@material-ui/core/TextField';
+
 require("dotenv").config();
 
 
@@ -47,13 +48,14 @@ class LocationAutoComplete extends Component {
 
     axios
       .get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${this.state.search}.json?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/{"countries":[{"name":"France","code":"fr"}]},{"onCountry":true},${this.state.search}.json?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`
       )
       .then((response) => {
         this.setState({
           results: response.data.features,
           isLoading: false,
         });
+        
       });
   }
 
@@ -67,6 +69,7 @@ class LocationAutoComplete extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className="LocationAutoComplete">
 
@@ -75,25 +78,13 @@ class LocationAutoComplete extends Component {
           value={this.state.search}
           onChange={this.handleSearchChange}
           placeholder="Enter an address" />
-
-        {/* <input
-          className="input"
-          type="text"
-          value={this.state.search}
-          onChange={this.handleSearchChange}
-          placeholder="Enter an address"
-        /> */}
-
-
-
-
-
         <ul className="LocationAutoComplete-results">
           {this.state.results.map((place) => (
             <li
               key={place.id}
               className="LocationAutoComplete-items"
               onClick={() => this.handleItemClicked(place)}
+              
             >
               {place.place_name}
             </li>
