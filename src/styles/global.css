@@ -50,6 +50,9 @@ ul {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  /* border: 1px solid black; */
+  /* border-radius: 10px; */
 }
 
 .flex-between {
@@ -63,17 +66,16 @@ ul {
   color: black;
 }
 
-.avatar-group {
+/* .avatar-group {
   position: relative;
-  /* top: -8px; */
   left: 12px;
-}
+} */
 
-.avatar-group-btn {
+/* .avatar-group-btn {
   position: relative;
   left: 52px;
   top: -4px;
-}
+} */
 
 .card-image {
   width: 90%;
@@ -91,6 +93,12 @@ ul {
 .card-margin {
   margin: 10px;
 }
+.card-container-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 10px 10px 20px;
+}
+
 
 .home-toggle-btn {
   position: relative;
@@ -161,12 +169,13 @@ ul {
   border-radius: 4px 20px 4px 20px;
   background-color: grey;
   text-align: center;
+  background-size: cover;
 }
 
 .team-container {
   border: 2px solid #3f51b5;
   border-radius: 4px 20px 4px 20px;
-  padding: 10px;
+  padding:15px 20px 15px 20px;
 }
 
 .pic-avatar-container {
@@ -215,7 +224,7 @@ ul {
   border: 2px solid #3f51b5;
   border-radius: 4px 20px 4px 20px;
   padding: 10px;
- 
+ margin: 20px 0;
 }
 
 .card-margin {
@@ -240,7 +249,7 @@ ul {
 }
 
 .margin-top {
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .margin-right {
@@ -259,3 +268,49 @@ ul {
 /* .LocationAutoComplete-results{
   border: 1px solid red;
 } */
+
+.date-hour-container {
+  margin: 30px 0 10px 0;
+}
+.adresse-container {
+  margin: 20px 0 10px 0;
+}
+
+.profile-container-burger {
+margin: 20px 0;
+}
+
+.img-container-burger {
+  margin: 20px auto;
+  height: 100px;
+  max-height: 150px;
+  width: 100px;
+  max-width: 150px;
+  border-radius: 100%;
+  background-color: grey;
+  text-align: center;
+}
+
+.title-container-burger {
+  text-align: center;
+  
+}
+
+.change-view-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 10px;
+  background-color: white;
+}
+
+.change-view-container button {
+background-color: red;
+padding: 8px;
+border-radius: 10px;
+color: white;
+}
+
+.margin-general {
+  margin: 20px;
+}

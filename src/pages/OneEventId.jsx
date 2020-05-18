@@ -16,6 +16,8 @@ import Grid from "@material-ui/core/Grid";
 
 import SubmitBtn from "../components/buttons/SubmitBtn";
 
+import MyMap from "../components/buttons/MyMap"
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -42,16 +44,19 @@ export default function OneEventId() {
             <div className="img-container"></div>
           </div>
 
-          <div className="flex-between margin-top">
-            <div className="flex-between">
-              <div className="pic-avatar-container"></div>
-              <h3 className="title">Createur</h3>
-            </div>
-          </div>
-
           {/* <div>
               <h3 className="title">Date / Heure</h3>
             </div> */}
+
+          <div className="flex-between date-hour-container">
+            <div>
+              {" "}
+              <h2>Lundi 17 Septembre</h2>
+            </div>
+            <div>
+              <h2>10:58</h2>
+            </div>
+          </div>
 
           <h1 className="title">Titre de l'évenement</h1>
 
@@ -74,27 +79,49 @@ export default function OneEventId() {
             primis in faucibus.
           </p>
 
-          <h2>Adresse</h2>
+          <h2>Createur</h2>
+
+          <div className="flex-between margin-top">
+            <div className="flex-between">
+              <div className="pic-avatar-container"></div>
+              <h3 className="title">Nom Prénom créateur</h3>
+            </div>
+          </div>
+
+          <h2>Adresse de RDV</h2>
+          <div>
+            <div className="adresse-container">
+              <div>
+                <p>17 rue du Moulin 75018 Paris</p>
+              </div>
+            </div>
+
+            <div className="img-container"> </div>
+          </div>
+          <h2 className="title">Participants</h2>
+
+          {/* INDIVIDUEL*/}
 
           <Grid container spacing={3}>
-            <Grid item xs={6}>
-              <div>Adresse</div>
-            </Grid>
-
-            <Grid item xs={3}>
-              <div>Date</div>
-            </Grid>
-
-            <Grid item xs={3}>
-              <div>Heure</div>
-            </Grid>
-
             <Grid item xs={12}>
-              <div className="img-container"></div>
+              <div className="team-container">
+                <div className="flex-between">
+                  <div className="flex-between">
+                    <div className="pic-avatar-container"></div>
+                    <h3 className="title">Nom Prénom participant</h3>
+                  </div>
+                </div>
+                <div className="flex-between">
+                  <div className="flex-between">
+                    <div className="pic-avatar-container"></div>
+                    <h3 className="title">Nom Prénom participant</h3>
+                  </div>
+                </div>
+              </div>
             </Grid>
           </Grid>
 
-          <h2 className="title">Participants</h2>
+          {/* SI TEAM */}
 
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
@@ -127,6 +154,13 @@ export default function OneEventId() {
               </div>
             </Grid>
           </Grid>
+
+          <h2 className="title">Messagerie</h2>
+          <div>
+
+            <div className="img-container"></div>
+          </div>
+   
 
           <div className="submit-btn padding-btn">
             <SubmitBtn />

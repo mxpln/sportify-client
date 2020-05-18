@@ -74,6 +74,13 @@ export default function SwipeableTemporaryDrawer() {
                   <li>Mes évenements</li>
                   <li>'Mes participations</li>
               </ul> */}
+
+              <div className="profile-container-burger">
+                <div className="img-container-burger"></div>
+                <div className="title-container-burger"> <h3>Nom Prenom</h3></div>
+              </div>
+
+              <div className="divider-section" >  <Divider  /> </div>
            
             
             <div className="menu-list"> <NavLink exact to="/"><List> <ListItem><ListItemIcon><HomeIcon/></ListItemIcon><ListItemText className="text-list">Accueil</ListItemText></ListItem> </List></NavLink></div> 

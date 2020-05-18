@@ -7,14 +7,20 @@ import FavoriteSportsFilter from "../components/buttons/FavoriteSportsFilter";
 import MyMap from "../components/buttons/MyMap";
 import Card from "../components/buttons/Card";
 
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+import SubmitBtn from "../components/buttons/SubmitBtn";
+
 class Home extends Component {
   state = {
     isSwitchOn: false,
     search: "",
     startDate: "",
-    endDate:"",
-    level :"",
-    team : "",
+    endDate: "",
+    level: "",
+    team: "",
     favoriteSports: false,
   };
 
@@ -36,55 +42,89 @@ class Home extends Component {
   };
 
   handleEndDate = (date) => {
-   this.setState({
-    endDate: date
-   })
+    this.setState({
+      endDate: date,
+    });
   };
 
   handleStartDate = (date) => {
     this.setState({
-      startDate: date
-     })
-  }
+      startDate: date,
+    });
+  };
 
-  handleRating = (newValue) =>{
+  handleRating = (newValue) => {
     let res;
-    if (newValue===null || newValue===1){res="facile"}
-    else if (newValue===2) {res="modéré"}
-    else if (newValue===3) {res="confirmé"}
+    if (newValue === null || newValue === 1) {
+      res = "facile";
+    } else if (newValue === 2) {
+      res = "modéré";
+    } else if (newValue === 3) {
+      res = "confirmé";
+    }
     this.setState({
-      level : res
-    })
-  }
+      level: res,
+    });
+  };
 
   handleTeam = (newValue) => {
     this.setState({
-      team: newValue
-    })
-  }
+      team: newValue,
+    });
+  };
 
   handleFavorite = (value) => {
     this.setState({
-      favoriteSports: value
-    })
-  }
+      favoriteSports: value,
+    });
+  };
 
   render() {
     console.log(this.state);
     return (
       <div>
         <div className="search-bar-home">
-          <Search clbk={this.handleChange} />
-          <DatePicker endDate={this.handleEndDate} startDate={this.handleStartDate}/>
-          <Level ratingValue={this.handleRating} />
-          <TeamSelector parentCallback={this.handleTeam} />
-          <FavoriteSportsFilter parentCallback={this.handleFavorite}/>
+        {/* <div className="change-view-container">
+          <button onClick={this.toggle}>Changer vue</button>
+        </div> */}
+          <div className="flex-between">
+            <div className="margin-general">
+              <Search clbk={this.handleChange} />
+            </div>
+            <div className="margin-general">
+              <DatePicker
+                endDate={this.handleEndDate}
+                startDate={this.handleStartDate}
+              />
+            </div>
+          </div>
+
+          <div className="flex-between">
+            {/* <button>Filters</button> */}
+            <div className="margin-general"> <Level ratingValue={this.handleRating} /></div>
+            <div className="margin-general"><TeamSelector parentCallback={this.handleTeam} /></div>
+            <div className="margin-general"> <FavoriteSportsFilter parentCallback={this.handleFavorite} /></div>
+          </div>
+
+          <div>
+         
+            <SubmitBtn />
+        
+          </div>
+
+          
         </div>
-        <button onClick={this.toggle}>Changer vue</button>
+
+        {/* <div className="change-view-container">
+
+          <button onClick={this.toggle}>Changer vue</button>
+        </div> */}
+
         <div
           className={
             this.state.isSwitchOn ? "toggleDisplayOff" : "toggleDisplayOn"
-          }>
+          }
+        >
           <MyMap />
         </div>
 
@@ -93,10 +133,38 @@ class Home extends Component {
             this.state.isSwitchOn ? "toggleDisplayOn" : "toggleDisplayOff"
           }
         >
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          <React.Fragment>
+            <CssBaseline />
+            <Container maxWidth="md">
+              <h2>Lundi 17 Mai 2020</h2>
+
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card />
+                </Grid>
+
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card />
+                </Grid>
+
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card />
+                </Grid>
+
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card />
+                </Grid>
+
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card />
+                </Grid>
+
+                <Grid item xs={12} sm={6} md={4}>
+                  <Card />
+                </Grid>
+              </Grid>
+            </Container>
+          </React.Fragment>
         </div>
       </div>
     );
