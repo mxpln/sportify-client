@@ -50,6 +50,7 @@ export default function BasicTextFields() {
        <OneDatePicker />
        
         <TextField
+          className="zIndex"
           id="outlined-number"
           label="Nombre de joueurs maximum"
           type="number"

@@ -97,3 +97,16 @@ padding : 10px 0;
   width: 600px;
   height: 200px;
 }
+/* .user-location{
+  height:100px;
+  width:100px;
+  background-color:rgba(0, 225, 255, 0.096);
+  border-radius:100%;
+} */
+
+.toggleDisplayOff{
+  display:none;
+}
+/* .LocationAutoComplete-results{
+  border: 1px solid red;
+} */
