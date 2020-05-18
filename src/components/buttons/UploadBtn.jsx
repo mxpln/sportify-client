@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,13 +30,9 @@ export default function UploadButtons() {
         type="file"
       />
       <label htmlFor="contained-button-file">
-       
-      </label>
-      <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
-      <label htmlFor="icon-button-file">
-        <IconButton color="primary" aria-label="upload picture" component="span">
-          <PhotoCamera />
-        </IconButton>
+        <Button variant="outlined" color="primary" startIcon={<CloudUploadIcon />} component="span" >
+          Upload
+        </Button>
       </label>
     </div>
   );

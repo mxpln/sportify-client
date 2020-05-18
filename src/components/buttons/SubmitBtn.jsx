@@ -21,6 +21,7 @@ export default function IconLabelButtons() {
       <Button
         variant="contained"
         color="primary"
+        padding="100px"
         className={classes.button}
         endIcon={<SendIcon>Envoyer</SendIcon>}
       >

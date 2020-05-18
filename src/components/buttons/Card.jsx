@@ -20,9 +20,14 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AvatarGroup from './AvatarGroup'
 import AddBtn from './AddBtn'
 
+import Grid from "@material-ui/core/Grid";
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
+    // width: 275,
     maxWidth: 345,
+    // margin:"10px"
   },
   media: {
     height: 0,
@@ -53,7 +58,7 @@ export default function RecipeReviewCard() {
 
   return (
       <>
-      <div className="card-margin">
+   
 
     <Card className={classes.root}>
       <CardHeader
@@ -62,8 +67,8 @@ export default function RecipeReviewCard() {
             R
           </Avatar>
         }
-        title="Match de foot entre vrais gars"
-        subheader="September 14, 2020"
+        title="Match de foot entre..."
+        subheader="10:30"
       />
       <CardMedia
         // className={classes.media}
@@ -77,18 +82,27 @@ export default function RecipeReviewCard() {
         </Typography>
       </CardContent> */}
 
+    
+
       <CardActions disableSpacing>
+
+      <div className="flex">
 
       <div className="avatar-group">
         <AvatarGroup />
      </div>
+
      <div className="avatar-group-btn">
         <AddBtn/>
         </div>
+
+    </div>
+
+
       </CardActions>
      
     </Card>
-</div>
+
     </>
   );
 }

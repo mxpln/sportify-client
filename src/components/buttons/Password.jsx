@@ -15,17 +15,17 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
+    display: "grid",
+    // flexWrap: "wrap",
   },
   margin: {
-    margin: theme.spacing(1),
+    // margin: theme.spacing(1),
   },
   withoutLabel: {
     marginTop: theme.spacing(3),
   },
   textField: {
-    width: "25ch",
+    // width: "100ch",
   },
 }));
 

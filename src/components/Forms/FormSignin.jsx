@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import UserContext from "../Auth/UserContext";
 import { withRouter } from "react-router-dom";
 import apiHandler from "../../api/apiHandler";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 import SubmitBtn from "../buttons/SubmitBtn";
 import Password from "../buttons/Password";
 
+import SimpleContainer from "../Display/SimpleContainer";
+import Grid from "@material-ui/core/Grid";
 
-
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 class FormSignin extends Component {
   static contextType = UserContext;
@@ -15,10 +18,7 @@ class FormSignin extends Component {
   state = {
     email: "",
     password: "",
-
   };
-
-
 
   handleChange = (event) => {
     const key = event.target.name;
@@ -49,33 +49,63 @@ class FormSignin extends Component {
       });
   };
 
-
-
   render() {
-
     return (
-      <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
-       {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
+      <>
+        <React.Fragment>
+          <CssBaseline />
+          <Container maxWidth="md">
+            
+              <div className="main-container">
+                {/* <h2 className="title-container">Inscription</h2> */}
 
-      
-       <label htmlFor="email"></label>
-       <TextField id="email" name="email" label="Email" variant="outlined" />
+                <h2 className="title-container">Connexion</h2>
 
-        {/* <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" /> */}
 
-        <Password />
+                <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                      <label htmlFor="email"></label>
+                      <TextField
+                        fullWidth
+                        id="email"
+                        name="email"
+                        label="Email"
+                        variant="outlined"
+                      />
+                    </Grid>
 
-        {/* <label htmlFor="password"></label>
-       <TextField id="password" name="password" label="Mot de passe" variant="outlined" /> */}
+                    <Grid item xs={12}>
+                      <TextField
+                        fullWidth
+                        id="filled-password-input"
+                        label="Password"
+                        type="password"
+                        autoComplete="current-password"
+                        variant="outlined"
+                      />
+                    </Grid>
 
-        {/* <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="password" /> */}
+                    {/* <Grid item xs={3}>
+                <Search />
+              </Grid>
+              <Grid item xs={3}>
+                <Level />
+              </Grid>
+              <Grid item xs={3}>
+                <AddBtn />
+              </Grid> */}
+                  </Grid>
 
-        <SubmitBtn />
-
-  
-      </form>
+                  <div className="submit-btn padding-btn">
+                    <SubmitBtn />
+                  </div>
+                </form>
+              </div>
+            
+          </Container>
+        </React.Fragment>
+      </>
     );
   }
 }

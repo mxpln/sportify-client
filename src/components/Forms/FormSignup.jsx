@@ -2,16 +2,21 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import UserContext from "../Auth/UserContext";
 import apiHandler from "../../api/apiHandler";
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 import SubmitBtn from "../buttons/SubmitBtn";
 import UploadBtn from "../buttons/UploadBtn";
 import Password from "../buttons/Password";
-import Search from "../buttons/Search"
+import Search from "../buttons/Search";
 import Level from "../buttons/Level";
 import AddBtn from "../buttons/AddBtn";
+import Button from "@material-ui/core/Button";
 
+import Grid from "@material-ui/core/Grid";
 
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
+import CardsFavorite from "../buttons/CardsFavorite";
 
 class FormSignup extends Component {
   static contextType = UserContext;
@@ -50,45 +55,133 @@ class FormSignup extends Component {
 
   render() {
     return (
-<>
-      <h1>Creation profile</h1>
-      <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
-      <UploadBtn />
-      <label htmlFor="firstName"></label>
-       <TextField id="firstName" name="firstName" label="Prenom" variant="outlined" />
+      <>
+        <React.Fragment>
+          <CssBaseline />
+          <Container maxWidth="md">
+            <div className="main-container">
+              {/* <h2 className="title-container">Inscription</h2> */}
+              <div className="img-position">
+                <div className="avatar-container"></div>
+              </div>
 
-       <label htmlFor="lastName"></label>
-       <TextField id="lastName" name="lastName" label="Nom" variant="outlined" />
+              <div className="upload-position">
+                <UploadBtn />
+              </div>
 
-      <label htmlFor="email"></label>
-       <TextField id="email" name="email" label="Email" variant="outlined" />
+              <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+                <h3 className="title">Informations personnelles</h3>
+                <Grid container spacing={3}>
+                  <Grid item xs={6}>
+                    <label htmlFor="firstName"></label>
+                    <TextField
+                      fullWidth
+                      id="firstName"
+                      name="firstName"
+                      label="Prenom"
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <label htmlFor="lastName"></label>
+                    <TextField
+                      fullWidth
+                      id="lastName"
+                      name="lastName"
+                      label="Nom"
+                      variant="outlined"
+                    />
+                  </Grid>
 
-{/* 
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" /> */}
-        <Password />
+                  <Grid item xs={12}>
+                    <label htmlFor="email"></label>
+                    <TextField
+                      fullWidth
+                      id="email"
+                      name="email"
+                      label="Email"
+                      variant="outlined"
+                    />
+                  </Grid>
 
-        {/* <label htmlFor="password"></label>
-       <TextField id="password" name="password" label="Mot de passe" variant="outlined" /> */}
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      id="filled-password-input"
+                      label="Password"
+                      type="password"
+                      autoComplete="current-password"
+                      variant="outlined"
+                    />
+                  </Grid>
+                </Grid>
+                {/* <Grid item xs={3}>
+                <Search />
+              </Grid>
+              <Grid item xs={3}>
+                <Level />
+              </Grid>
+              <Grid item xs={3}>
+                <AddBtn />
+              </Grid> */}
+
+              
+
+                <h3 className="title">Sports favoris</h3>
+                
+                <Grid container spacing={3}>
+
+                
+                  <Grid item xs={4}>
+                    <Search />
+                  </Grid>
+
+                  <Grid item xs={4}>
+                    <Level />
+                  </Grid>
+
+                  <Grid item xs={4}>
+                    <AddBtn />
+                  </Grid>
+                  
+                  
+                </Grid>
+
+           
+
+              <div className="favorite-container">
+                <Grid container >
+                  <Grid xs={12} sm={6} md={4}>
+                  <div className="favorite-card-position">
+                    <CardsFavorite />
+                  </div>
+                    
+                  </Grid>
+
+                  <Grid xs={12} sm={6} md={4}>
+                  <div className="favorite-card-position">
+                    <CardsFavorite />
+                    </div>
+                  </Grid>
+
+                  <Grid xs={12} sm={6} md={4}>
+                  <div className="favorite-card-position">
+                    <CardsFavorite />
+                    </div>
+                  </Grid>
+                </Grid>
+                </div>
 
 
-        {/* <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="password" /> */}
+               
 
-
-        <h1>Sports favoris</h1>
-        <div className="flex">
-        <Search />
-        <Level />
-        <AddBtn />
-        </div>
-
-
-        
-        <SubmitBtn />
-        {/* <button>Submit</button> */}
-      </form>
-
+                <div className="submit-btn padding-btn">
+                  <SubmitBtn />
+                </div>
+              </form>
+            </div>
+          </Container>
+        </React.Fragment>
       </>
     );
   }

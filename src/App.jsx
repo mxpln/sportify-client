@@ -30,6 +30,7 @@ function App() {
         <Route exact path="/oneEvent" component={OneEventId} />
         <Route exact path="/editProfile" component={EditProfile} />
         <Route exact path="/myEvents" component={MyEvents} />
+        <Route exact path="/OneEventId" component={OneEventId} />
       </Switch>
     </div>
   );

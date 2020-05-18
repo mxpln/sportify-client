@@ -26,7 +26,9 @@ export default function MaterialUIPickers() {
       
       
         <KeyboardDatePicker
-          margin="normal"
+          // margin="normal"
+          fullWidth
+          margin="max"
           id="date-picker-dialog"
           label="Date"
           format="MM/dd/yyyy"
@@ -40,7 +42,7 @@ export default function MaterialUIPickers() {
 
         
         <KeyboardTimePicker
-          margin="normal"
+          // margin="normal"
           id="time-picker"
           label="Heure"
           value={selectedDate}
