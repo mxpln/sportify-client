@@ -84,9 +84,9 @@ class Home extends Component {
     return (
       <div>
         <div className="search-bar-home">
-        {/* <div className="change-view-container">
+        <div className="change-view-container">
           <button onClick={this.toggle}>Changer vue</button>
-        </div> */}
+        </div>
           <div className="flex-between">
             <div className="margin-general">
               <Search clbk={this.handleChange} />
