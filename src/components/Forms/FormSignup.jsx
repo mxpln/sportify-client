@@ -16,7 +16,12 @@ import { objectToFormData } from "object-to-formdata";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+import buildFormData from "../../utils/buildFormData"
+
 import CardsFavorite from "../buttons/CardsFavorite";
+
+
+
 
 class FormSignup extends Component {
   static contextType = UserContext;
@@ -30,6 +35,8 @@ class FormSignup extends Component {
     preferences: [],
     favoriteSport: "",
     level: "beginner",
+    sportCards: [],
+    favoriteSportID: "",
   };
 
   // handleChange = (event) => {
@@ -68,12 +75,15 @@ class FormSignup extends Component {
 
   handleSearch = (event, value) => {
     let res;
-    if (value === null) res = "";
-    else {
-      res = value.sport;
+    let id;
+    if (value === null) {
+      (res = "") && (id = "");
+    } else {
+      (res = value.sport) && (id = value._id);
     }
     this.setState({
       favoriteSport: res,
+      favoriteSportID: id,
     });
   };
 
@@ -93,37 +103,51 @@ class FormSignup extends Component {
 
   SubmitPref = (event) => {
     event.preventDefault();
-    let favoriteSport = this.state.favoriteSport;
+    let favoriteSportOne = this.state.favoriteSport;
     let level = this.state.level;
+    let favoriteSport = this.state.favoriteSportID;
+    // this.setState({
+    //   sportCards: [...this.state.sportCards, { favoriteSport, level }],
+    // });
     this.setState({
+      sportCards: [...this.state.sportCards, { favoriteSportOne, level }],
       preferences: [...this.state.preferences, { favoriteSport, level }],
     });
   };
 
   handleImage = (event) => {
-    let value=event.target.files[0];
-    
+    let value = event.target.files[0];
+
     this.setState({ image: value });
   };
-  handleUpload = (event) => {
-    
-  };
+  handleUpload = (event) => {};
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const email=this.state.email;
-    const password=this.state.password;
-    const firstName=this.state.firstName;
-    const lastName=this.state.lastName;
-    const image=this.state.image;
-    const preferences=this.state.preferences;
-    const fd= {email, password, firstName, lastName, image, preferences}
-    const result = fd;
-    console.log("result", result)
+    const email = this.state.email;
+    const password = this.state.password;
+    const firstName = this.state.firstName;
+    const lastName = this.state.lastName;
+    const image = this.state.image;
+    const preferences = this.state.preferences;
+    const userInfo = { email, password, firstName, lastName, image, preferences };
+    const fd = new FormData()
+    const result = buildFormData(fd, userInfo);
+    // const stringify = JSON.stringify(Object.fromEntries(result));
+
+    
+
+    // const fd = new FormData();
+    // fd.append("email", this.state.email);
+    // fd.append("password", this.state.password);
+    // fd.append("firstName", this.state.firstName)
+    // fd.append("lastName", this.state.lastName)
+    // fd.append("image", this.state.image)
+    // fd.append("preferences", this.state.preferences)
+
     apiHandler
-      .signup(result)
+      .signup(fd)
       .then((data) => {
-        console.log("date!", data)
         this.context.setUser(data);
         this.props.history.push("/");
       })
@@ -133,7 +157,7 @@ class FormSignup extends Component {
   };
 
   render() {
-    console.log(this.state.image);
+    // console.log(this.state.sportCards)
 
     return (
       <>
@@ -148,7 +172,10 @@ class FormSignup extends Component {
                     src={URL.createObjectURL(this.state.image)}
                   />
                 ) : (
-                  <img src="https://lh3.googleusercontent.com/proxy/VqXGJiJarTRD1K0-MFksdopGky4_v-8oRJtU9uKNw5pLOiPrsiGnXT568Df65wLwJT1zo8iZ7FMS6mw7tpglme4OOwMNnfvAI-r9Ywsqm4B7TbA-SL_yjNje4Eh7vDT1el_ghgND_aW58rntEcnlnLgN3w" className="avatar-container"/>
+                  <img
+                    src="/media/standard_profile.png"
+                    className="avatar-container"
+                  />
                 )}
               </div>
 
@@ -239,11 +266,11 @@ class FormSignup extends Component {
                   <Grid container>
                     <Grid xs={12} sm={6} md={4}>
                       <div className="favorite-card-position">
-                        {this.state.preferences.map((items, index) => {
+                        {this.state.sportCards.map((items, index) => {
                           return (
                             <CardsFavorite
                               key={index}
-                              name={items.favoriteSport}
+                              name={items.favoriteSportOne}
                               level={items.level}
                             />
                           );
