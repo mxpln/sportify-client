@@ -16,15 +16,8 @@ class FormSignin extends Component {
     email: "",
     password: "",
   };
-<<<<<<< HEAD
-
   // handleChange = (event) => {
   //   const key = event.target.name;
-
-=======
-  // handleChange = (event) => {
-  //   const key = event.target.name;
->>>>>>> master
   //   // You can test more if you have to handle different sorts of inputs.
   //   const value =
   //     event.target.type === "file"
@@ -32,10 +25,6 @@ class FormSignin extends Component {
   //       : event.target.type === "checkbox"
   //       ? event.target.checked
   //       : event.target.value;
-<<<<<<< HEAD
-
-=======
->>>>>>> master
   //   this.setState({ [key]: value });
   // };
   handleEmail = (event) => {
@@ -75,13 +64,7 @@ class FormSignin extends Component {
           <Container maxWidth="md">
             <div className="main-container">
               {/* <h2 className="title-container">Inscription</h2> */}
-<<<<<<< HEAD
-
               <h2 className="title-container">Connexion</h2>
-
-=======
-              <h2 className="title-container">Connexion</h2>
->>>>>>> master
               <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
@@ -95,10 +78,6 @@ class FormSignin extends Component {
                       variant="outlined"
                     />
                   </Grid>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
                   <Grid item xs={12}>
                     <TextField
                       onChange={this.handlePassword}
@@ -110,10 +89,6 @@ class FormSignin extends Component {
                       variant="outlined"
                     />
                   </Grid>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
                   {/* <Grid item xs={3}>
                 <Search />
               </Grid>
@@ -124,10 +99,6 @@ class FormSignin extends Component {
                 <AddBtn />
               </Grid> */}
                 </Grid>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
                 <div className="submit-btn padding-btn">
                   <SubmitBtn clbk={this.handleSubmit} />
                 </div>

@@ -25,7 +25,7 @@ export default class MyMap extends Component {
         lat: position.coords.latitude,
       });
     });
-   console.log(this.state.truc)
+
     const { center, zoom, style } = this.state;
     return (
       <>
