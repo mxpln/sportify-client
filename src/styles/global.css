@@ -312,5 +312,31 @@ color: white;
 }
 
 .margin-general {
-  margin: 20px;
+  margin: 10px;
+  /* border: 1px solid black; */
+}
+
+.title-favorite {
+  font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.00938em
+}
+
+.MuiRating-root {
+  margin-top: 9.5px;
+}
+
+.MuiSwitch-root {
+  left:-10px
+}
+
+.MuiExpansionPanelSummary-content {
+  justify-content: center;
+}
+
+.MuiExpansionPanelDetails-root  {
+  justify-content: center;
+  /* justify-content: space-around; */
 }

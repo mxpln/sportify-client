@@ -29,7 +29,7 @@ const handleChange = () => {
 
   return (
       <>
-      <h6>Sports favoris</h6>
+      <h6 className='title-favorite'>Sports favoris</h6>
       <FormControlLabel
         control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
         label=""
