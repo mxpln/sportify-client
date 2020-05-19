@@ -84,9 +84,9 @@ export default function RecipeReviewCard() {
 
     
 
-      <CardActions disableSpacing>
+     
 
-      <div className="flex">
+      <div className="card-container-bottom">
 
       <div className="avatar-group">
         <AvatarGroup />
@@ -99,7 +99,6 @@ export default function RecipeReviewCard() {
     </div>
 
 
-      </CardActions>
      
     </Card>
 
