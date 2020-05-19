@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import UserContext from "../components/Auth/UserContext";
+import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
 import TextField from "@material-ui/core/TextField";
 import SubmitBtn from "../components/buttons/SubmitBtn";
@@ -10,7 +11,7 @@ import Search from "../components/buttons/Search";
 import Level from "../components/buttons/Level";
 import AddBtn from "../components//buttons/AddBtn";
 import Button from "@material-ui/core/Button";
-
+// import UserContext from "../components/Auth/UserContext";
 import Grid from "@material-ui/core/Grid";
 
 import Container from "@material-ui/core/Container";
@@ -24,6 +25,8 @@ class Profile extends Component {
   state = {
     email: "",
     password: "",
+    firstName: "",
+    lastName: "",
   };
 
   handleChange = (event) => {
@@ -42,18 +45,22 @@ class Profile extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    apiHandler
-      .signup(this.state)
-      .then((data) => {
-        this.context.setUser(data);
-        this.props.history.push("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // apiHandler
+    //   .signup(this.state)
+    //   .then((data) => {
+    //     this.context.setUser(data);
+    //     this.props.history.push("/");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   render() {
+    console.log(this.context);
+    if (this.context.user === null) {
+      return null;
+    }
     return (
       <>
         <React.Fragment>
@@ -80,6 +87,7 @@ class Profile extends Component {
                       name="firstName"
                       label="Prenom"
                       variant="outlined"
+                      defaultValue={this.context.user.firstName}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -90,6 +98,7 @@ class Profile extends Component {
                       name="lastName"
                       label="Nom"
                       variant="outlined"
+                      defaultValue={this.context.user.lastName}
                     />
                   </Grid>
 
@@ -101,6 +110,7 @@ class Profile extends Component {
                       name="email"
                       label="Email"
                       variant="outlined"
+                      defaultValue={this.context.user.email}
                     />
                   </Grid>
 
@@ -125,13 +135,9 @@ class Profile extends Component {
                 <AddBtn />
               </Grid> */}
 
-              
-
                 <h3 className="title">Sports favoris</h3>
-                
-                <Grid container spacing={3}>
 
-                
+                <Grid container spacing={3}>
                   <Grid item xs={4}>
                     <Search />
                   </Grid>
@@ -143,37 +149,29 @@ class Profile extends Component {
                   <Grid item xs={4}>
                     <AddBtn />
                   </Grid>
-                  
-                  
                 </Grid>
 
-           
+                <div className="favorite-container">
+                  <Grid container>
+                    <Grid xs={12} sm={6} md={4}>
+                      <div className="favorite-card-position">
+                        <CardsFavorite />
+                      </div>
+                    </Grid>
 
-              <div className="favorite-container">
-                <Grid container >
-                  <Grid xs={12} sm={6} md={4}>
-                  <div className="favorite-card-position">
-                    <CardsFavorite />
-                  </div>
-                    
-                  </Grid>
+                    <Grid xs={12} sm={6} md={4}>
+                      <div className="favorite-card-position">
+                        <CardsFavorite />
+                      </div>
+                    </Grid>
 
-                  <Grid xs={12} sm={6} md={4}>
-                  <div className="favorite-card-position">
-                    <CardsFavorite />
-                    </div>
+                    <Grid xs={12} sm={6} md={4}>
+                      <div className="favorite-card-position">
+                        <CardsFavorite />
+                      </div>
+                    </Grid>
                   </Grid>
-
-                  <Grid xs={12} sm={6} md={4}>
-                  <div className="favorite-card-position">
-                    <CardsFavorite />
-                    </div>
-                  </Grid>
-                </Grid>
                 </div>
-
-
-               
 
                 <div className="submit-btn padding-btn">
                   <SubmitBtn />
