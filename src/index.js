@@ -12,13 +12,15 @@ import "./styles/locationAutocomplete.css";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
+import red from '@material-ui/core/colors/red';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#009ee3',
     },
-    secondary: green,
+    secondary: red,
+    // testcolor: red,
   },
   status: {
     danger: 'orange',

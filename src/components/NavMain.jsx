@@ -85,9 +85,9 @@ const NavMain = (props) => {
       </NavLink>
           </Typography>
 
-          <Typography variant="h6" className={classes.title}>
+          {/* <Typography variant="h6" className={classes.title}>
             TITLE A VOIR
-          </Typography>
+          </Typography> */}
 
           
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">

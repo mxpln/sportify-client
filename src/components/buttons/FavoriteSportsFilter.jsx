@@ -29,12 +29,14 @@ const handleChange = () => {
 
   return (
       <>
-      <h6 className='title-favorite'>Sports favoris</h6>
+      <div>
+      <h6 className='title-favorite'>Favoris</h6>
       <FormControlLabel
         control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
         label=""
         onClick={handleChange}
       />
+      </div>
  </>
   );
 }

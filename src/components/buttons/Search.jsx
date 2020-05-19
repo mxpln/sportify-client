@@ -29,14 +29,15 @@ class Search extends Component {
   render() {
     
   return (
-    <div>
+    <div >
     <Autocomplete
+    
       onChange={(e, v)=>this.props.clbk(e, v)}
       id="combo-box-demo"
       options={this.state.sports}
       getOptionLabel={(option) => option.sport}
-      // style={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Sport..." variant="outlined" />}
+      style={{ width: "100%" }}
+      renderInput={(params) => <TextField {...params} label="Rechercher sport..." variant="outlined" />}
     />
 </div>
 
