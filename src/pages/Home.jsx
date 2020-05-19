@@ -33,6 +33,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 class Home extends Component {
   state = {
     isSwitchOn: false,
+    isFilterOn: false,
     search: "",
     startDate: "",
     endDate: "",
@@ -46,7 +47,11 @@ class Home extends Component {
       isSwitchOn: !this.state.isSwitchOn,
     });
   };
-
+  toggleFilter = () => {
+    this.setState({
+      isFilterOn: !this.state.isFilterOn,
+    });
+  };
   handleChange = (event, value) => {
     let res;
     if (value === null) res = "";
@@ -97,109 +102,108 @@ class Home extends Component {
   };
 
   render() {
-    // console.log(this.state);
-    return ( 
-      
+    // console.log(this.state.isFilterOn);
+    return (
       // VUE FILTER
       <>
-     
+        <div className="search-bar-home">
+          <button onClick={this.toggleFilter}>click</button>
 
-      <ExpansionPanel>
+          <div className="flex-between">
+            <div className="margin-general">
+              <Search clbk={this.handleChange} />
+            </div>
+            <div className="margin-general">
+              <DatePicker
+                endDate={this.handleEndDate}
+                startDate={this.handleStartDate}
+              />
+            </div>
+          </div>
 
-       <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-            >
+          <div>
+            <SubmitBtn />
+          </div>
+        </div>
 
-      <div className="search-bar-home">
-
-              <div className="flex-between">
-                <div className="margin-general">
-                <Search clbk={this.handleChange} />
-                </div>
-                <div className="margin-general">
-                  <DatePicker
-                    endDate={this.handleEndDate}
-                    startDate={this.handleStartDate}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <SubmitBtn />
-              </div>
-              </div>
-
-              {/* <Typography className={classes.heading}>Expansion Panel 1</Typography> */}
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
-            <div className="flex-between">
-                {/* <button>Filters</button> */}
-                <div className="margin-general"> <Level ratingValue={this.handleRating} /></div>
-          <div className="margin-general"><TeamSelector parentCallback={this.handleTeam} /></div>
-          <div className="margin-general"> <FavoriteSportsFilter parentCallback={this.handleFavorite} /></div>
-          <div className="change-view-container">
+        {/* <Typography className={classes.heading}>Expansion Panel 1</Typography> */}
+        <div
+          className={
+            this.state.isFilterOn ? "toggleFilterOn" : "toggleFilterOff"
+          }
+        >
+          <div className="flex-between">
+            {/* <button>Filters</button> */}
+            <div className="margin-general">
+             
+              <Level ratingValue={this.handleRating} />
+            </div>
+            <div className="margin-general">
+              <TeamSelector parentCallback={this.handleTeam} />
+            </div>
+            <div className="margin-general">
+           
+              <FavoriteSportsFilter parentCallback={this.handleFavorite} />
+            </div>
+            <div className="change-view-container">
               <button onClick={this.toggle}>Changer vue</button>
             </div>
-              </div>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+          </div>
+        </div>
 
-      {/* // VUE CHANGER VIEW */}
+        {/* // VUE CHANGER VIEW */}
 
-      <>
-        {/* <div className="change-view-container">
+        <>
+          {/* <div className="change-view-container">
           <button onClick={this.toggle}>Changer vue</button>
         </div> */}
-        <div
-          className={
-            this.state.isSwitchOn ? "toggleDisplayOff" : "toggleDisplayOn"
-          }
-        >
-          <MyMap />
-        </div>
+          <div
+            className={
+              this.state.isSwitchOn ? "toggleDisplayOff" : "toggleDisplayOn"
+            }
+          >
+            <MyMap />
+          </div>
 
-        <div
-          className={
-            this.state.isSwitchOn ? "toggleDisplayOn" : "toggleDisplayOff"
-          }
-        >
-          <React.Fragment>
-            <CssBaseline />
-            <Container maxWidth="md">
-              <h2 className="title">Lundi 17 Mai 2020</h2>
+          <div
+            className={
+              this.state.isSwitchOn ? "toggleDisplayOn" : "toggleDisplayOff"
+            }
+          >
+            <React.Fragment>
+              <CssBaseline />
+              <Container maxWidth="md">
+                <h2 className="title">Lundi 17 Mai 2020</h2>
 
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6} md={4}>
-                  <Card />
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Card />
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Card />
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Card />
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Card />
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Card />
+                  </Grid>
+
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Card />
+                  </Grid>
                 </Grid>
-
-                <Grid item xs={12} sm={6} md={4}>
-                  <Card />
-                </Grid>
-
-                <Grid item xs={12} sm={6} md={4}>
-                  <Card />
-                </Grid>
-
-                <Grid item xs={12} sm={6} md={4}>
-                  <Card />
-                </Grid>
-
-                <Grid item xs={12} sm={6} md={4}>
-                  <Card />
-                </Grid>
-
-                <Grid item xs={12} sm={6} md={4}>
-                  <Card />
-                </Grid>
-              </Grid>
-            </Container>
-          </React.Fragment>
-        </div>
-      </>
-
+              </Container>
+            </React.Fragment>
+          </div>
+        </>
       </>
     );
   }

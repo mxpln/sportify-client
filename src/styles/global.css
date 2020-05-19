@@ -340,3 +340,9 @@ color: white;
   justify-content: center;
   /* justify-content: space-around; */
 }
+.toggleFilterOff{
+  display:none;
+}
+.testMap{
+  height:10px
+}

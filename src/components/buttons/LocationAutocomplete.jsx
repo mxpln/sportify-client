@@ -69,7 +69,7 @@ class LocationAutoComplete extends Component {
   }
 
   render() {
-    console.log(this.state)
+    
     return (
       <div className="LocationAutoComplete">
 

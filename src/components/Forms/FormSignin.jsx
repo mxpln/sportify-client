@@ -20,25 +20,39 @@ class FormSignin extends Component {
     password: "",
   };
 
-  handleChange = (event) => {
-    const key = event.target.name;
+  // handleChange = (event) => {
+  //   const key = event.target.name;
 
-    // You can test more if you have to handle different sorts of inputs.
-    const value =
-      event.target.type === "file"
-        ? event.target.files[0]
-        : event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
+  //   // You can test more if you have to handle different sorts of inputs.
+  //   const value =
+  //     event.target.type === "file"
+  //       ? event.target.files[0]
+  //       : event.target.type === "checkbox"
+  //       ? event.target.checked
+  //       : event.target.value;
 
-    this.setState({ [key]: value });
+  //   this.setState({ [key]: value });
+  // };
+  handleEmail = (event) => {
+    this.setState({
+      email: event.target.value,
+    });
+  };
+  handlePassword = (event) => {
+    this.setState({
+      password: event.target.value,
+    });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-
+    console.log("click");
+    let email = this.state.email;
+    let password = this.state.password;
+    let res = { email, password };
+    console.log(res);
     apiHandler
-      .signin(this.state)
+      .signin(res)
       .then((data) => {
         this.context.setUser(data);
         this.props.history.push("/");
@@ -50,43 +64,44 @@ class FormSignin extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <>
         <React.Fragment>
           <CssBaseline />
           <Container maxWidth="md">
-            
-              <div className="main-container">
-                {/* <h2 className="title-container">Inscription</h2> */}
+            <div className="main-container">
+              {/* <h2 className="title-container">Inscription</h2> */}
 
-                <h2 className="title-container">Connexion</h2>
+              <h2 className="title-container">Connexion</h2>
 
+              <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12}>
+                    <label htmlFor="email"></label>
+                    <TextField
+                      onChange={this.handleEmail}
+                      fullWidth
+                      id="email"
+                      name="email"
+                      label="Email"
+                      variant="outlined"
+                    />
+                  </Grid>
 
-                <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                      <label htmlFor="email"></label>
-                      <TextField
-                        fullWidth
-                        id="email"
-                        name="email"
-                        label="Email"
-                        variant="outlined"
-                      />
-                    </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      onChange={this.handlePassword}
+                      fullWidth
+                      id="filled-password-input"
+                      label="Password"
+                      type="password"
+                      autoComplete="current-password"
+                      variant="outlined"
+                    />
+                  </Grid>
 
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        id="filled-password-input"
-                        label="Password"
-                        type="password"
-                        autoComplete="current-password"
-                        variant="outlined"
-                      />
-                    </Grid>
-
-                    {/* <Grid item xs={3}>
+                  {/* <Grid item xs={3}>
                 <Search />
               </Grid>
               <Grid item xs={3}>
@@ -95,14 +110,13 @@ class FormSignin extends Component {
               <Grid item xs={3}>
                 <AddBtn />
               </Grid> */}
-                  </Grid>
+                </Grid>
 
-                  <div className="submit-btn padding-btn">
-                    <SubmitBtn />
-                  </div>
-                </form>
-              </div>
-            
+                <div className="submit-btn padding-btn">
+                  <SubmitBtn clbk={this.handleSubmit} />
+                </div>
+              </form>
+            </div>
           </Container>
         </React.Fragment>
       </>
