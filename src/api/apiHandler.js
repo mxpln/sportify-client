@@ -50,4 +50,11 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+
+getSports() {
+  return service.get('/api/sports')
+  .then((res)=> res.data)
+  .catch(errorHandler)
+},
+
 };

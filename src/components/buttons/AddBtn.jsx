@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function IconLabelButtons() {
+const IconLabelButtons= ({clbk}) => {
   const classes = useStyles();
 
   return (
@@ -22,6 +22,7 @@ export default function IconLabelButtons() {
         variant="contained"
         color="primary"
         className={classes.button}
+        onClick={clbk}
         // endIcon={<AddIcon>Add</AddIcon>}
       >
         Ajouter
@@ -30,3 +31,5 @@ export default function IconLabelButtons() {
     </div>
   );
 }
+
+export default IconLabelButtons;

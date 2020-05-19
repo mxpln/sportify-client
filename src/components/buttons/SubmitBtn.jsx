@@ -11,8 +11,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function IconLabelButtons() {
+const IconLabelButtons = ({clbk}) => {
   const classes = useStyles();
+
+
 
   return (
     <div>
@@ -24,6 +26,7 @@ export default function IconLabelButtons() {
         padding="100px"
         className={classes.button}
         endIcon={<SendIcon>Envoyer</SendIcon>}
+        onClick={clbk}
       >
         Envoyer
       </Button>
@@ -31,3 +34,5 @@ export default function IconLabelButtons() {
     </div>
   );
 }
+
+export default IconLabelButtons;

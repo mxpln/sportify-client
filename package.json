@@ -15,6 +15,7 @@
     "litepicker-module-ranges": "0.0.3",
     "mapbox-gl": "^1.10.0",
     "material-date-range-picker": "^0.1.1",
+    "object-to-formdata": "^3.0.9",
     "react": "^16.13.1",
     "react-datepicker": "^2.15.0",
     "react-dom": "^16.13.1",

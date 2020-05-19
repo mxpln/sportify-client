@@ -28,10 +28,10 @@ class Home extends Component {
     let res;
     if (value === null) res = "";
     else {
-      res = value.title;
+      res = value.sport;
     }
     this.setState({
-      search: res,
+      search: res
     });
   };
 
@@ -49,14 +49,13 @@ class Home extends Component {
 
   handleRating = (newValue) =>{
     let res;
-    if (newValue===null || newValue===1){res="facile"}
-    else if (newValue===2) {res="modéré"}
-    else if (newValue===3) {res="confirmé"}
+    if (newValue===null || newValue===1){res="beginner"}
+    else if (newValue===2) {res="intermediate"}
+    else if (newValue===3) {res="advanced"}
     this.setState({
       level : res
     })
   }
-
   handleTeam = (newValue) => {
     this.setState({
       team: newValue
@@ -70,7 +69,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
         <div className="search-bar-home">

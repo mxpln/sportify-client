@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -25,7 +25,7 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Level from "../buttons/Level";
+import LevelTwo from "../buttons/LevelTwo";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,29 +57,32 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1),
   },
 }));
+ 
+class RecipeReviewCard extends Component {
+ 
+  render() {
+  
+    let res;
+    let level="";
+    if (this.props.level==="beginner")((res=1)&&(level="débutant"))
+    else if (this.props.level==="intermediate")((res=2)&&(level="intermédiaire"))
+    else if (this.props.level==="advanced")((res=3)&&(level="avancé"))
 
-export default function RecipeReviewCard() {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
     <>
-      <Card className={classes.root}>
+      <Card>
         <div className="card-margin">
           <Grid container spacing={0}>
             <Grid item xs={12}>
-              <h2>Nom du sport</h2>
+              <h2>{this.props.name}</h2>
             </Grid>
 
             <Grid item xs={6}>
-              <Level />
+              <LevelTwo res={res} level={level}/>
             </Grid>
 
-            <Grid className={classes.control} item xs={6}>
+            <Grid item xs={6}>
               <RemoveBtn />
             </Grid>
           </Grid>
@@ -87,4 +90,7 @@ export default function RecipeReviewCard() {
       </Card>
     </>
   );
+  }
 }
+
+export default RecipeReviewCard;

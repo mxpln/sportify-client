@@ -46,9 +46,9 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 const labels = {
-  1: 'Facile',
-  2: 'Modéré',
-  3: 'Avancé',
+  1: 'débutant',
+  2: 'intermédiaire',
+  3: 'avancé',
 };
 
 const useStyles = makeStyles({
