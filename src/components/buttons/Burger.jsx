@@ -38,17 +38,17 @@ const useStyles = makeStyles({
 const SwipeableTemporaryDrawer = (props) => {
   const { context } = props;
 
-function handleLogout(){
-console.log("logout")
-apiHandler
-  .logout()
-  .then(() => {
-    context.removeUser();
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+  function handleLogout() {
+    console.log("logout");
+    apiHandler
+      .logout()
+      .then(() => {
+        context.removeUser();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -84,11 +84,15 @@ apiHandler
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <div className="profile-container-burger">
-
-        {context.isLoggedIn &&  <img src={context.user.image} className="img-container-burger"></img> }
-        {!context.isLoggedIn && 
-        <img src="/media/standard_profile.png" className="img-container-burger"></img>
-         }   
+        {context.isLoggedIn && (
+          <img src={context.user.image} className="img-container-burger"></img>
+        )}
+        {!context.isLoggedIn && (
+          <img
+            src="/media/standard_profile.png"
+            className="img-container-burger"
+          ></img>
+        )}
 
         <div className="title-container-burger">
           {/* <ConsumingContext /> */}
@@ -115,95 +119,97 @@ apiHandler
         </NavLink>
       </div>
       {context.isLoggedIn && (
-      <div className="menu-list">
-        <NavLink exact to="/profile">
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText className="text-list">Mon profil</ListItemText>
-            </ListItem>
-          </List>
-        </NavLink>
-      </div>
+        <div className="menu-list">
+          <NavLink exact to="/profile">
+            <List>
+              <ListItem>
+                <ListItemIcon>
+                  <PersonIcon />
+                </ListItemIcon>
+                <ListItemText className="text-list">Mon profil</ListItemText>
+              </ListItem>
+            </List>
+          </NavLink>
+        </div>
       )}
       {context.isLoggedIn && (
-      <div className="menu-list">
-        <NavLink exact to="/createEvent">
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <AddIcon />
-              </ListItemIcon>
-              <ListItemText className="text-list">Créer évenement</ListItemText>
-            </ListItem>
-          </List>
-        </NavLink>
-      </div>
+        <div className="menu-list">
+          <NavLink exact to="/createEvent">
+            <List>
+              <ListItem>
+                <ListItemIcon>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText className="text-list">
+                  Créer évenement
+                </ListItemText>
+              </ListItem>
+            </List>
+          </NavLink>
+        </div>
       )}
       {context.isLoggedIn && (
-      <div className="menu-list">
-        <NavLink exact to="/myEvents">
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <CheckIcon />
-              </ListItemIcon>
-              <ListItemText className="text-list">Mes évenements</ListItemText>
-            </ListItem>
-          </List>
-        </NavLink>
-      </div>
+        <div className="menu-list">
+          <NavLink exact to="/myEvents">
+            <List>
+              <ListItem>
+                <ListItemIcon>
+                  <CheckIcon />
+                </ListItemIcon>
+                <ListItemText className="text-list">
+                  Mes évenements
+                </ListItemText>
+              </ListItem>
+            </List>
+          </NavLink>
+        </div>
       )}
       <div className="divider-section">
         <Divider />
       </div>
       {!context.isLoggedIn && (
-      <div className="menu-list">
-        <NavLink exact to="/signup">
-          <List>
-            <ListItem>
-              <ListItemIcon></ListItemIcon>
-              <ListItemText className="text-list">Inscription</ListItemText>
-            </ListItem>
-          </List>
-        </NavLink>
-      </div>
+        <div className="menu-list">
+          <NavLink exact to="/signup">
+            <List>
+              <ListItem>
+                <ListItemIcon></ListItemIcon>
+                <ListItemText className="text-list">Inscription</ListItemText>
+              </ListItem>
+            </List>
+          </NavLink>
+        </div>
       )}
 
       {!context.isLoggedIn && (
-      <div className="menu-list">
-        <NavLink exact to="/signin">
-          <List>
-            <ListItem>
-              <ListItemIcon></ListItemIcon>
-              <ListItemText className="text-list">Connexion</ListItemText>
-            </ListItem>
-          </List>
-        </NavLink>
-      </div>
+        <div className="menu-list">
+          <NavLink exact to="/signin">
+            <List>
+              <ListItem>
+                <ListItemIcon></ListItemIcon>
+                <ListItemText className="text-list">Connexion</ListItemText>
+              </ListItem>
+            </List>
+          </NavLink>
+        </div>
       )}
 
       {context.isLoggedIn && (
-      <div className="menu-list">
-        {" "}
-        <NavLink exact to="/" onClick={handleLogout}>
-          <List>
-            {" "}
-            <ListItem>
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText className="text-list">Déconnexion</ListItemText>
-            </ListItem>{" "}
-          </List>
-        </NavLink>
-      </div>
+        <div className="menu-list">
+          {" "}
+          <NavLink exact to="/" onClick={handleLogout}>
+            <List>
+              {" "}
+              <ListItem>
+                <ListItemIcon>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText className="text-list">Déconnexion</ListItemText>
+              </ListItem>{" "}
+            </List>
+          </NavLink>
+        </div>
       )}
-
     </div>
-    
   );
 
   return (

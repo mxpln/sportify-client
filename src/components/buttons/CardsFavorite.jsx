@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -16,7 +16,7 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-
+import apiHandler from "../../api/apiHandler";
 import AvatarGroup from "./AvatarGroup";
 import RemoveBtn from "./RemoveBtn";
 
@@ -47,49 +47,67 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: red[500],
-
   },
 
   controls: {
-    display: 'flex',
-    alignItems: 'right',
+    display: "flex",
+    alignItems: "right",
     paddingLeft: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
 }));
- 
+
 class RecipeReviewCard extends Component {
- 
+  // handleDelete = (id) => {
+  //   apiHandler
+  //     .patch(`/api/user/sports/${id}`)
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  //   console.log(id);
+  //   console.log("deleting card");
+  // };
   render() {
-  
     let res;
-    let level="";
-    if (this.props.level==="beginner")((res=1)&&(level="débutant"))
-    else if (this.props.level==="intermediate")((res=2)&&(level="intermédiaire"))
-    else if (this.props.level==="advanced")((res=3)&&(level="avancé"))
+    let level = "";
+    if (this.props.level === "beginner") (res = 1) && (level = "débutant");
+    else if (this.props.level === "intermediate")
+      (res = 2) && (level = "intermédiaire");
+    else if (this.props.level === "advanced") (res = 3) && (level = "avancé");
 
+    return (
+      <>
+        <Card>
+          <div className="card-margin">
+            <Grid container spacing={0}>
+              <Grid item xs={12}>
+                <h2>{this.props.name}</h2>
+              </Grid>
 
-  return (
-    <>
-      <Card>
-        <div className="card-margin">
-          <Grid container spacing={0}>
-            <Grid item xs={12}>
-              <h2>{this.props.name}</h2>
+              <Grid item xs={6}>
+                <LevelTwo res={res} level={level} />
+              </Grid>
+
+              <Grid item xs={6}>
+                {/* <button onClick={() => this.handleDelete(this.props.id)}>
+                  Delete
+                </button> */}
+                <button
+                  onClick={() => this.handleDelete(this.props.id)}
+                  className="removeButtonhandler"
+                >
+                  {/* <RemoveBtn />{" "} */}
+                </button>
+                {/* <RemoveBtn /> */}
+              </Grid>
             </Grid>
-
-            <Grid item xs={6}>
-              <LevelTwo res={res} level={level}/>
-            </Grid>
-
-            <Grid item xs={6}>
-              <RemoveBtn />
-            </Grid>
-          </Grid>
-        </div>
-      </Card>
-    </>
-  );
+          </div>
+        </Card>
+      </>
+    );
   }
 }
 

@@ -15,9 +15,17 @@ function errorHandler(error) {
 function get(endPoint) {
   return service.get(endPoint);
 }
+function patch(endPoint) {
+  return service.patch(endPoint);
+}
+function post(endPoint) {
+  return service.post(endPoint);
+}
 export default {
   service,
   get,
+  patch,
+  post,
 
   signup(userInfo) {
     return service
@@ -36,7 +44,10 @@ export default {
   isLoggedIn() {
     return service
       .get("/api/auth/isLoggedIn")
-      .then((res) => res.data)
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      })
       .catch(errorHandler);
   },
 
@@ -54,16 +65,28 @@ export default {
       .catch(errorHandler);
   },
 
-getSports() {
-  return service.get('/api/sports')
-  .then((res)=> res.data)
-  .catch(errorHandler)
-},
+  getSports() {
+    return service
+      .get("/api/sports")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+  editProfile(updatedUserInfo) {
+    return service
+      .post("/api/auth/edit-profile", updatedUserInfo)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+  // deleteSports() {
+  //   return service
+  //     .patch(`/api/user/sports/${id}`)
+  //     .then((res) => res.data)
+  //     .catch(errorHandler);
+  // },
 
-// getUserSport() {
-//   return service.get(`/api/user/${id}/sports`)
-//   .then((res)=>res.data)
-//   .catch(errorHandler)
-// }
-
+  // getUserSport() {
+  //   return service.get(`/api/user/${id}/sports`)
+  //   .then((res)=>res.data)
+  //   .catch(errorHandler)
+  // }
 };

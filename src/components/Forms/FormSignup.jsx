@@ -16,12 +16,9 @@ import { objectToFormData } from "object-to-formdata";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import buildFormData from "../../utils/buildFormData"
+import buildFormData from "../../utils/buildFormData";
 
 import CardsFavorite from "../buttons/CardsFavorite";
-
-
-
 
 class FormSignup extends Component {
   static contextType = UserContext;
@@ -130,12 +127,18 @@ class FormSignup extends Component {
     const lastName = this.state.lastName;
     const image = this.state.image;
     const preferences = this.state.preferences;
-    const userInfo = { email, password, firstName, lastName, image, preferences };
-    const fd = new FormData()
+    const userInfo = {
+      email,
+      password,
+      firstName,
+      lastName,
+      image,
+      preferences,
+    };
+    const fd = new FormData();
     const result = buildFormData(fd, userInfo);
     // const stringify = JSON.stringify(Object.fromEntries(result));
-
-    
+    console.log(fd);
 
     // const fd = new FormData();
     // fd.append("email", this.state.email);
@@ -148,6 +151,7 @@ class FormSignup extends Component {
     apiHandler
       .signup(fd)
       .then((data) => {
+        console.log("THE USER I JUST SIGNED UP", data);
         this.context.setUser(data);
         this.props.history.push("/");
       })

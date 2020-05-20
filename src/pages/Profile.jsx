@@ -16,51 +16,78 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import CardsFavorite from "../components//buttons/CardsFavorite";
+import buildFormData from "../utils/buildFormData";
+// import { withUser } from "../Auth/withUser";
+
 class Profile extends Component {
-  static contextType = UserContext;
+  // static contextType = UserContext;
   state = {
     email: "",
-    password: "",
+    // password: "",
     firstName: "",
     lastName: "",
-    sports: [],
+    image: null,
+    // sports: [],
   };
-  handleChange = (event) => {
-    const value =
-      event.target.type === "file"
-        ? event.target.files[0]
-        : event.target.type === "checkbox"
-        ? event.target.checked
-        : event.target.value;
-    const key = event.target.name;
-    this.setState({ [key]: value });
-  };
+  // handleChange = (event) => {
+  //   const value =
+  //     event.target.type === "file"
+  //       ? event.target.files[0]
+  //       : event.target.type === "checkbox"
+  //       ? event.target.checked
+  //       : event.target.value;
+  //   const key = event.target.name;
+  //   this.setState({ [key]: value });
+  // };
   handleSubmit = (event) => {
     event.preventDefault();
-    // apiHandler
-    //   .signup(this.state)
-    //   .then((data) => {
-    //     this.context.setUser(data);
-    //     this.props.history.push("/");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    const email = this.state.email;
+    const firstName = this.state.firstName;
+    const lastName = this.state.lastName;
+    const image = this.state.image;
+    const userInfo = { email, firstName, lastName, image };
+
+    const fd = new FormData();
+    const result = buildFormData(fd, userInfo);
+    console.log(fd);
+    apiHandler
+      .editProfile(fd)
+      .then((data) => {
+        this.props.context.setUser(data);
+        this.props.history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-  // componentDidMount() {
-  //   apiHandler
-  //     .get(`/api/user/sports`)
-  //     .then((data) => {
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
+  handleImage = (event) => {
+    let value = event.target.files[0];
+
+    this.setState({ image: value });
+  };
+  handleUpload = (event) => {};
+  handleFirstName = (event) => {
+    this.setState({
+      firstName: event.target.value,
+    });
+  };
+  handleLastName = (event) => {
+    this.setState({
+      lastName: event.target.value,
+    });
+  };
+  handleEmail = (event) => {
+    this.setState({
+      email: event.target.value,
+    });
+  };
+
+  componentDidUpdate() {}
   render() {
-    if (this.context.user === null) {
+    if (this.props.context.user === null) {
       return null;
     }
+    console.log(this.state);
     return (
       <>
         <React.Fragment>
@@ -69,15 +96,18 @@ class Profile extends Component {
             <div className="main-container">
               {/* <h2 className="title-container">Inscription</h2> */}
               <div className="img-position">
-                {this.context.isLoggedIn && (
+                {this.props.context.isLoggedIn && (
                   <img
-                    src={this.context.user.image}
+                    src={this.props.context.user.image}
                     className="avatar-container"
                   ></img>
                 )}
               </div>
               <div className="upload-position">
-                <UploadBtn />
+                <UploadBtn
+                  change={this.handleImage}
+                  click={this.handleUpload}
+                />
               </div>
               <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
                 <h3 className="title">Informations personnelles</h3>
@@ -90,7 +120,8 @@ class Profile extends Component {
                       name="firstName"
                       label="Prenom"
                       variant="outlined"
-                      defaultValue={this.context.user.firstName}
+                      onChange={this.handleFirstName}
+                      defaultValue={this.props.context.user.firstName}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -101,7 +132,8 @@ class Profile extends Component {
                       name="lastName"
                       label="Nom"
                       variant="outlined"
-                      defaultValue={this.context.user.lastName}
+                      onChange={this.handleLastName}
+                      defaultValue={this.props.context.user.lastName}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -112,7 +144,8 @@ class Profile extends Component {
                       name="email"
                       label="Email"
                       variant="outlined"
-                      defaultValue={this.context.user.email}
+                      onChange={this.handleEmail}
+                      defaultValue={this.props.context.user.email}
                     />
                   </Grid>
                   {/*
@@ -136,7 +169,7 @@ class Profile extends Component {
               <Grid item xs={3}>
                 <AddBtn />
               </Grid> */}
-                <h3 className="title">Sports favoris</h3>
+                {/* <h3 className="title">Sports favoris</h3>
                 <Grid container spacing={3}>
                   <Grid item xs={4}>
                     <Search />
@@ -147,9 +180,9 @@ class Profile extends Component {
                   <Grid item xs={4}>
                     <AddBtn />
                   </Grid>
-                </Grid>
+                </Grid> */}
                 <div className="favorite-container">
-                  {/* {this.context.user.preferences.map((items) => {
+                  {/* {this.props.context.user.preferences.map((items) => {
                     return (
                       <li>
                         <ul>{items.level}</ul>
@@ -157,13 +190,14 @@ class Profile extends Component {
                       </li>
                     );
                   })} */}
-                  {this.context.user.preferences.map((items, index) => {
+                  {this.props.context.user.preferences.map((items, index) => {
                     return (
                       <Grid container>
                         <Grid xs={12} sm={6} md={4}>
                           <div className="favorite-card-position">
                             <CardsFavorite
                               key={index}
+                              id={items._id}
                               name={items.favoriteSport.sport}
                               level={items.level}
                             />
@@ -174,7 +208,7 @@ class Profile extends Component {
                   })}
                 </div>
                 <div className="submit-btn padding-btn">
-                  <SubmitBtn />
+                  <SubmitBtn clbk={this.handleSubmit} />
                 </div>
               </form>
             </div>
@@ -184,4 +218,4 @@ class Profile extends Component {
     );
   }
 }
-export default withRouter(Profile);
+export default withUser(withRouter(Profile));
