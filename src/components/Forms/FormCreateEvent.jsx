@@ -146,6 +146,7 @@ class BasicTextFields extends Component {
     const maxPlayersByTeam = this.state.maxPlayersByTeam;
     const maxPlayers = this.state.maxPlayers;
     const individualNbrOfParticipants = this.state.individualNbrOfParticipants;
+    
     const day = this.state.day;
     const hour = this.state.hour;
     const date = day + hour;

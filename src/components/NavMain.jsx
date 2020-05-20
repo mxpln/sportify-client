@@ -77,7 +77,7 @@ const NavMain = (props) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Container maxWidth="l">
+          <Container maxWidth="lg">
           <div className="flex-between">
             <div>
               <Typography variant="h6" className={classes.title}>

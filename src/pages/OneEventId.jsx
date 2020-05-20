@@ -40,7 +40,8 @@ export default class OneEventId extends Component {
     type: "",
     level: "",
     description: "",
-    createur: "",
+    createurFirstName: "",
+    createurLastName: "",
     avatarCreateur: "",
     adresse: "",
     coordoninates: "",
@@ -64,31 +65,21 @@ export default class OneEventId extends Component {
           sport: apiRes.data.sportType.sport,
           type: apiRes.data.type,
           level: apiRes.data.level,
-          description: apiRes.data,
-          createur: apiRes.data,
-          avatarCreateur: apiRes.data,
-          adresse: apiRes.data,
-          coordoninates: apiRes.data,
-          participants: apiRes.data,
-          teamA: apiRes.data,
-          teamB: apiRes.data,
+          description: apiRes.data.description,
+          createurFirstName: apiRes.data.creator.firstName,
+          createurLastName: apiRes.data.creator.lastName,
+          avatarCreateur: apiRes.data.creator.image,
+          adresse: apiRes.data.location.formattedAddress,
+          coordoninates: apiRes.data.location.coordinates,
+          participants: apiRes.data.individualNbrOfParticipants,
+          teamA: apiRes.data.teamA,
+          teamB: apiRes.data.teamB,
         });
         console.log(apiRes.data);
       })
       .catch((err) => console.log(err));
   }
 
-  // componentDidUpdate(){
-
-  //   return service
-  //   .get(`/api/${creatorId}`)
-  //   .then((apiRes)=>{
-  //     this.setState({event : apiRes.data})
-  //   })
-  //   .catch((err)=>
-  //   console.log(err))
-
-  // }
   handleAdd = (event) => {
     const id = this.props.match.params.id;
     event.preventDefault();
@@ -140,8 +131,30 @@ export default class OneEventId extends Component {
     }
   };
 
+  // componentDidUpdate(){
+
+  //   return service
+  //   .get(`/api/${creatorId}`)
+  //   .then((apiRes)=>{
+  //     this.setState({event : apiRes.data})
+  //   })
+  //   .catch((err)=>
+  //   console.log(err))
+
+  // }
+
   render() {
-    console.log("TYPE:", this.state.type);
+    console.log("ICIII", this.state);
+
+    if (this.state.level === "beginner") {
+      this.setState({ level: "Débutant" });
+    }
+    if (this.state.level === "intermediate") {
+      this.setState({ level: "Intermédiaire" });
+    }
+    if (this.state.level === "advanced") {
+      this.setState({ level: "Avancé" });
+    }
 
     return (
       <React.Fragment>
@@ -156,40 +169,39 @@ export default class OneEventId extends Component {
             <div className="flex-between date-hour-container">
               <div>
                 {" "}
-                <h2>Lundi 17 Septembre</h2>
+                <h2>{this.state.date}</h2>
               </div>
               <div>
-                <h2>10:58</h2>
+                <h2>{this.state.heure}</h2>
               </div>
             </div>
 
-            <h1 className="title">Titre de l'évenement</h1>
+            <h1 className="title">{this.state.titre}</h1>
 
             <div className="tag-container margin-right ">
-              <h3>Nom du sport</h3>
-            </div>
-            <div className="tag-container margin-right ">
-              <h3>En équipe</h3>
-            </div>
-            <div className="tag-container margin-right ">
-              <h3>Débutant</h3>
+              <h3>{this.state.sport}</h3>
             </div>
 
-            <p className="title">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at
-              massa et nibh facilisis cursus vitae non nunc. Suspendisse mattis
-              fringilla arcu consequat ullamcorper. Morbi at tincidunt est.
-              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-              posuere cubilia curae; Interdum et malesuada fames ac ante ipsum
-              primis in faucibus.
-            </p>
+            <div className="tag-container margin-right ">
+              <h3>
+                {this.state.type === "individual" ? "Individuel" : "En équipe"}
+              </h3>
+              {/* <h3>En équipe</h3> */}
+            </div>
+            <div className="tag-container margin-right ">
+              <h3>{this.state.level}</h3>
+            </div>
 
-            <h2>Createur</h2>
+            <p className="title">{this.state.description}</p>
+
+            <h2>Créateur</h2>
 
             <div className="flex-between">
               <div className="flex-between">
                 <div className="pic-avatar-container margin-title-creator "></div>
-                <h3 className="title  ">Nom Prénom créateur</h3>
+                <h3 className="title  ">
+                  {this.state.createurFirstName} {this.state.createurLastName}
+                </h3>
               </div>
             </div>
 
@@ -197,12 +209,13 @@ export default class OneEventId extends Component {
             <div>
               <div className="adresse-container">
                 <div>
-                  <p>17 rue du Moulin 75018 Paris</p>
+                  <p>{this.state.adresse}</p>
                 </div>
               </div>
 
               <div className="img-container"> </div>
             </div>
+
             <h2 className="title">Participants</h2>
 
             {/* INDIVIDUEL*/}
