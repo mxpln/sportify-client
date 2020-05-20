@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -20,7 +20,12 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AvatarGroup from './AvatarGroup'
 import AddBtn from './AddBtn'
 
+import RetirerBtn from './RetirerBtn'
+
 import Grid from "@material-ui/core/Grid";
+
+import { NavLink } from "react-router-dom";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -48,44 +53,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard() {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+class RecipeReviewCard extends Component {
+  
+  render() {
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
       <>
    
 
-    <Card className={classes.root}>
+    <Card >
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+          <Avatar aria-label="recipe">
             R
           </Avatar>
         }
-        title="Match de foot entre..."
-        subheader="10:30"
+        // title={this.props.title}
+        // subheader={this.props.hour}
       />
+
+<NavLink exact to="/OneEventId">
       <CardMedia
         // className={classes.media}
         className="card-image"
         image="/media/not-found.png"
         title="Paella dish"
       />
-      {/* <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Venez faire un match de street foot les potos ca va être super et même peut être y aura des zouz
-        </Typography>
-      </CardContent> */}
-
-    
-
-     
-
+</NavLink>
       <div className="card-container-bottom">
 
       <div className="avatar-group">
@@ -94,6 +89,10 @@ export default function RecipeReviewCard() {
 
      <div className="avatar-group-btn">
         <AddBtn/>
+        </div>
+
+        <div className="avatar-group-btn">
+        <RetirerBtn/>
         </div>
 
     </div>
@@ -105,3 +104,6 @@ export default function RecipeReviewCard() {
     </>
   );
 }
+}
+
+export default Card;

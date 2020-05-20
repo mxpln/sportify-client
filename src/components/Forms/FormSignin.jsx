@@ -98,10 +98,18 @@ class FormSignin extends Component {
               <Grid item xs={3}>
                 <AddBtn />
               </Grid> */}
-                </Grid>
-                <div className="submit-btn padding-btn">
+
+
+              <Grid item xs={12}>
+              <div className="padding-btn">
                   <SubmitBtn clbk={this.handleSubmit} />
-                </div>
+                  </div> 
+                </Grid>
+
+                </Grid>
+                {/* <div className="submit-btn padding-btn">
+                  <SubmitBtn clbk={this.handleSubmit} />
+                </div> */}
               </form>
             </div>
           </Container>

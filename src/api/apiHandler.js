@@ -64,14 +64,7 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
-
-  getSports() {
-    return service
-      .get("/api/sports")
-      .then((res) => res.data)
-      .catch(errorHandler);
-  },
-  editProfile(updatedUserInfo) {
+  Profile(updatedUserInfo) {
     return service
       .post("/api/auth/edit-profile", updatedUserInfo)
       .then((res) => res.data)
@@ -83,6 +76,39 @@ export default {
   //     .then((res) => res.data)
   //     .catch(errorHandler);
   // },
+  getSports() {
+    return service
+      .get("/api/sports")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  postSoloSport(data) {
+    return service
+      .post("/api/events/solo/new", data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  postTeamSport(data) {
+    return service
+      .post("/api/events/multi/new", data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getSoloSport() {
+    return service
+      .get("/api/events/solo")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+  getTeamSport() {
+    return service
+      .get("/api/events/multi")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
   // getUserSport() {
   //   return service.get(`/api/user/${id}/sports`)

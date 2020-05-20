@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { NavLink } from "react-router-dom";
 import Search from "../buttons/Search";
 import TeamSelector from "../buttons/TeamSelector";
 import OneDatePicker from "../buttons/OneDatePicker";
 import Level from "../buttons/Level";
 import UploadBtn from "../buttons/UploadBtn";
 import MyMapTwo from "../buttons/MyMapTwo";
+import buildFormData from "../../utils/buildFormData";
+import apiHandler from "../../api/apiHandler";
+import { withRouter } from "react-router-dom";
 
 import SearchPlace from "./SearchPlace";
 
@@ -16,6 +20,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 
 import SubmitBtn from "../buttons/SubmitBtn";
+import { isThisMonth } from "date-fns";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,8 +45,8 @@ class BasicTextFields extends Component {
     individualNbrOfParticipants: "",
     date: "",
     day: "",
-    hour:'',
-    location:'',
+    hour: "",
+    location: "",
   };
 
   handleTitle = (event) => {
@@ -113,16 +118,15 @@ class BasicTextFields extends Component {
     let fullDate = event.toString();
     let dateSelected = fullDate.slice(0, 16);
     this.setState({
-      day : dateSelected
-    })
-    
+      day: dateSelected,
+    });
   };
   handleHour = (event) => {
     let fullDate = event.toString();
     let hourSelected = fullDate.slice(16, fullDate.length);
     this.setState({
-      hour: hourSelected
-    })
+      hour: hourSelected,
+    });
   };
   handleImage = (event) => {
     let value = event.target.files[0];
@@ -131,12 +135,76 @@ class BasicTextFields extends Component {
   };
   handleUpload = (event) => {};
 
-  test = () =>{
-    return "blabla"
-  }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const image = this.state.image;
+    const title = this.state.title;
+    const sportType = this.state.sportType;
+    const level = this.state.level;
+    const description = this.state.description;
+    const type = this.state.type;
+    const maxPlayersByTeam = this.state.maxPlayersByTeam;
+    const maxPlayers = this.state.maxPlayers;
+    const individualNbrOfParticipants = this.state.individualNbrOfParticipants;
+    const day = this.state.day;
+    const hour = this.state.hour;
+    const date = day + hour;
+    const location = this.state.location;
+
+    const individualEvent = {
+      image,
+      title,
+      sportType,
+      level,
+      description,
+      type,
+      maxPlayers,
+      date,
+      location,
+    };
+    const teamEvent = {
+      image,
+      title,
+      sportType,
+      level,
+      description,
+      type,
+      maxPlayersByTeam,
+      date,
+      location,
+    };
+
+    if (this.state.type === "individual") {
+      const fd = new FormData();
+      const sendForm = buildFormData(fd, individualEvent);
+      apiHandler
+        .postSoloSport(fd)
+        .then((data) => {
+          this.props.history.push("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    if (this.state.type === "collective") {
+      const fd = new FormData();
+      const sendForm = buildFormData(fd, teamEvent);
+      apiHandler
+      .postTeamSport(fd)
+      .then((data)=>{
+        this.props.history.push("/");
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    }
+    
+
+  };
 
   render() {
-    console.log(this.state);
+    console.log("ici", this.props.history);
     return (
       <React.Fragment>
         <CssBaseline />
@@ -189,8 +257,6 @@ class BasicTextFields extends Component {
                   />
                 </Grid>
 
-
-
                 <Grid item xs={3}>
                   <TeamSelector parentCallback={this.handleTeam} fullWidth />
                 </Grid>
@@ -199,16 +265,21 @@ class BasicTextFields extends Component {
                   <Level ratingValue={this.handleRating} />
                 </Grid>
 
-               <Grid item xs={6} className={
-              this.state.isSwitchOn ? "toggleFilterOff" : "toggleDisplayOn"
-            }>
+                <Grid
+                  item
+                  xs={6}
+                  className={
+                    this.state.isSwitchOn
+                      ? "toggleFilterOff"
+                      : "toggleDisplayOn"
+                  }
+                >
                   <TextField
                     fullWidth
                     onChange={this.handleNumbOfIndivPlayers}
                     id="outlined-number"
                     label="Nombre de joueurs maximum"
                     type="number"
-                    value="1"
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -217,12 +288,15 @@ class BasicTextFields extends Component {
                 </Grid>
                 {/* </div> */}
 
-
-
-        
-                <Grid item xs={6} className={
-              this.state.isSwitchOn ? "toggleDisplayOn" : "toggleFilterOff"
-            }>
+                <Grid
+                  item
+                  xs={6}
+                  className={
+                    this.state.isSwitchOn
+                      ? "toggleDisplayOn"
+                      : "toggleFilterOff"
+                  }
+                >
                   <TextField
                     onChange={this.handleNumPlayerByTeam}
                     fullWidth
@@ -249,14 +323,20 @@ class BasicTextFields extends Component {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <div className="img-container">
-                    <MyMapTwo place={this.state.location}/>
+                  <div className="img-container-map">
+                    <MyMapTwo place={this.state.location} />
                   </div>
                 </Grid>
+                <Grid item xs={12}>
+              <div className="padding-btn">
+             
+              
+              <SubmitBtn clbk={this.handleSubmit} /> 
+               
+      
+                  </div> 
+                </Grid>
               </Grid>
-              <div className="submit-btn padding-btn">
-                <SubmitBtn />
-              </div>
             </form>
           </div>
         </Container>
@@ -265,4 +345,5 @@ class BasicTextFields extends Component {
   }
 }
 
-export default BasicTextFields;
+
+export default withRouter(BasicTextFields);

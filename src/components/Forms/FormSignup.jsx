@@ -284,9 +284,15 @@ class FormSignup extends Component {
                   </Grid>
                 </div>
 
-                <div className="submit-btn padding-btn">
+                <Grid item xs={12}>
+                  <div className="padding-btn">
+                    <SubmitBtn clbk={this.handleSubmit} />
+                  </div>
+                </Grid>
+
+                {/* <div className="submit-btn padding-btn">
                   <SubmitBtn clbk={this.handleSubmit} />
-                </div>
+                </div> */}
               </form>
             </div>
           </Container>

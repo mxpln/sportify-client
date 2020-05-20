@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Search from "../components/buttons/Search";
@@ -6,6 +6,7 @@ import TeamSelector from "../components/buttons/TeamSelector";
 import OneDatePicker from "../components/buttons/OneDatePicker";
 import Level from "../components/buttons/Level";
 import UploadBtn from "../components/buttons/UploadBtn";
+import axios from "axios";
 
 import SearchPlace from "../components/Forms/SearchPlace";
 
@@ -18,21 +19,87 @@ import SubmitBtn from "../components/buttons/SubmitBtn";
 
 import MyMap from "../components/buttons/MyMap"
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: "25ch",
-    },
-  },
-}));
+import AddBtn from "../components/buttons/AddBtn";
+import RetirerBtn from "../components/buttons/RetirerBtn";
 
-export default function OneEventId() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState("Controlled");
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+const service = axios.create({
+  baseURL: process.env.REACT_APP_BACKEND_URL,
+  withCredentials: true, // Cookie is sent to client when using this service. (used for session)
+});
+
+export default class OneEventId extends Component {
+
+  state={
+event:null,
+creator:null,
+creatorInfo:null,
+image:'',
+titre: '',
+date :'',
+heure: '',
+sport: '',
+type: '',
+level: '',
+description: '',
+createur: '',
+avatarCreateur: '',
+adresse : '',
+coordoninates: '',
+participants: '',
+teamA: '',
+teamB: '',
+  }
+
+
+componentDidMount(){
+ const id = this.props.match.params.id;
+//  const creatorId = this.state.event
+ return service
+ .get(`/api/events/${id}`)
+ .then((apiRes)=>{
+   this.setState({
+     event : apiRes.data,
+     image : apiRes.data.image,
+     titre: apiRes.data.title,
+date :apiRes.data.date,
+heure: apiRes.data.date,
+sport: apiRes.data.sportType.sport,
+type: apiRes.data.type,
+level: apiRes.data.level,
+description: apiRes.data,
+createur: apiRes.data,
+avatarCreateur: apiRes.data,
+adresse : apiRes.data,
+coordoninates: apiRes.data,
+participants: apiRes.data,
+teamA: apiRes.data,
+teamB: apiRes.data,
+    
+    
+    })
+   console.log(apiRes.data)
+ })
+ .catch((err)=>
+ console.log(err))
+}
+
+// componentDidUpdate(){
+
+ 
+//   return service
+//   .get(`/api/${creatorId}`)
+//   .then((apiRes)=>{
+//     this.setState({event : apiRes.data})
+//   })
+//   .catch((err)=>
+//   console.log(err))
+
+// }
+
+
+
+render(){
+  console.log("ici", this.state)
 
   return (
     <React.Fragment>
@@ -41,12 +108,10 @@ export default function OneEventId() {
         <div className="main-container">
           <h2 className="title-container"></h2>
           <div className="img-position">
-            <div className="img-container"></div>
+            
+              <img className="img-container" src={this.state.image} />
+           
           </div>
-
-          {/* <div>
-              <h3 className="title">Date / Heure</h3>
-            </div> */}
 
           <div className="flex-between date-hour-container">
             <div>
@@ -81,10 +146,10 @@ export default function OneEventId() {
 
           <h2>Createur</h2>
 
-          <div className="flex-between margin-top">
+          <div className="flex-between">
             <div className="flex-between">
-              <div className="pic-avatar-container"></div>
-              <h3 className="title">Nom Prénom créateur</h3>
+              <div className="pic-avatar-container margin-title-creator "></div>
+              <h3 className="title  ">Nom Prénom créateur</h3>
             </div>
           </div>
 
@@ -160,13 +225,26 @@ export default function OneEventId() {
 
             <div className="img-container"></div>
           </div>
-   
 
-          <div className="submit-btn padding-btn">
-            <SubmitBtn />
+         
+          <Grid item xs={12}>
+           <div className="padding-btn">
+          <AddBtn/>
           </div>
+        </Grid>
+
+        <Grid item xs={12}>
+           <div className="padding-btn">
+          <RetirerBtn/>
+          </div>
+        </Grid>
+
+          {/* <div className="submit-btn padding-btn">
+            <SubmitBtn />
+          </div> */}
         </div>
       </Container>
     </React.Fragment>
   );
+}
 }
