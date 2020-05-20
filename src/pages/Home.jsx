@@ -8,6 +8,15 @@ import TextField from "@material-ui/core/TextField";
 import MyMap from "../components/buttons/MyMap";
 import Card from "../components/buttons/Card";
 import { NavLink } from "react-router-dom";
+import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import AvatarGroup from "../components/buttons/AvatarGroup";
+import AddBtn from "../components/buttons/AddBtn";
+import Avatar from "@material-ui/core/Avatar";
+import RetirerBtn from "../components/buttons/RetirerBtn";
+import Modal from '@material-ui/core/Modal';
+import { red } from "@material-ui/core/colors";
 
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -24,19 +33,42 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ModalMap from "../components/buttons/ModalMap";
 
 import ViewsChangerBtn from "../components/buttons/ViewsChangerBtn";
 import FilterIconBtn from "../components/buttons/FilterIconBtn";
+import apiHandler from "../api/apiHandler";
+require("dotenv").config();
+const Map = ReactMapboxGl({
+  accessToken:
+    "pk.eyJ1IjoiY2FwemViaWIiLCJhIjoiY2s5emRveWVxMHlkdDNndGVpcjM5ZDNuNSJ9.RHGZkM4ZydezmApMPNj3yA",
+});
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
-//     width: '100%',
+//     // width: 275,
+//     maxWidth: 345,
+//     // margin:"10px"
 //   },
-//   heading: {
-//     fontSize: theme.typography.pxToRem(15),
-//     fontWeight: theme.typography.fontWeightRegular,
+//   media: {
+//     height: 0,
+//     paddingTop: '56.25%', // 16:9
+//   },
+//   expand: {
+//     transform: 'rotate(0deg)',
+//     marginLeft: 'auto',
+//     transition: theme.transitions.create('transform', {
+//       duration: theme.transitions.duration.shortest,
+//     }),
+//   },
+//   expandOpen: {
+//     transform: 'rotate(180deg)',
+//   },
+//   avatar: {
+//     backgroundColor: red[500],
 //   },
 // }));
+
 class Home extends Component {
   state = {
     isSwitchOn: false,
@@ -47,7 +79,21 @@ class Home extends Component {
     level: "",
     team: "",
     favoriteSports: false,
+    soloSports: [],
+    teamSports: [],
+    items: [],
+    lng: 2.333333,
+    lat: 48.866667,
+    zoom: 11,
+    style: "mapbox://styles/mapbox/light-v9",
+    userLocation: [],
+  setOpen: false,
+  imageSolo:'',
+  imageTeam:'',
   };
+
+
+
   toggle = () => {
     this.setState({
       isSwitchOn: !this.state.isSwitchOn,
@@ -58,6 +104,18 @@ class Home extends Component {
       isFilterOn: !this.state.isFilterOn,
     });
   };
+
+  handleOpen=()=>{
+   this.setState({
+    setOpen : true
+   }) 
+  };
+  handleClose=()=>{
+    this.setState({
+      setOpen : false
+     }) 
+    };
+
   handleChange = (event, value) => {
     let res;
     if (value === null) res = "";
@@ -101,11 +159,56 @@ class Home extends Component {
       favoriteSports: value,
     });
   };
+
+  componentDidMount = () => {
+    apiHandler
+      .getSoloSport()
+      .then((res) => {
+        this.setState({
+          soloSports: res,
+          imageSolo:res.image,
+        });
+      })
+      .catch((apiError) => {
+        console.log(apiError);
+      });
+
+    apiHandler
+      .getTeamSport()
+      .then((apiRes) => {
+        this.setState({
+          teamSports: apiRes,
+          imageTeam: apiRes.image
+        });
+      })
+      .catch((apiError) => {
+        console.log(apiError);
+      });
+
+
+    // this.setState({
+
+    // })  
+  };
+handMarker=(e)=>{
+  console.log("clickkk")
+}
+
   render() {
-    // console.log(this.state.isFilterOn);
+    console.log(this.state.soloSports);
+    
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({
+        lng: position.coords.longitude,
+        lat: position.coords.latitude,
+      });
+    });
+
+    const { center, zoom, style } = this.state;
+
     return (
       // VUE FILTER
-     
+
       <>
         <React.Fragment>
           <CssBaseline />
@@ -114,7 +217,7 @@ class Home extends Component {
               <Grid className="test-search" container spacing={2}>
                 <Grid item xs={12} sm={6} md={4}>
                   {/* <div className="margin-top"> */}
-                    <Search clbk={this.handleChange} />
+                  <Search clbk={this.handleChange} />
                   {/* </div> */}
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -140,7 +243,6 @@ class Home extends Component {
           </div>
         </React.Fragment>
 
-        
         <div
           className={
             this.state.isFilterOn ? "toggleFilterOn" : "toggleFilterOff"
@@ -150,27 +252,29 @@ class Home extends Component {
             <CssBaseline />
             <div className="position-filtered-container">
               <Container maxWidth="md">
-                <Grid  container spacing={2}>
-                  <Grid className="position-filtered" item xs={12} sm={12} md={12}>
+                <Grid container spacing={2}>
+                  <Grid
+                    className="position-filtered"
+                    item
+                    xs={12}
+                    sm={12}
+                    md={12}
+                  >
                     <Level ratingValue={this.handleRating} />
                     <TeamSelector parentCallback={this.handleTeam} />
-                    
+
                     <FavoriteSportsFilter
                       parentCallback={this.handleFavorite}
                     />
                   </Grid>
-                 
-
-          
                 </Grid>
               </Container>
             </div>
           </React.Fragment>
         </div>
-        
+
         {/* // VUE CHANGER VIEW */}
         <>
-      
           {/* <div className="change-view-container">
           <button onClick={this.toggle}>Changer vue</button>
         </div> */}
@@ -179,7 +283,63 @@ class Home extends Component {
               this.state.isSwitchOn ? "toggleDisplayOff" : "toggleDisplayOn"
             }
           >
-            <MyMap />
+            <Map
+              center={[this.state.lng, this.state.lat]}
+              zoom={[zoom]}
+              style={style}
+              containerStyle={{
+                height: "100vh",
+                width: "100vw",
+              }}
+            >
+
+
+                <Layer
+                  // onClick={this.handleClick}
+                  // key={index}
+                  // coordinates={item.location.coordinates}
+                  // anchor="bottom"
+                  type="symbol"
+                  layout={{ "icon-image": "rocket-15" }}
+                >
+
+
+              {this.state.soloSports.map((item, index) => (
+
+                    <Feature key={index}
+                    coordinates={item.location.coordinates}
+                    onClick={this.handleMarker}
+                     />
+
+           
+                  /* <img
+                  // onMouseOver={this.toggleHover} 
+                  className="event-icon" src={item.image} />
+                  <ModalMap test={item.title} image={item.image} id={item._id} date={item.date}/> */
+               
+
+                   
+              ))}
+                </Layer>
+
+              {/* {this.state.soloSports.map((item, index) => (
+                <Marker
+                  
+                  
+                  key={index}
+                  coordinates={item.location.coordinates}
+                  anchor="bottom"
+                >
+                  <img 
+                  onMouseOver={this.toggleHoverTwo}
+                  className="event-icon" src={item.image} />
+              
+
+                </Marker>
+              ))} */}
+
+              {/* this.state.soloSports.map((i)=>{console.log(i.location.coordinates)}) */}
+            </Map>
           </div>
           <div
             className={
@@ -190,25 +350,85 @@ class Home extends Component {
               <CssBaseline />
               <Container maxWidth="md">
                 <h2 className="title">Lundi 17 Mai 2020</h2>
+
+
                 <Grid container spacing={2}>
+
+
+                {this.state.soloSports.map((item, index) => (
                   <Grid item xs={12} sm={6} md={4}>
-                    <Card />
+                    <Card key={index}>
+                      <CardHeader
+                        avatar={<Avatar aria-label="recipe">R</Avatar>}
+                        title={item.title}
+                        subheader={
+                          item.date.slice(11, 16)
+                        }
+                      />
+                      <NavLink 
+                      place={this.state} 
+                      exact to={`/OneEvent/${item._id}`}>
+                        <CardMedia
+                          // className={classes.media}
+
+                          className="card-image"
+                          image={item.image}
+                          title="Paella dish"
+                        />
+                      </NavLink>
+                      <div className="card-container-bottom">
+                        <div className="avatar-group">
+                          <AvatarGroup />
+                        </div>
+
+                        <div className="avatar-group-btn">
+                          <AddBtn />
+                        </div>
+
+                        <div className="avatar-group-btn">
+                          <RetirerBtn />
+                        </div>
+                      </div>
+                    </Card>
                   </Grid>
+                  ))}
+
+                  {this.state.teamSports.map((item, index) => (
                   <Grid item xs={12} sm={6} md={4}>
-                    <Card />
+                    <Card key={index}>
+                      <CardHeader
+                        avatar={<Avatar aria-label="recipe">R</Avatar>}
+                        title={item.title}
+                        subheader={
+                          item.date.slice(11, 16)
+                        }
+                      />
+                      <NavLink exact to={`/OneEvent/${item._id}`}>
+                        <CardMedia
+                          // className={classes.media}
+                          className="card-image"
+                          image={item.image}
+                          title="Paella dish"
+                        />
+                      </NavLink>
+                      <div className="card-container-bottom">
+                        <div className="avatar-group">
+                          <AvatarGroup />
+                        </div>
+
+                        <div className="avatar-group-btn">
+                          <AddBtn />
+                        </div>
+
+                        <div className="avatar-group-btn">
+                          <RetirerBtn />
+                        </div>
+                      </div>
+                    </Card>
                   </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <Card />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <Card />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <Card />
-                  </Grid>
-                  <Grid item xs={12} sm={6} md={4}>
-                    <Card />
-                  </Grid>
+                  ))}
+
+
                 </Grid>
               </Container>
             </React.Fragment>

@@ -12,29 +12,12 @@ const Map = ReactMapboxGl({
 export default class MyMap extends Component {
   state = {
     items: [],
-    // lng: 2.333333,
-    // lat: 48.866667,
     coordinates:[2.61570809, 47],
     zoom: 5.2,
     style: "mapbox://styles/mapbox/light-v9",
     userLocation: [],
     eventCoordinates:[],
   };
-
-
-//   componentDidMount(){
-//     navigator.geolocation.getCurrentPosition((position) => {
-//         let lng = position.coords.longitude;
-//         let lat = position.coords.latitude;
-//         let res = [lng, lat]
-//         console.log("res", res)
-//       this.setState({
-//         coordinates : res,
-//         zoom:11
-//       });
-//     });
-//   }
-
 
 
  componentDidUpdate(){

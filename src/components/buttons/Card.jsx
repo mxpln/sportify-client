@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -53,27 +53,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard() {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+class RecipeReviewCard extends Component {
+  
+  render() {
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
       <>
    
 
-    <Card className={classes.root}>
+    <Card >
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
+          <Avatar aria-label="recipe">
             R
           </Avatar>
         }
-        title="Match de foot entre..."
-        subheader="10:30"
+        // title={this.props.title}
+        // subheader={this.props.hour}
       />
 
 <NavLink exact to="/OneEventId">
@@ -83,18 +80,7 @@ export default function RecipeReviewCard() {
         image="/media/not-found.png"
         title="Paella dish"
       />
-
 </NavLink>
-      {/* <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Venez faire un match de street foot les potos ca va être super et même peut être y aura des zouz
-        </Typography>
-      </CardContent> */}
-
-    
-
-     
-
       <div className="card-container-bottom">
 
       <div className="avatar-group">
@@ -118,3 +104,6 @@ export default function RecipeReviewCard() {
     </>
   );
 }
+}
+
+export default Card;

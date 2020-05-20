@@ -480,3 +480,9 @@ ul {
   text-transform: none !important;
   font-size: 1.05rem !important;
 }
+.event-icon{
+  height:50px;
+  width:50px;
+  border-radius:100%;
+  border:1px solid red
+}

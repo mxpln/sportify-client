@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { NavLink } from "react-router-dom";
 import Search from "../buttons/Search";
 import TeamSelector from "../buttons/TeamSelector";
 import OneDatePicker from "../buttons/OneDatePicker";
@@ -9,6 +10,7 @@ import UploadBtn from "../buttons/UploadBtn";
 import MyMapTwo from "../buttons/MyMapTwo";
 import buildFormData from "../../utils/buildFormData";
 import apiHandler from "../../api/apiHandler";
+import { withRouter } from "react-router-dom";
 
 import SearchPlace from "./SearchPlace";
 
@@ -197,12 +199,12 @@ class BasicTextFields extends Component {
         console.log(error)
       })
     }
-
+    
 
   };
 
   render() {
-    console.log(this.state);
+    console.log("ici", this.props.history);
     return (
       <React.Fragment>
         <CssBaseline />
@@ -327,7 +329,11 @@ class BasicTextFields extends Component {
                 </Grid>
                 <Grid item xs={12}>
               <div className="padding-btn">
-                  <SubmitBtn clbk={this.handleSubmit} />
+             
+              
+              <SubmitBtn clbk={this.handleSubmit} /> 
+               
+      
                   </div> 
                 </Grid>
               </Grid>
@@ -340,4 +346,4 @@ class BasicTextFields extends Component {
 }
 
 
-export default BasicTextFields;
+export default withRouter(BasicTextFields);

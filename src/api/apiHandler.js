@@ -73,12 +73,22 @@ postTeamSport(data) {
   .post("/api/events/multi/new", data)
   .then((res)=>res.data)
   .catch(errorHandler)
-}
+},
 
-// getUserSport() {
-//   return service.get(`/api/user/${id}/sports`)
-//   .then((res)=>res.data)
-//   .catch(errorHandler)
-// }
+getSoloSport(){
+  return service
+  .get('/api/events/solo')
+  .then((res)=>res.data)
+  .catch(errorHandler)
+},
+getTeamSport(){
+  return service
+  .get('/api/events/multi')
+  .then((res)=>res.data)
+  .catch(errorHandler)
+},
+
+
+
 
 };
