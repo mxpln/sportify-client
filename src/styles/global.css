@@ -78,11 +78,11 @@ ul {
   left: 12px;
 } */
 
-/* .avatar-group-btn {
+.avatar-group-btn {
   position: relative;
-  left: 52px;
+  left: -3px;
   top: -4px;
-} */
+}
 
 .card-image {
   width: 90%;
@@ -104,7 +104,8 @@ ul {
 .card-container-bottom {
   display: flex;
   justify-content: space-between;
-  margin: 10px 10px 10px 20px;
+  margin: 15px 10px 10px 20px;
+  
 }
 
 
@@ -159,7 +160,7 @@ ul {
 }
 
 .avatar-container {
-  margin: 20px;
+  margin: 20px ;
   height: 150px;
   max-height: 150px;
   width: 150px;
@@ -170,6 +171,20 @@ ul {
 }
 
 .img-container {
+  margin: 0px 0 20px 0;
+  height: 150px;
+  max-height: 150px;
+  width: 100%;
+  /* max-width: 150px; */
+  border-radius: 4px 20px 4px 20px;
+  background-color: grey;
+  text-align: center;
+  background-size: cover;
+}
+
+
+.img-container-map {
+  /* margin: 0px 0 20px 0; */
   height: 150px;
   max-height: 150px;
   width: 100%;
@@ -187,7 +202,7 @@ ul {
 }
 
 .pic-avatar-container {
-  margin-right: 10px;
+  margin-right: 15px;
   height: 50px;
   max-height: 150px;
   width: 50px;
@@ -237,7 +252,7 @@ ul {
 
 
 .padding-btn {
-  padding: 20px 0 !important;
+  margin: 0 0 20px 0 !important;
 }
 
 .favorite-container {
@@ -271,6 +286,10 @@ ul {
 /* .margin-top {
   margin: 20px 0;
 } */
+
+.margin-title-creator {
+  margin: 20px 15px 20px 0;
+}
 
 .margin-right {
   margin-right: 10px;
@@ -375,9 +394,14 @@ ul {
 }
 
 .btn-recherche-style {
-  background-color: red;
+  /* background-color: red; */
   width: 100%;
-  height: 40px;
+  height: 46px;
+}
+
+.btn-recherche-style-add{
+  width: 100%;
+  height: 46px;
 }
 
 .MuiExpansionPanelSummary-expandIcon {
@@ -451,6 +475,8 @@ ul {
     font-size: 1rem;
     cursor: pointer;
     text-align: center;
-  
-
+}
+.MuiButton-root {
+  text-transform: none !important;
+  font-size: 1.05rem !important;
 }

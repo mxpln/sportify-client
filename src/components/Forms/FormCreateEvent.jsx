@@ -321,14 +321,16 @@ class BasicTextFields extends Component {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <div className="img-container">
+                  <div className="img-container-map">
                     <MyMapTwo place={this.state.location} />
                   </div>
                 </Grid>
+                <Grid item xs={12}>
+              <div className="padding-btn">
+                  <SubmitBtn clbk={this.handleSubmit} />
+                  </div> 
+                </Grid>
               </Grid>
-              <div className="submit-btn padding-btn">
-                <SubmitBtn clbk={this.handleSubmit} />
-              </div>
             </form>
           </div>
         </Container>
@@ -336,5 +338,6 @@ class BasicTextFields extends Component {
     );
   }
 }
+
 
 export default BasicTextFields;

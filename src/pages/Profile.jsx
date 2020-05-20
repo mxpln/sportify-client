@@ -11,6 +11,8 @@ import Search from "../components/buttons/Search";
 import Level from "../components/buttons/Level";
 import AddBtn from "../components//buttons/AddBtn";
 import Button from "@material-ui/core/Button";
+
+import UpdateBtn from "../components/buttons/UpdateBtn"
 // import UserContext from "../components/Auth/UserContext";
 import Grid from "@material-ui/core/Grid";
 
@@ -199,9 +201,13 @@ class Profile extends Component {
                     })}
                 </div>
 
-                <div className="submit-btn padding-btn">
-                  <SubmitBtn />
-                </div>
+                {/* <div className="submit-btn padding-btn">
+                  <UpdateBtn />
+                </div> */}
+
+                <div className="padding-btn">
+                  <UpdateBtn  />
+                  </div> 
               </form>
             </div>
           </Container>
