@@ -64,7 +64,7 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
-  Profile(updatedUserInfo) {
+  editProfile(updatedUserInfo) {
     return service
       .post("/api/auth/edit-profile", updatedUserInfo)
       .then((res) => res.data)
@@ -109,7 +109,30 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
-
+  addEventSolo() {
+    return service
+      .post("/api/events/solo/:id/join")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+  addEventMulti() {
+    return service
+      .post("/api/events/multi/:id/join")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+  deleteEventSolo() {
+    return service
+      .delete("/api/events/solo/:id/leave")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+  deleteEventMulti() {
+    return service
+      .delete("/api/events/multi/:id/leave")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
   // getUserSport() {
   //   return service.get(`/api/user/${id}/sports`)
   //   .then((res)=>res.data)
