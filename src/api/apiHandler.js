@@ -60,6 +60,21 @@ getSports() {
   .catch(errorHandler)
 },
 
+postSoloSport(data) {
+  return service
+  .post("/api/events/solo/new", data)
+  .then((res)=>
+    res.data)
+  .catch(errorHandler);
+},
+
+postTeamSport(data) {
+  return service
+  .post("/api/events/multi/new", data)
+  .then((res)=>res.data)
+  .catch(errorHandler)
+}
+
 // getUserSport() {
 //   return service.get(`/api/user/${id}/sports`)
 //   .then((res)=>res.data)

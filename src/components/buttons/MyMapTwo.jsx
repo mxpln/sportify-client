@@ -44,13 +44,13 @@ export default class MyMap extends Component {
         zoom:11
     })
   }
-     console.log("test", this.props)
+    
   }
 
 
   render() {
   
-    console.log("ici", this.state.coordinates)
+  
     const { center, zoom, style } = this.state;
     return (
       <>
@@ -60,8 +60,9 @@ export default class MyMap extends Component {
           zoom={[this.state.zoom]}
           style={style}
           containerStyle={{
-            height: "75vh",
-            width: "100vw",
+            height: "100%",
+            width: "100%",
+            borderRadius: "4px 20px 4px 20px"
           }}
           movingMethod="flyTo"
         >

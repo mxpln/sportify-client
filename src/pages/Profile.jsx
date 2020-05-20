@@ -20,6 +20,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import CardsFavorite from "../components//buttons/CardsFavorite";
 
 class Profile extends Component {
+
   static contextType = UserContext;
 
   state = {
@@ -59,7 +60,7 @@ class Profile extends Component {
   componentDidMount() {
     if (this.context.user){
     apiHandler
-      .get(`/api/user/${this.context.user._id}/sports`)
+      .get(`/api/user/sports`)
       .then((data) => {
         console.log(data.data.preferences.map((items)=>{
           console.log("test", items.favoriteSport.sport)
@@ -172,33 +173,30 @@ class Profile extends Component {
                 </Grid>
 
                 <div className="favorite-container">
-                  {this.context.user.preferences.map((items) => {
+                  {/* {this.context.user.preferences.map((items) => {
                     return (
                       <li>
                         <ul>{items.level}</ul>
                         <ul>{items.favoriteSport}</ul>
                       </li>
                     );
-                  })}
+                  })} */}
+                  {this.context.user.preferences.map(
+                    (items, index) => {
+                      return (
                   <Grid container>
                     <Grid xs={12} sm={6} md={4}>
                       <div className="favorite-card-position">
-                        <CardsFavorite />
-                      </div>
-                    </Grid>
-
-                    <Grid xs={12} sm={6} md={4}>
-                      <div className="favorite-card-position">
-                        <CardsFavorite />
-                      </div>
-                    </Grid>
-
-                    <Grid xs={12} sm={6} md={4}>
-                      <div className="favorite-card-position">
-                        <CardsFavorite />
+                        <CardsFavorite
+                        key={index}
+                        name={items.favoriteSport}
+                        level={items.level}
+                         />
                       </div>
                     </Grid>
                   </Grid>
+                  );
+                    })}
                 </div>
 
                 <div className="submit-btn padding-btn">

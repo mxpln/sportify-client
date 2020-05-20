@@ -133,18 +133,7 @@ class FormSignup extends Component {
     const userInfo = { email, password, firstName, lastName, image, preferences };
     const fd = new FormData()
     const result = buildFormData(fd, userInfo);
-    // const stringify = JSON.stringify(Object.fromEntries(result));
-
-    
-
-    // const fd = new FormData();
-    // fd.append("email", this.state.email);
-    // fd.append("password", this.state.password);
-    // fd.append("firstName", this.state.firstName)
-    // fd.append("lastName", this.state.lastName)
-    // fd.append("image", this.state.image)
-    // fd.append("preferences", this.state.preferences)
-
+ 
     apiHandler
       .signup(fd)
       .then((data) => {

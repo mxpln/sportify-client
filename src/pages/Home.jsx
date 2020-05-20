@@ -102,7 +102,7 @@ class Home extends Component {
     });
   };
   render() {
-    console.log(this.state.isFilterOn);
+    // console.log(this.state.isFilterOn);
     return (
       // VUE FILTER
      

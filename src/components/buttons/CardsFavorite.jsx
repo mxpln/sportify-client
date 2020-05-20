@@ -68,6 +68,7 @@ class RecipeReviewCard extends Component {
     else if (this.props.level==="intermediate")((res=2)&&(level="intermédiaire"))
     else if (this.props.level==="advanced")((res=3)&&(level="avancé"))
 
+const test=(e)=>{console.log("click")}
 
   return (
     <>
@@ -83,7 +84,7 @@ class RecipeReviewCard extends Component {
             </Grid>
 
             <Grid item xs={6}>
-              <RemoveBtn />
+             <button onClick={test} className="removeButtonhandler"><RemoveBtn /> </button> 
             </Grid>
           </Grid>
         </div>

@@ -73,7 +73,7 @@ class LocationAutoComplete extends Component {
     return (
       <div className="LocationAutoComplete">
 
-<TextField id="outlined-basic" label="Adresse" variant="outlined" className="input"
+<TextField style={{ width: "100%" }} id="outlined-basic" label="Adresse" variant="outlined" className="input"
           type="text"
           value={this.state.search}
           onChange={this.handleSearchChange}
