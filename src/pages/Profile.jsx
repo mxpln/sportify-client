@@ -27,6 +27,7 @@ class Profile extends Component {
     password: "",
     firstName: "",
     lastName: "",
+    sports: [],
   };
 
   handleChange = (event) => {
@@ -44,7 +45,6 @@ class Profile extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
     // apiHandler
     //   .signup(this.state)
     //   .then((data) => {
@@ -56,8 +56,23 @@ class Profile extends Component {
     //   });
   };
 
+  componentDidMount() {
+    if (this.context.user){
+    apiHandler
+      .get(`/api/user/${this.context.user._id}/sports`)
+      .then((data) => {
+        console.log(data.data.preferences.map((items)=>{
+          console.log("test", items.favoriteSport.sport)
+        }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+  }
+
+  
   render() {
-    console.log(this.context);
     if (this.context.user === null) {
       return null;
     }
@@ -69,7 +84,12 @@ class Profile extends Component {
             <div className="main-container">
               {/* <h2 className="title-container">Inscription</h2> */}
               <div className="img-position">
-                <div className="avatar-container"></div>
+                {this.context.isLoggedIn && (
+                  <img
+                    src={this.context.user.image}
+                    className="avatar-container"
+                  ></img>
+                )}
               </div>
 
               <div className="upload-position">
@@ -113,7 +133,7 @@ class Profile extends Component {
                       defaultValue={this.context.user.email}
                     />
                   </Grid>
-
+                  {/* 
                   <Grid item xs={12}>
                     <TextField
                       fullWidth
@@ -123,7 +143,7 @@ class Profile extends Component {
                       autoComplete="current-password"
                       variant="outlined"
                     />
-                  </Grid>
+                  </Grid> */}
                 </Grid>
                 {/* <Grid item xs={3}>
                 <Search />
@@ -152,6 +172,14 @@ class Profile extends Component {
                 </Grid>
 
                 <div className="favorite-container">
+                  {this.context.user.preferences.map((items) => {
+                    return (
+                      <li>
+                        <ul>{items.level}</ul>
+                        <ul>{items.favoriteSport}</ul>
+                      </li>
+                    );
+                  })}
                   <Grid container>
                     <Grid xs={12} sm={6} md={4}>
                       <div className="favorite-card-position">

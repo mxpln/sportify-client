@@ -4,8 +4,10 @@ import DatePicker from "../components/buttons/DatePicker";
 import Level from "../components/buttons/Level";
 import TeamSelector from "../components/buttons/TeamSelector";
 import FavoriteSportsFilter from "../components/buttons/FavoriteSportsFilter";
+import TextField from "@material-ui/core/TextField";
 import MyMap from "../components/buttons/MyMap";
 import Card from "../components/buttons/Card";
+import { NavLink } from "react-router-dom";
 
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -105,10 +107,13 @@ class Home extends Component {
     // console.log(this.state.isFilterOn);
     return (
       // VUE FILTER
+     
       <>
         <div className="search-bar-home">
+    
           <button onClick={this.toggleFilter}>click</button>
-
+   
+    
           <div className="flex-between">
             <div className="margin-general">
               <Search clbk={this.handleChange} />
@@ -120,13 +125,25 @@ class Home extends Component {
               />
             </div>
           </div>
-
+  
+     
           <div>
             <SubmitBtn />
           </div>
+    
+      {/* {!this.context.isLoggedIn && (
+        <NavLink exact to="/signin">
+       <h1>Connection</h1>
+        </NavLink>
+        )}
+        {!this.context.isLoggedIn && (
+        <NavLink exact to="/signup">
+       <h1>Inscription</h1>
+        </NavLink>
+        )} */}
         </div>
 
-        {/* <Typography className={classes.heading}>Expansion Panel 1</Typography> */}
+        
         <div
           className={
             this.state.isFilterOn ? "toggleFilterOn" : "toggleFilterOff"
@@ -154,6 +171,7 @@ class Home extends Component {
         {/* // VUE CHANGER VIEW */}
 
         <>
+      
           {/* <div className="change-view-container">
           <button onClick={this.toggle}>Changer vue</button>
         </div> */}

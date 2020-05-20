@@ -28,21 +28,23 @@ const useStyles = makeStyles((theme) => ({
 const NavMain = (props) => {
   const { context } = props;
 
-  function handleLogout() {
-    apiHandler
-      .logout()
-      .then(() => {
-        context.removeUser();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  // function handleLogout(){
+
+  //   console.log("click")
+  //   // apiHandler
+  //   //   .logout()
+  //   //   .then(() => {
+  //   //     context.removeUser();
+  //   //   })
+  //   //   .catch((error) => {
+  //   //     console.log(error);
+  //   //   });
+  // }
 
   
 
   const classes = useStyles();
-
+  
   return (
     // <nav className="NavMain">
     //   <NavLink exact to="/">
@@ -85,13 +87,18 @@ const NavMain = (props) => {
       </NavLink>
           </Typography>
 
-          <Typography variant="h6" className={classes.title}>
-            TITLE A VOIR
-          </Typography>
+       
 
           
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <Burger />
+
+         
+         <Burger />
+        
+
+
+
+
           </IconButton>
 
         </Toolbar>

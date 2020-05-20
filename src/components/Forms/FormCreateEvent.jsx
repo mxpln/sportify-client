@@ -41,7 +41,7 @@ class BasicTextFields extends Component {
     date: "",
     day: "",
     hour:'',
-    location: "",
+    location:'',
   };
 
   handleTitle = (event) => {
@@ -250,7 +250,7 @@ class BasicTextFields extends Component {
 
                 <Grid item xs={12}>
                   <div className="img-container">
-                    <MyMapTwo truc={this.state.hour}/>
+                    <MyMapTwo place={this.state.location}/>
                   </div>
                 </Grid>
               </Grid>

@@ -12,9 +12,12 @@ function errorHandler(error) {
   }
   throw error;
 }
-
+function get(endPoint) {
+  return service.get(endPoint);
+}
 export default {
   service,
+  get,
 
   signup(userInfo) {
     return service
@@ -56,5 +59,11 @@ getSports() {
   .then((res)=> res.data)
   .catch(errorHandler)
 },
+
+// getUserSport() {
+//   return service.get(`/api/user/${id}/sports`)
+//   .then((res)=>res.data)
+//   .catch(errorHandler)
+// }
 
 };

@@ -343,6 +343,7 @@ color: white;
 .toggleFilterOff{
   display:none;
 }
-.testMap{
-  height:10px
+.location-icon{
+  width: 30px;
+  height: 30px
 }
