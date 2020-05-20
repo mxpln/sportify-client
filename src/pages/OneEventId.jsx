@@ -18,6 +18,9 @@ import SubmitBtn from "../components/buttons/SubmitBtn";
 
 import MyMap from "../components/buttons/MyMap"
 
+import AddBtn from "../components/buttons/AddBtn";
+import RetirerBtn from "../components/buttons/RetirerBtn";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -81,10 +84,10 @@ export default function OneEventId() {
 
           <h2>Createur</h2>
 
-          <div className="flex-between margin-top">
+          <div className="flex-between">
             <div className="flex-between">
-              <div className="pic-avatar-container"></div>
-              <h3 className="title">Nom Prénom créateur</h3>
+              <div className="pic-avatar-container margin-title-creator "></div>
+              <h3 className="title  ">Nom Prénom créateur</h3>
             </div>
           </div>
 
@@ -160,11 +163,23 @@ export default function OneEventId() {
 
             <div className="img-container"></div>
           </div>
-   
 
-          <div className="submit-btn padding-btn">
-            <SubmitBtn />
+         
+          <Grid item xs={12}>
+           <div className="padding-btn">
+          <AddBtn/>
           </div>
+        </Grid>
+
+        <Grid item xs={12}>
+           <div className="padding-btn">
+          <RetirerBtn/>
+          </div>
+        </Grid>
+
+          {/* <div className="submit-btn padding-btn">
+            <SubmitBtn />
+          </div> */}
         </div>
       </Container>
     </React.Fragment>

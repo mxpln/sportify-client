@@ -32,7 +32,7 @@ export default class MyMap extends Component {
           zoom={[zoom]}
           style={style}
           containerStyle={{
-            height: "75vh",
+            height: "100vh",
             width: "100vw",
           }}
         >

@@ -60,8 +60,9 @@ export default class MyMap extends Component {
           zoom={[this.state.zoom]}
           style={style}
           containerStyle={{
-            height: "75vh",
-            width: "100vw",
+            height: "100%",
+            width: "100%",
+            borderRadius: "4px 20px 4px 20px"
           }}
           movingMethod="flyTo"
         >

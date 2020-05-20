@@ -20,7 +20,12 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AvatarGroup from './AvatarGroup'
 import AddBtn from './AddBtn'
 
+import RetirerBtn from './RetirerBtn'
+
 import Grid from "@material-ui/core/Grid";
+
+import { NavLink } from "react-router-dom";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,12 +75,16 @@ export default function RecipeReviewCard() {
         title="Match de foot entre..."
         subheader="10:30"
       />
+
+<NavLink exact to="/OneEventId">
       <CardMedia
         // className={classes.media}
         className="card-image"
         image="/media/not-found.png"
         title="Paella dish"
       />
+
+</NavLink>
       {/* <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           Venez faire un match de street foot les potos ca va être super et même peut être y aura des zouz
@@ -94,6 +103,10 @@ export default function RecipeReviewCard() {
 
      <div className="avatar-group-btn">
         <AddBtn/>
+        </div>
+
+        <div className="avatar-group-btn">
+        <RetirerBtn/>
         </div>
 
     </div>

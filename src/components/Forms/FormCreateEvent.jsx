@@ -40,8 +40,8 @@ class BasicTextFields extends Component {
     individualNbrOfParticipants: "",
     date: "",
     day: "",
-    hour:'',
-    location:'',
+    hour: "",
+    location: "",
   };
 
   handleTitle = (event) => {
@@ -113,16 +113,15 @@ class BasicTextFields extends Component {
     let fullDate = event.toString();
     let dateSelected = fullDate.slice(0, 16);
     this.setState({
-      day : dateSelected
-    })
-    
+      day: dateSelected,
+    });
   };
   handleHour = (event) => {
     let fullDate = event.toString();
     let hourSelected = fullDate.slice(16, fullDate.length);
     this.setState({
-      hour: hourSelected
-    })
+      hour: hourSelected,
+    });
   };
   handleImage = (event) => {
     let value = event.target.files[0];
@@ -131,9 +130,9 @@ class BasicTextFields extends Component {
   };
   handleUpload = (event) => {};
 
-  test = () =>{
-    return "blabla"
-  }
+  test = () => {
+    return "blabla";
+  };
 
   render() {
     console.log(this.state);
@@ -189,8 +188,6 @@ class BasicTextFields extends Component {
                   />
                 </Grid>
 
-
-
                 <Grid item xs={3}>
                   <TeamSelector parentCallback={this.handleTeam} fullWidth />
                 </Grid>
@@ -199,9 +196,15 @@ class BasicTextFields extends Component {
                   <Level ratingValue={this.handleRating} />
                 </Grid>
 
-               <Grid item xs={6} className={
-              this.state.isSwitchOn ? "toggleFilterOff" : "toggleDisplayOn"
-            }>
+                <Grid
+                  item
+                  xs={6}
+                  className={
+                    this.state.isSwitchOn
+                      ? "toggleFilterOff"
+                      : "toggleDisplayOn"
+                  }
+                >
                   <TextField
                     fullWidth
                     onChange={this.handleNumbOfIndivPlayers}
@@ -217,12 +220,15 @@ class BasicTextFields extends Component {
                 </Grid>
                 {/* </div> */}
 
-
-
-        
-                <Grid item xs={6} className={
-              this.state.isSwitchOn ? "toggleDisplayOn" : "toggleFilterOff"
-            }>
+                <Grid
+                  item
+                  xs={6}
+                  className={
+                    this.state.isSwitchOn
+                      ? "toggleDisplayOn"
+                      : "toggleFilterOff"
+                  }
+                >
                   <TextField
                     onChange={this.handleNumPlayerByTeam}
                     fullWidth
@@ -249,14 +255,16 @@ class BasicTextFields extends Component {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <div className="img-container">
-                    <MyMapTwo place={this.state.location}/>
+                  <div className="img-container-map">
+                    <MyMapTwo place={this.state.location} />
                   </div>
                 </Grid>
+                <Grid item xs={12}>
+              <div className="padding-btn">
+                  <SubmitBtn clbk={this.handleSubmit} />
+                  </div> 
+                </Grid>
               </Grid>
-              <div className="submit-btn padding-btn">
-                <SubmitBtn />
-              </div>
             </form>
           </div>
         </Container>

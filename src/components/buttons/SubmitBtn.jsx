@@ -24,11 +24,11 @@ const IconLabelButtons = ({clbk}) => {
         variant="contained"
         color="primary"
         padding="100px"
-        className={classes.button}
-        endIcon={<SendIcon>Envoyer</SendIcon>}
+        className={"btn-recherche-style"}
+        // endIcon={<SendIcon>Envoyer</SendIcon>}
         onClick={clbk}
       >
-        Envoyer
+        Valider
       </Button>
       
     </div>
