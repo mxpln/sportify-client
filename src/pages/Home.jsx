@@ -354,7 +354,7 @@ handMarker=(e)=>{
 
                 <Grid container spacing={2}>
 
-
+{/* ///MAP SUR LES EVENT INDIVIDUELS */}
                 {this.state.soloSports.map((item, index) => (
                   <Grid item xs={12} sm={6} md={4}>
                     <Card key={index}>
@@ -392,6 +392,8 @@ handMarker=(e)=>{
                     </Card>
                   </Grid>
                   ))}
+
+        {/* //MAP SUR LES EVENT EN EQUIPE           */}
 
                   {this.state.teamSports.map((item, index) => (
                   <Grid item xs={12} sm={6} md={4}>

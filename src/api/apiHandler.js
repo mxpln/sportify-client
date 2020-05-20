@@ -64,7 +64,7 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
-  Profile(updatedUserInfo) {
+  editProfile(updatedUserInfo) {
     return service
       .post("/api/auth/edit-profile", updatedUserInfo)
       .then((res) => res.data)
