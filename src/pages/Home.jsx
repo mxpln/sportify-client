@@ -108,7 +108,7 @@ class Home extends Component {
           <CssBaseline />
           <div className="color margin-top">
             <Container maxWidth="lg">
-              <Grid className="test-search" container spacing={4}>
+              <Grid className="test-search" container spacing={2}>
                 <Grid item xs={12} sm={6} md={4}>
                   {/* <div className="margin-top"> */}
                     <Search clbk={this.handleChange} />
@@ -137,6 +137,7 @@ class Home extends Component {
           </div>
         </React.Fragment>
 
+        {/* <Typography className={classes.heading}>Expansion Panel 1</Typography> */}
         <div
           className={
             this.state.isFilterOn ? "toggleFilterOn" : "toggleFilterOff"

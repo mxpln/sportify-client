@@ -9,14 +9,14 @@ export default class SearchPlace extends Component {
         location: {},
       };
 
-      handlePlace = (place) => {
-        const newPlace = {
-          type: place.geometry.type,
-          coordinates: place.geometry.coordinates,
-          formattedAddress: place.place_name,
-        };
-        this.setState({ location: newPlace });
-      };
+      // handlePlace = (place) => {
+      //   const newPlace = {
+      //     type: place.geometry.type,
+      //     coordinates: place.geometry.coordinates,
+      //     formattedAddress: place.place_name,
+      //   };
+      //   this.setState({ location: newPlace });
+      // };
 
 
     render() {
@@ -24,7 +24,7 @@ export default class SearchPlace extends Component {
           <>
             <div>   
                         
-            <LocationAutoComplete onSelect={this.handlePlace}/>
+            <LocationAutoComplete onSelect={(e, v)=>this.props.clbk(e, v)}/>
         
             </div>
             </>

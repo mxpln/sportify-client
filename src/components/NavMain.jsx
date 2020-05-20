@@ -2,14 +2,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Burger from './buttons/Burger';
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Burger from "./buttons/Burger";
+
+import Container from "@material-ui/core/Container";
 
 // import "../styles/NavMain.css";
 
@@ -38,8 +40,6 @@ const NavMain = (props) => {
         console.log(error);
       });
   }
-
-  
 
   const classes = useStyles();
 
@@ -74,31 +74,36 @@ const NavMain = (props) => {
     //   </ul>
     // </nav>
 
-
- <div className={classes.root}>
+    <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-
-        <Typography variant="h6" className={classes.title}>
-        <NavLink exact to="/">
-         <h3 className="logo">sportufy</h3>
-      </NavLink>
-          </Typography>
-
-          {/* <Typography variant="h6" className={classes.title}>
+          <Container maxWidth="l">
+          <div className="flex-between">
+            <div>
+              <Typography variant="h6" className={classes.title}>
+                <NavLink exact to="/">
+                  <h3 className="logo">sportufy</h3>
+                </NavLink>
+              </Typography>
+            </div>
+            {/* <Typography variant="h6" className={classes.title}>
             TITLE A VOIR
           </Typography> */}
-
-          
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <Burger />
-          </IconButton>
-
+            <div>
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="menu"
+              >
+                <Burger />
+              </IconButton>
+            </div>
+            </div>
+          </Container>
         </Toolbar>
-        
       </AppBar>
     </div>
-
   );
 };
 
