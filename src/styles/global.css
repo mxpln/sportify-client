@@ -43,6 +43,8 @@ ul {
 
 .date-picker-container {
   display: flex;
+  align-content: center;
+  /* background-color: red; */
 }
 
 .search-bar-home {
@@ -53,6 +55,11 @@ ul {
   background-color: white;
   /* border: 1px solid black; */
   /* border-radius: 10px; */
+}
+
+.margin0 {
+  margin: -10px 0 0 0 !important;
+  /* background-color: red; */
 }
 
 .flex-between {
@@ -93,6 +100,7 @@ ul {
 .card-margin {
   margin: 10px;
 }
+
 .card-container-bottom {
   display: flex;
   justify-content: space-between;
@@ -175,7 +183,7 @@ ul {
 .team-container {
   border: 2px solid #3f51b5;
   border-radius: 4px 20px 4px 20px;
-  padding:15px 20px 15px 20px;
+  padding: 15px 20px 15px 20px;
 }
 
 .pic-avatar-container {
@@ -205,8 +213,20 @@ ul {
   border-radius: 6px;
   display: inline-flex;
   font-size: 12px;
-  color: #6246ea; 
+  color: #6246ea;
 }
+
+.img-position img {
+  object-fit: cover;
+  overflow: hidden;
+  filter: grayscale(60%);
+}
+
+/* .img-position img {
+  object-fit: cover;
+  overflow: hidden;
+} */
+
 
 .img-position,
 .upload-position,
@@ -224,7 +244,7 @@ ul {
   border: 2px solid #3f51b5;
   border-radius: 4px 20px 4px 20px;
   padding: 10px;
- margin: 20px 0;
+  margin: 20px 0;
 }
 
 .card-margin {
@@ -239,7 +259,7 @@ ul {
 }
 
 .favorite-card-position {
-  margin:10px;
+  margin: 10px;
 }
 
 .test {
@@ -248,13 +268,14 @@ ul {
 
 }
 
-.margin-top {
+/* .margin-top {
   margin: 20px 0;
-}
+} */
 
 .margin-right {
-  margin-right: 10px ;
+  margin-right: 10px;
 }
+
 /* .user-location{
   height:100px;
   width:100px;
@@ -262,9 +283,10 @@ ul {
   border-radius:100%;
 } */
 
-.toggleDisplayOff{
-  display:none;
+.toggleDisplayOff {
+  display: none;
 }
+
 /* .LocationAutoComplete-results{
   border: 1px solid red;
 } */
@@ -272,12 +294,13 @@ ul {
 .date-hour-container {
   margin: 30px 0 10px 0;
 }
+
 .adresse-container {
   margin: 20px 0 10px 0;
 }
 
 .profile-container-burger {
-margin: 20px 0;
+  margin: 20px 0;
 }
 
 .img-container-burger {
@@ -293,7 +316,7 @@ margin: 20px 0;
 
 .title-container-burger {
   text-align: center;
-  
+
 }
 
 .change-view-container {
@@ -305,10 +328,10 @@ margin: 20px 0;
 }
 
 .change-view-container button {
-background-color: red;
-padding: 8px;
-border-radius: 10px;
-color: white;
+  background-color: red;
+  padding: 8px;
+  border-radius: 10px;
+  color: white;
 }
 
 .margin-general {
@@ -318,10 +341,10 @@ color: white;
 
 .title-favorite {
   font-size: 1rem;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: 0.00938em
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.00938em
 }
 
 .MuiRating-root {
@@ -329,21 +352,89 @@ color: white;
 }
 
 .MuiSwitch-root {
-  left:-10px
+  left: -10px
 }
 
 .MuiExpansionPanelSummary-content {
   justify-content: center;
 }
 
-.MuiExpansionPanelDetails-root  {
+.MuiExpansionPanelDetails-root {
   justify-content: center;
   /* justify-content: space-around; */
 }
-.toggleFilterOff{
-  display:none;
+
+.MuiExpansionPanelSummary-content {
+  margin: 0 !important;
+}
+
+.makeStyles-menuButton-2 {
+  margin: 0 !important;
+  position: relative;
+  top: 5px;
+}
+
+.btn-recherche-style {
+  background-color: red;
+  width: 100%;
+  height: 40px;
+}
+
+.MuiExpansionPanelSummary-expandIcon {
+  position: relative;
+  right: 19px
+}
+
+.toggleFilterOff {
+  display: none;
+}
+
+
+.test-search {
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  /* padding: 10px 30px; */
+  /* background-color: red; */
+}
+
+.largeurTotale {
+  width: 100%;
+}
+
+.color {
+  background-color: white;
+  margin: 0px 3px 0 0;
+  /* box-shadow: 10px 5px 5px red; */
+  /* padding: 10px 0; */
+  /* border-bottom: 1px solid black; */
 }
 .location-icon{
   width: 30px;
   height: 30px
+}
+.margin-top {
+  /* margin : 16px 20px; */
+  padding: 16px 20px;
+  /* background-color: red; */
+}
+
+.middle {
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+}
+
+.position-filtered-container {
+  background-color: white;
+  padding: 10px 0;
+  margin: 0px 20px 0 0;
+}
+
+.position-filtered {
+  /* background-color: yellow; */
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
 }

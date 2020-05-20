@@ -22,11 +22,12 @@ const DatePicker = ({ startDate, endDate }) => {
 
   return (
     <>
-      <div className="date-picker-container">
-        <div>
+      <div className="date-picker-container margin0">
+        <div >
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container>
               <KeyboardDatePicker
+              
                 disableToolbar
                 variant="inline"
                 format="dd/MM/yyyy"
@@ -46,7 +47,7 @@ const DatePicker = ({ startDate, endDate }) => {
 
         <div>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container>
+            <Grid  container>
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"

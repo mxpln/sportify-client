@@ -59,7 +59,9 @@ const HoverRating = ({ ratingValue }) => {
   const classes = useStyles();
 
   return (
-    <div>
+
+
+    <div >
       <div className={classes.root}>
         <Typography component="legend">Niveau </Typography>
         {value !== null && (
@@ -83,6 +85,8 @@ const HoverRating = ({ ratingValue }) => {
       />
       {/* {value !== null && <Box ml={2}>{labels[hover !== 1 ? hover : value]}</Box>} */}
     </div>
+    
+  
   );
 };
 
