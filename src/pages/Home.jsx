@@ -417,14 +417,72 @@ class Home extends Component {
                 </Marker>
               ))}
 
-              {/* <Marker
-                 onClick= {this.handleClickMarkerSolo}
-                  coordinates={coordinatesDisplay}
+              {this.state.teamSports.map((item, index) => (
+                <Marker
+                  onClick={() =>
+                    this.handleClickMarkerSolo(
+                      item._id,
+                      item.location.coordinates
+                    )
+                  }
+                  key={index}
+                  coordinates={item.location.coordinates}
                   anchor="bottom"
                 >
-               
-            {imageDisplay}
-                </Marker> */}
+                  {/* // SI L'IMAGE EST CLIQUEE */}
+
+                  {this.state.imageClicked === item._id ? (
+                    <div>
+                      <Card key={index}>
+                        <CardHeader
+                          avatar={<Avatar aria-label="recipe">R</Avatar>}
+                          title={item.title}
+                          subheader={item.date.slice(11, 16)}
+                        />
+                        <NavLink
+                          place={this.state}
+                          exact
+                          to={`/OneEvent/${item._id}`}
+                        >
+                          <CardMedia
+                            // className={classes.media}
+
+                            className="card-image"
+                            image={item.image}
+                            title="Paella dish"
+                          />
+                        </NavLink>
+                        <div className="card-container-bottom">
+                          <div className="avatar-group">
+                            <AvatarGroup />
+                          </div>
+
+                          <div className="avatar-group-btn">
+                            <AddBtn />
+                          </div>
+
+                          <div className="avatar-group-btn">
+                            <RetirerBtn />
+                          </div>
+                        </div>
+                      </Card>
+
+                      <div
+                        onClick={this.handleHidePopup}
+                        className="zIndexTest"
+                      >
+                        X
+                      </div>
+                    </div>
+                  ) : (
+                    // SI L IMAGE EST PAS CLIQUEE
+                    <img className="event-icon" src={item.image} />
+                  )}
+                </Marker>
+              ))}
+
+
+
             </Map>
           </div>
 
