@@ -20,6 +20,9 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AvatarGroup from './AvatarGroup'
 import AddBtn from './AddBtn'
 
+
+import ViewBtn from './ViewEventBtn'
+
 import RetirerBtn from './RetirerBtn'
 
 import Grid from "@material-ui/core/Grid";
@@ -83,9 +86,9 @@ class RecipeReviewCard extends Component {
 </NavLink>
       <div className="card-container-bottom">
 
-      <div className="avatar-group">
+      {/* <div className="avatar-group">
         <AvatarGroup />
-     </div>
+     </div> */}
 
      <div className="avatar-group-btn">
         <AddBtn/>

@@ -11,6 +11,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Burger from "./buttons/Burger";
 
+// import logo from "../../public/media/"
+
 import Container from "@material-ui/core/Container";
 
 // import "../styles/NavMain.css";
@@ -82,7 +84,8 @@ const NavMain = (props) => {
             <div>
               <Typography variant="h6" className={classes.title}>
                 <NavLink exact to="/">
-                  <h3 className="logo">sportufy</h3>
+                <img src="/media/logo.svg"/>
+                  {/* <h3 className="logo">sportufy</h3> */}
                 </NavLink>
               </Typography>
             </div>

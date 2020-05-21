@@ -1,9 +1,8 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import SendIcon from '@material-ui/icons/Send';
-import AddIcon from '@material-ui/icons/Add';
-
+import React from "react";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import SendIcon from "@material-ui/icons/Send";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -12,13 +11,11 @@ const useStyles = makeStyles((theme) => ({
   fullWidth: true,
 }));
 
-const IconLabelButtons= ({clbk}) => {
+const IconLabelButtons = ({ clbk }) => {
   const classes = useStyles();
 
   return (
     <div>
-     
-      
       <Button
         variant="outlined"
         color="primary"
@@ -26,11 +23,10 @@ const IconLabelButtons= ({clbk}) => {
         onClick={clbk}
         // endIcon={<AddIcon>Add</AddIcon>}
       >
-        Changer vue 
+        Changer vue
       </Button>
-      
     </div>
   );
-}
+};
 
 export default IconLabelButtons;
