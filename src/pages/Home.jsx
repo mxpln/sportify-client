@@ -17,6 +17,9 @@ import Avatar from "@material-ui/core/Avatar";
 import RetirerBtn from "../components/buttons/RetirerBtn";
 import Modal from "@material-ui/core/Modal";
 import { red } from "@material-ui/core/colors";
+import Moment from "react-moment";
+import "moment-timezone";
+import "moment/locale/fr";
 
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -90,6 +93,38 @@ class Home extends Component {
     setOpen: false,
     imageSolo: "",
     imageTeam: "",
+    imageClicked: null,
+
+    teamCreatorPic: [],
+    teamTitleEvent: [],
+    teamDate: [],
+    teamEventPic: [],
+    teamA: [],
+    teamB: [],
+    allTeamsPics: [],
+    teamSportName: [],
+
+    soloCreatorPic: [],
+    soloTitleEvent: [],
+    soloDate: [],
+    soloEventPic: [],
+    soloParticipantsPics: [],
+    soloSportName: [],
+  };
+
+  handleClickMarkerSolo = (id, coords) => {
+    this.setState({
+      imageClicked: id,
+      lng: coords[0],
+      lat: coords[1],
+    });
+  };
+  handleHidePopup = (event) => {
+    event.stopPropagation();
+    this.setState({
+      imageClicked: null,
+    });
+    console.log("CLICK");
   };
 
   toggle = () => {
@@ -174,25 +209,54 @@ class Home extends Component {
     apiHandler
       .getTeamSport()
       .then((apiRes) => {
+        let test;
+        let allTeams;
+        this.setState({
+          allTeamsPics: allTeams,
+        });
+        // console.log("apiRes", apiRes)
         this.setState({
           teamSports: apiRes,
           imageTeam: apiRes.image,
+          teamCreatorPic: apiRes.map((i) => {
+            return i.creator.image;
+          }),
+          teamTitleEvent: apiRes.map((item) => {
+            return item.title;
+          }),
+          teamDate: apiRes.map((item) => {
+            return item.date;
+          }),
+          teamA: apiRes.map((item) => {
+            return item.teamA;
+          }),
+          teamB: apiRes.map((item) => {
+            return item.teamB;
+          }),
+          teamSportName: apiRes.map((item) => {
+            return item.sportType.sport;
+          }),
+          allTeams: apiRes
+            .map((item) => {
+              return item.teamA;
+            })
+            .concat(
+              apiRes.map((item) => {
+                return item.teamB;
+              })
+            ),
+        }).map((item) => {
+          return item.image;
         });
       })
       .catch((apiError) => {
         console.log(apiError);
       });
-
-    // this.setState({
-
-    // })
-  };
-  handMarker = (e) => {
-    console.log("clickkk");
   };
 
   render() {
-    console.log(this.state.soloSports);
+    // console.log("state", this.state.teamSports.map((i)=>{return i.creator.image}))
+    console.log("state", this.state);
 
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
@@ -289,47 +353,81 @@ class Home extends Component {
                 width: "100vw",
               }}
             >
-              <Layer
-                // onClick={this.handleClick}
-                // key={index}
-                // coordinates={item.location.coordinates}
-                // anchor="bottom"
-                type="symbol"
-                layout={{ "icon-image": "rocket-15" }}
-              >
-                {this.state.soloSports.map((item, index) => (
-                  <Feature
-                    key={index}
-                    coordinates={item.location.coordinates}
-                    onClick={this.handleMarker}
-                  />
-
-                  /* <img
-                  // onMouseOver={this.toggleHover} 
-                  className="event-icon" src={item.image} />
-                  <ModalMap test={item.title} image={item.image} id={item._id} date={item.date}/> */
-                ))}
-              </Layer>
-
-              {/* {this.state.soloSports.map((item, index) => (
+              {this.state.soloSports.map((item, index) => (
                 <Marker
-                  
-                  
+                  onClick={() =>
+                    this.handleClickMarkerSolo(
+                      item._id,
+                      item.location.coordinates
+                    )
+                  }
                   key={index}
                   coordinates={item.location.coordinates}
                   anchor="bottom"
                 >
-                  <img 
-                  onMouseOver={this.toggleHoverTwo}
-                  className="event-icon" src={item.image} />
-              
+                  {/* // SI L'IMAGE EST CLIQUEE */}
 
+                  {this.state.imageClicked === item._id ? (
+                    <div>
+                      <Card key={index}>
+                        <CardHeader
+                          avatar={<Avatar aria-label="recipe">R</Avatar>}
+                          title={item.title}
+                          subheader={item.date.slice(11, 16)}
+                        />
+                        <NavLink
+                          place={this.state}
+                          exact
+                          to={`/OneEvent/${item._id}`}
+                        >
+                          <CardMedia
+                            // className={classes.media}
+
+                            className="card-image"
+                            image={item.image}
+                            title="Paella dish"
+                          />
+                        </NavLink>
+                        <div className="card-container-bottom">
+                          <div className="avatar-group">
+                            <AvatarGroup />
+                          </div>
+
+                          <div className="avatar-group-btn">
+                            <AddBtn />
+                          </div>
+
+                          <div className="avatar-group-btn">
+                            <RetirerBtn />
+                          </div>
+                        </div>
+                      </Card>
+
+                      <div
+                        onClick={this.handleHidePopup}
+                        className="zIndexTest"
+                      >
+                        X
+                      </div>
+                    </div>
+                  ) : (
+                    // SI L IMAGE EST PAS CLIQUEE
+                    <img className="event-icon" src={item.image} />
+                  )}
                 </Marker>
-              ))} */}
+              ))}
 
-              {/* this.state.soloSports.map((i)=>{console.log(i.location.coordinates)}) */}
+              {/* <Marker
+                 onClick= {this.handleClickMarkerSolo}
+                  coordinates={coordinatesDisplay}
+                  anchor="bottom"
+                >
+               
+            {imageDisplay}
+                </Marker> */}
             </Map>
           </div>
+
           <div
             className={
               this.state.isSwitchOn ? "toggleDisplayOn" : "toggleDisplayOff"
@@ -348,7 +446,11 @@ class Home extends Component {
                         <CardHeader
                           avatar={<Avatar aria-label="recipe">R</Avatar>}
                           title={item.title}
-                          subheader={item.date.slice(11, 16)}
+                          subheader={
+                            <Moment format="DD MMM YYYY - HH:mm">
+                              {item.date}
+                            </Moment>
+                          }
                         />
                         <NavLink
                           place={this.state}
@@ -388,7 +490,11 @@ class Home extends Component {
                         <CardHeader
                           avatar={<Avatar aria-label="recipe">R</Avatar>}
                           title={item.title}
-                          subheader={item.date.slice(0, 11)}
+                          subheader={
+                            <Moment format="DD MMM YYYY - HH:mm">
+                              {item.date}
+                            </Moment>
+                          }
                         />
                         <NavLink exact to={`/OneEvent/${item._id}`}>
                           <CardMedia

@@ -22,7 +22,7 @@ import Grid from "@material-ui/core/Grid";
 import SubmitBtn from "../components/buttons/SubmitBtn";
 
 import MyMap from "../components/buttons/MyMap";
-
+import UserContext from "../components/Auth/UserContext";
 import AddBtn from "../components/buttons/AddBtn";
 import RetirerBtn from "../components/buttons/RetirerBtn";
 require("dotenv").config();
@@ -37,6 +37,7 @@ const service = axios.create({
 });
 
 export default class OneEventId extends Component {
+  static contextType = UserContext;
   state = {
     event: null,
     creator: null,
@@ -56,8 +57,8 @@ export default class OneEventId extends Component {
     adresse: "",
     coordoninates: "",
     participants: [],
-    teamA: "",
-    teamB: "",
+    teamA: [],
+    teamB: [],
     items: [],
     coordinates: [2.61570809, 47],
     zoom: 13,
@@ -136,8 +137,29 @@ export default class OneEventId extends Component {
       apiHandler
         .post(`/api/events/multi/${id}/join`)
         .then((res) => {
-          console.log(res);
-          this.props.history.push("/");
+          let updatedUser = res.data.dbRes;
+          this.context.setUser(updatedUser);
+          let updatedEvent = res.data.eventsDocument;
+          this.setState({
+            teamAFirstName: updatedEvent.teamA.map((item) => {
+              return item.firstName;
+            }),
+            teamALastName: updatedEvent.teamA.map((item) => {
+              return item.lastName;
+            }),
+            teamAImage: updatedEvent.teamA.map((item) => {
+              return item.image;
+            }),
+  
+            teamBFirstName: updatedEvent.teamB.map((item) => {
+              return item.firstName;
+            }),
+            teamBLastName: updatedEvent.teamB.map((item) => {
+              return item.lastName;
+            }),
+            teamBImage: updatedEvent.teamB.map((item) => {
+              return item.image})
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -161,8 +183,9 @@ export default class OneEventId extends Component {
       apiHandler
         .post(`/api/events/multi/${id}/leave`)
         .then((res) => {
-          console.log(res);
-          this.props.history.push("/");
+          console.log("Multi LEAVE:----->", res);
+          console.log("Multi LEAVE (state):----->", this.state);
+          // this.props.history.push("/");
         })
         .catch((error) => {
           console.log(error);
@@ -193,9 +216,13 @@ export default class OneEventId extends Component {
   // }
 
   render() {
-   console.log(this.state.participants.map((item)=>{console.log ("laaaa", item.firstName)}))
+    // console.log("USER ID", this.context._id)
 
-
+    console.log(
+      this.state.participants.map((item) => {
+        console.log("laaaa", item.firstName);
+      })
+    );
 
     if (this.state.level === "beginner") {
       this.setState({ level: "Débutant" });
@@ -210,16 +237,16 @@ export default class OneEventId extends Component {
     // <div className="pic-avatar-container"></div>
     // <h3 className="title">Nom Prénom participant</h3>
 
-//     const participants = this.state.participants;
-//     let name;
-//     let lastName;
-//     let image;
-//     if (this.state.participants.firstName !== 0) {
-//       name = this.state.participants.firstName.map((index, item)=> {
-//         <h3 key={index} className="title">{item}</h3>
-//        })
-//     }
-// console.log(name)
+    //     const participants = this.state.participants;
+    //     let name;
+    //     let lastName;
+    //     let image;
+    //     if (this.state.participants.firstName !== 0) {
+    //       name = this.state.participants.firstName.map((index, item)=> {
+    //         <h3 key={index} className="title">{item}</h3>
+    //        })
+    //     }
+    // console.log(name)
 
     const isThereATeamB = this.state.teamBFirstName;
     let displayOne;
@@ -253,7 +280,7 @@ export default class OneEventId extends Component {
     // <div className="pic-avatar-container"></div>
 
     const { center, zoom, style } = this.state;
-
+    console.log("USER->>>", this.context);
     return (
       <React.Fragment>
         <CssBaseline />
@@ -352,20 +379,21 @@ export default class OneEventId extends Component {
                   <div className="team-container">
                     <div className="flex-between">
                       <div className="flex-between">
-
-  
-                         {/* <div className="pic-avatar-container"></div>
+                        {/* <div className="pic-avatar-container"></div>
                         <h3 className="title"></h3> */}
-                        {this.state.participants.map((item, index)=>(
-                          <img className="pic-avatar-container" key={index} src={item.image}/> ))}
+                        {this.state.participants.map((item, index) => (
+                          <img
+                            className="pic-avatar-container"
+                            key={index}
+                            src={item.image}
+                          />
+                        ))}
 
-                        {this.state.participants.map((item, index)=>(
-                          <h3 className="title" key={index}>{item.firstName} {item.lastName}</h3>))}
-
-                   
-
-
-
+                        {this.state.participants.map((item, index) => (
+                          <h3 className="title" key={index}>
+                            {item.firstName} {item.lastName}
+                          </h3>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -424,6 +452,14 @@ export default class OneEventId extends Component {
               <div className="img-container"></div>
             </div>
 
+            <div>
+              {this.state.event &&
+                this.context.user &&
+                this.context.user.events.includes(this.state.event._id) && (
+                  <div>j'ai join cet event</div>
+                )}
+            </div>
+
             <Grid item xs={12}>
               <div className="padding-btn">
                 <AddBtn clbk={this.handleAdd} />
@@ -435,10 +471,6 @@ export default class OneEventId extends Component {
                 <RetirerBtn clbk={this.handleRemove} />
               </div>
             </Grid>
-
-            {/* <div className="submit-btn padding-btn">
-            <SubmitBtn />
-          </div> */}
           </div>
         </Container>
       </React.Fragment>
