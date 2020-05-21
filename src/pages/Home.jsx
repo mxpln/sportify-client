@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
-import AvatarGroup from "../components/buttons/AvatarGroup";
+
 import AddBtn from "../components/buttons/AddBtn";
 import Avatar from "@material-ui/core/Avatar";
 import RetirerBtn from "../components/buttons/RetirerBtn";
@@ -20,6 +20,7 @@ import { red } from "@material-ui/core/colors";
 import Moment from "react-moment";
 import "moment-timezone";
 import "moment/locale/fr";
+import ViewEventBtn from "../components/buttons/ViewEventBtn"
 
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -157,7 +158,10 @@ class Home extends Component {
     }
     this.setState({
       search: res,
+
     });
+
+
   };
   handleEndDate = (date) => {
     this.setState({
@@ -255,8 +259,15 @@ class Home extends Component {
   };
 
   render() {
-    // console.log("state", this.state.teamSports.map((i)=>{return i.creator.image}))
-    console.log("state", this.state);
+    let allTeamSports=this.state.teamSports;
+    let searchTeamSports=this.state.search;
+
+    if(allTeamSports.sportType.sport === searchTeamSports) {console.log("YESS")}
+
+    // if (this.state.search===)
+  // console.log("--->", searchResult)
+    console.log("--->", allTeamSports)
+  
 
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
@@ -352,8 +363,11 @@ class Home extends Component {
                 height: "100vh",
                 width: "100vw",
               }}
+                movingMethod="flyTo"
             >
               {this.state.soloSports.map((item, index) => (
+
+               
                 <Marker
                   onClick={() =>
                     this.handleClickMarkerSolo(
@@ -368,15 +382,15 @@ class Home extends Component {
                   {/* // SI L'IMAGE EST CLIQUEE */}
 
                   {this.state.imageClicked === item._id ? (
-                    <div>
-                      <Card key={index}>
+                   
+                    <div className="zIndexCard">
+                      <Card key={index} className="zIndexCard">
                         <CardHeader
                           avatar={<Avatar aria-label="recipe">R</Avatar>}
                           title={item.title}
                           subheader={item.date.slice(11, 16)}
                         />
                         <NavLink
-                          place={this.state}
                           exact
                           to={`/OneEvent/${item._id}`}
                         >
@@ -385,20 +399,28 @@ class Home extends Component {
 
                             className="card-image"
                             image={item.image}
-                            title="Paella dish"
+                            title="event"
                           />
                         </NavLink>
                         <div className="card-container-bottom">
                           <div className="avatar-group">
-                            <AvatarGroup />
+                           
                           </div>
 
                           <div className="avatar-group-btn">
-                            <AddBtn />
+
+                          <NavLink
+                          // place={this.state}
+                          exact
+                          to={`/OneEvent/${item._id}`}
+                        >
+                          <ViewEventBtn />
+                          
+                          </NavLink>
                           </div>
 
-                          <div className="avatar-group-btn">
-                            <RetirerBtn />
+                          <div>
+                            {/* <RetirerBtn /> */}
                           </div>
                         </div>
                       </Card>
@@ -412,7 +434,7 @@ class Home extends Component {
                     </div>
                   ) : (
                     // SI L IMAGE EST PAS CLIQUEE
-                    <img className="event-icon" src={item.image} />
+                    <img  className="event-icon zIndexImage" src={item.image} />
                   )}
                 </Marker>
               ))}
@@ -432,8 +454,8 @@ class Home extends Component {
                   {/* // SI L'IMAGE EST CLIQUEE */}
 
                   {this.state.imageClicked === item._id ? (
-                    <div>
-                      <Card key={index}>
+                    <div className="zIndexCard">
+                      <Card  key={index}>
                         <CardHeader
                           avatar={<Avatar aria-label="recipe">R</Avatar>}
                           title={item.title}
@@ -449,21 +471,30 @@ class Home extends Component {
 
                             className="card-image"
                             image={item.image}
-                            title="Paella dish"
+                            title="Event"
                           />
                         </NavLink>
                         <div className="card-container-bottom">
                           <div className="avatar-group">
-                            <AvatarGroup />
+                           
                           </div>
 
                           <div className="avatar-group-btn">
-                            <AddBtn />
+                            {/* <AddBtn /> */}
                           </div>
 
                           <div className="avatar-group-btn">
-                            <RetirerBtn />
+                          <NavLink
+                          // place={this.state}
+                          exact
+                          to={`/OneEvent/${item._id}`}
+                        >
+                          <ViewEventBtn />
+                          </NavLink>
+                        
+                            
                           </div>
+                          
                         </div>
                       </Card>
 
@@ -476,7 +507,7 @@ class Home extends Component {
                     </div>
                   ) : (
                     // SI L IMAGE EST PAS CLIQUEE
-                    <img className="event-icon" src={item.image} />
+                    <img className="event-icon zIndexImage" src={item.image} />
                   )}
                 </Marker>
               ))}
@@ -502,7 +533,7 @@ class Home extends Component {
                     <Grid item xs={12} sm={6} md={4}>
                       <Card key={index}>
                         <CardHeader
-                          avatar={<Avatar aria-label="recipe">R</Avatar>}
+                          avatar={<Avatar aria-label="recipe"><img src={item.creator.image}/></Avatar>}
                           title={item.title}
                           subheader={
                             <Moment format="DD MMM YYYY - HH:mm">
@@ -520,21 +551,26 @@ class Home extends Component {
 
                             className="card-image"
                             image={item.image}
-                            title="Paella dish"
+                            title="Event"
                           />
                         </NavLink>
                         <div className="card-container-bottom">
                           <div className="avatar-group">
-                            <AvatarGroup />
+                     
+                          </div>
+                        
+                          <div className="avatar-group-btn">
+                          <NavLink
+                          // place={this.state}
+                          exact
+                          to={`/OneEvent/${item._id}`}
+                        >
+                          <ViewEventBtn />
+                        
+                            </NavLink>
                           </div>
 
-                          <div className="avatar-group-btn">
-                            <AddBtn />
-                          </div>
-
-                          <div className="avatar-group-btn">
-                            <RetirerBtn />
-                          </div>
+                         
                         </div>
                       </Card>
                     </Grid>
@@ -559,20 +595,21 @@ class Home extends Component {
                             // className={classes.media}
                             className="card-image"
                             image={item.image}
-                            title="Paella dish"
+                            title="Event"
                           />
                         </NavLink>
                         <div className="card-container-bottom">
                           <div className="avatar-group">
-                            <AvatarGroup />
+                         
                           </div>
 
                           <div className="avatar-group-btn">
-                            <AddBtn />
-                          </div>
-
-                          <div className="avatar-group-btn">
-                            <RetirerBtn />
+                            {/* <AddBtn /> */}
+                            <NavLink exact to={`/OneEvent/${item._id}`}>
+                            <ViewEventBtn />
+                            </NavLink>
+                         
+                            {/* <RetirerBtn /> */}
                           </div>
                         </div>
                       </Card>

@@ -7,16 +7,22 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Card from "./Card";
+import { NavLink } from "react-router-dom";
+import CardMedia from "@material-ui/core/CardMedia";
+import ViewEventBtn from "../buttons/ViewEventBtn"
+import Moment from "react-moment";
+import "moment-timezone";
+import "moment/locale/fr";
+import Avatar from "@material-ui/core/Avatar";
+import CardHeader from "@material-ui/core/CardHeader";
 
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import GridList from "@material-ui/core/GridList";
-
 import Grid from "@material-ui/core/Grid";
-import Level from "../buttons/Level";
 
-import RemoveBtn from "./RemoveBtn";
+
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,44 +90,54 @@ export default function CenteredTabs() {
         <CssBaseline />
         <Container maxWidth="md">
           <TabPanel value={value} index={0}>
-            <h2>Lundi 17 Mai 2020</h2>
+            <h2>INFOS PREMIERE PAGE ICI</h2>
 
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={4}>
-                <Card />
-              </Grid>
+           
+
 
               <Grid item xs={12} sm={6} md={4}>
-                <Card />
-              </Grid>
 
-              <Grid item xs={12} sm={6} md={4}>
-                <Card />
-              </Grid>
 
-              <Grid item xs={12} sm={6} md={4}>
-                <Card />
-              </Grid>
+              <Card>
+                        <CardHeader
+                          avatar={<Avatar aria-label="recipe">R</Avatar>}
+                          // title={item.title}
+                          subheader={
+                            <Moment format="DD MMM YYYY - HH:mm">
+                              {/* {item.date} */}
+                            </Moment>
+                          }
+                        />
+                        {/* <NavLink exact to={`/OneEvent/${item._id}`}> */}
+                          <CardMedia
+                            // className={classes.media}
+                            className="card-image"
+                            // image={item.image}
+                            title="Event"
+                          />
+                        {/* </NavLink> */}
+                        <div className="card-container-bottom">
+                          <div className="avatar-group">
+                         <h1>PREMIERE CARTE</h1>
+                          </div>
 
-              <Grid item xs={12} sm={6} md={4}>
-                <Card />
-              </Grid>
+                          <div className="avatar-group-btn">
+                       
+                            {/* <NavLink exact to={`/OneEvent/${item._id}`}> */}
+                            <ViewEventBtn />
+                            {/* </NavLink> */}
+                         
+                         
+                          </div>
+                        </div>
+                      </Card>
 
-              <Grid item xs={12} sm={6} md={4}>
-                <Card />
+
               </Grid>
             </Grid>
 
-            {/* <div className="flex-card">
-
-
-              
-                <Card />
-                <Card />              
-                <Card />
-                <Card />
-        
-            </div> */}
+         
           </TabPanel>
         </Container>
       </React.Fragment>
@@ -130,19 +146,53 @@ export default function CenteredTabs() {
         <CssBaseline />
         <Container maxWidth="md">
           <TabPanel value={value} index={1}>
-            <h2>Mardi 18 Mai 2020</h2>
+            <h2>INFOOOOS DEUXIEME PAGE ICI</h2>
 
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={4}>
-                <Card />
-              </Grid>
+             
+
 
               <Grid item xs={12} sm={6} md={4}>
-                <Card />
-              </Grid>
 
-              <Grid item xs={12} sm={6} md={4}>
-                <Card />
+              {/* <Card key={index}> */}
+              <Card>
+                        <CardHeader
+                          avatar={<Avatar aria-label="recipe">R</Avatar>}
+                          // title={item.title}
+                          subheader={
+                            <Moment format="DD MMM YYYY - HH:mm">
+                              {/* {item.date} */}
+                            </Moment>
+                          }
+                        />
+                            <h1>DEUXIEME CARTE</h1>
+                        {/* <NavLink exact to={`/OneEvent/${item._id}`}> */}
+                          <CardMedia
+                            // className={classes.media}
+                            className="card-image"
+                            // image={item.image}
+                            title="Event"
+                          />
+                        {/* </NavLink> */}
+                        <div className="card-container-bottom">
+                          <div className="avatar-group">
+                         
+                          </div>
+
+                          <div className="avatar-group-btn">
+                       
+                            {/* <NavLink exact to={`/OneEvent/${item._id}`}> */}
+                            <ViewEventBtn />
+                            {/* </NavLink> */}
+                         
+                         
+                          </div>
+                        </div>
+                      </Card>
+
+
+
+                
               </Grid>
             </Grid>
           </TabPanel>

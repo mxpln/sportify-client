@@ -84,7 +84,7 @@ const NavMain = (props) => {
             <div>
               <Typography variant="h6" className={classes.title}>
                 <NavLink exact to="/">
-                <img src="/media/logo.svg"/>
+                <img className="logo-container" src="/media/logo.svg"/>
                   {/* <h3 className="logo">sportufy</h3> */}
                 </NavLink>
               </Typography>

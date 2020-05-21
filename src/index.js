@@ -10,14 +10,7 @@ import "./styles/locationAutocomplete.css";
 
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
-import purple from '@material-ui/core/colors/purple';
-import green from '@material-ui/core/colors/green';
-import red from '@material-ui/core/colors/red';
-import yellow from '@material-ui/core/colors/yellow';
 
-import orange from '@material-ui/core/colors/orange';
-
-const colorSecondary = "ffc107";
 
 const theme = createMuiTheme({
   palette: {

@@ -1,15 +1,10 @@
 import React, { Component } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Search from "../components/buttons/Search";
-import TeamSelector from "../components/buttons/TeamSelector";
-import OneDatePicker from "../components/buttons/OneDatePicker";
-import Level from "../components/buttons/Level";
-import UploadBtn from "../components/buttons/UploadBtn";
+
+
 import axios from "axios";
 import apiHandler from "../api/apiHandler";
-import SearchPlace from "../components/Forms/SearchPlace";
-import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
+
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import Moment from "react-moment";
 import "moment-timezone";
 import "moment/locale/fr";
@@ -19,9 +14,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Grid from "@material-ui/core/Grid";
 
-import SubmitBtn from "../components/buttons/SubmitBtn";
 
-import MyMap from "../components/buttons/MyMap";
 import UserContext from "../components/Auth/UserContext";
 import AddBtn from "../components/buttons/AddBtn";
 import RetirerBtn from "../components/buttons/RetirerBtn";
@@ -279,7 +272,7 @@ export default class OneEventId extends Component {
 
     // <div className="pic-avatar-container"></div>
 
-    const { center, zoom, style } = this.state;
+    const { style } = this.state;
 
     return (
       <React.Fragment>

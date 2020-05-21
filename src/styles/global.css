@@ -499,6 +499,17 @@ box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
 }
 .zIndexTest{
   z-index: 100;
+  position: relative;
+  top: -315px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  background-color: #3F51B5;
+  padding-top: 5px;
+  color: white;
+  font-weight: 500;
+  border-radius: 100%;
+  left:210px;
 }
 
 .map-position {
@@ -515,4 +526,15 @@ box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
   background-color: white !important;
   color: black !important;
   box-shadow: none !important;
+}
+.zIndexCard{
+  z-index: 200;
+}
+.zIndexImage{
+  z-index: 0;
+}
+
+.logo-container {
+  height: 35px;
+  width: auto;
 }
