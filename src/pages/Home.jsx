@@ -15,7 +15,7 @@ import AvatarGroup from "../components/buttons/AvatarGroup";
 import AddBtn from "../components/buttons/AddBtn";
 import Avatar from "@material-ui/core/Avatar";
 import RetirerBtn from "../components/buttons/RetirerBtn";
-import Modal from '@material-ui/core/Modal';
+import Modal from "@material-ui/core/Modal";
 import { red } from "@material-ui/core/colors";
 
 import Grid from "@material-ui/core/Grid";
@@ -87,12 +87,10 @@ class Home extends Component {
     zoom: 11,
     style: "mapbox://styles/mapbox/light-v9",
     userLocation: [],
-  setOpen: false,
-  imageSolo:'',
-  imageTeam:'',
+    setOpen: false,
+    imageSolo: "",
+    imageTeam: "",
   };
-
-
 
   toggle = () => {
     this.setState({
@@ -105,16 +103,16 @@ class Home extends Component {
     });
   };
 
-  handleOpen=()=>{
-   this.setState({
-    setOpen : true
-   }) 
-  };
-  handleClose=()=>{
+  handleOpen = () => {
     this.setState({
-      setOpen : false
-     }) 
-    };
+      setOpen: true,
+    });
+  };
+  handleClose = () => {
+    this.setState({
+      setOpen: false,
+    });
+  };
 
   handleChange = (event, value) => {
     let res;
@@ -166,7 +164,7 @@ class Home extends Component {
       .then((res) => {
         this.setState({
           soloSports: res,
-          imageSolo:res.image,
+          imageSolo: res.image,
         });
       })
       .catch((apiError) => {
@@ -178,25 +176,24 @@ class Home extends Component {
       .then((apiRes) => {
         this.setState({
           teamSports: apiRes,
-          imageTeam: apiRes.image
+          imageTeam: apiRes.image,
         });
       })
       .catch((apiError) => {
         console.log(apiError);
       });
 
-
     // this.setState({
 
-    // })  
+    // })
   };
-handMarker=(e)=>{
-  console.log("clickkk")
-}
+  handMarker = (e) => {
+    console.log("clickkk");
+  };
 
   render() {
     console.log(this.state.soloSports);
-    
+
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
         lng: position.coords.longitude,
@@ -292,35 +289,27 @@ handMarker=(e)=>{
                 width: "100vw",
               }}
             >
-
-
-                <Layer
-                  // onClick={this.handleClick}
-                  // key={index}
-                  // coordinates={item.location.coordinates}
-                  // anchor="bottom"
-                  type="symbol"
-                  layout={{ "icon-image": "rocket-15" }}
-                >
-
-
-              {this.state.soloSports.map((item, index) => (
-
-                    <Feature key={index}
+              <Layer
+                // onClick={this.handleClick}
+                // key={index}
+                // coordinates={item.location.coordinates}
+                // anchor="bottom"
+                type="symbol"
+                layout={{ "icon-image": "rocket-15" }}
+              >
+                {this.state.soloSports.map((item, index) => (
+                  <Feature
+                    key={index}
                     coordinates={item.location.coordinates}
                     onClick={this.handleMarker}
-                     />
+                  />
 
-           
                   /* <img
                   // onMouseOver={this.toggleHover} 
                   className="event-icon" src={item.image} />
                   <ModalMap test={item.title} image={item.image} id={item._id} date={item.date}/> */
-               
-
-                   
-              ))}
-                </Layer>
+                ))}
+              </Layer>
 
               {/* {this.state.soloSports.map((item, index) => (
                 <Marker
@@ -351,86 +340,80 @@ handMarker=(e)=>{
               <Container maxWidth="md">
                 <h2 className="title">Lundi 17 Mai 2020</h2>
 
-
                 <Grid container spacing={2}>
-
-{/* ///MAP SUR LES EVENT INDIVIDUELS */}
-                {this.state.soloSports.map((item, index) => (
-                  <Grid item xs={12} sm={6} md={4}>
-                    <Card key={index}>
-                      <CardHeader
-                        avatar={<Avatar aria-label="recipe">R</Avatar>}
-                        title={item.title}
-                        subheader={
-                          item.date.slice(11, 16)
-                        }
-                      />
-                      <NavLink 
-                      place={this.state} 
-                      exact to={`/OneEvent/${item._id}`}>
-                        <CardMedia
-                          // className={classes.media}
-
-                          className="card-image"
-                          image={item.image}
-                          title="Paella dish"
+                  {/* ///MAP SUR LES EVENT INDIVIDUELS */}
+                  {this.state.soloSports.map((item, index) => (
+                    <Grid item xs={12} sm={6} md={4}>
+                      <Card key={index}>
+                        <CardHeader
+                          avatar={<Avatar aria-label="recipe">R</Avatar>}
+                          title={item.title}
+                          subheader={item.date.slice(11, 16)}
                         />
-                      </NavLink>
-                      <div className="card-container-bottom">
-                        <div className="avatar-group">
-                          <AvatarGroup />
-                        </div>
+                        <NavLink
+                          place={this.state}
+                          exact
+                          to={`/OneEvent/${item._id}`}
+                        >
+                          <CardMedia
+                            // className={classes.media}
 
-                        <div className="avatar-group-btn">
-                          <AddBtn />
-                        </div>
+                            className="card-image"
+                            image={item.image}
+                            title="Paella dish"
+                          />
+                        </NavLink>
+                        <div className="card-container-bottom">
+                          <div className="avatar-group">
+                            <AvatarGroup />
+                          </div>
 
-                        <div className="avatar-group-btn">
-                          <RetirerBtn />
+                          <div className="avatar-group-btn">
+                            <AddBtn />
+                          </div>
+
+                          <div className="avatar-group-btn">
+                            <RetirerBtn />
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  </Grid>
+                      </Card>
+                    </Grid>
                   ))}
 
-        {/* //MAP SUR LES EVENT EN EQUIPE           */}
+                  {/* //MAP SUR LES EVENT EN EQUIPE           */}
 
                   {this.state.teamSports.map((item, index) => (
-                  <Grid item xs={12} sm={6} md={4}>
-                    <Card key={index}>
-                      <CardHeader
-                        avatar={<Avatar aria-label="recipe">R</Avatar>}
-                        title={item.title}
-                        subheader={
-                          item.date.slice(11, 16)
-                        }
-                      />
-                      <NavLink exact to={`/OneEvent/${item._id}`}>
-                        <CardMedia
-                          // className={classes.media}
-                          className="card-image"
-                          image={item.image}
-                          title="Paella dish"
+                    <Grid item xs={12} sm={6} md={4}>
+                      <Card key={index}>
+                        <CardHeader
+                          avatar={<Avatar aria-label="recipe">R</Avatar>}
+                          title={item.title}
+                          subheader={item.date.slice(0, 11)}
                         />
-                      </NavLink>
-                      <div className="card-container-bottom">
-                        <div className="avatar-group">
-                          <AvatarGroup />
-                        </div>
+                        <NavLink exact to={`/OneEvent/${item._id}`}>
+                          <CardMedia
+                            // className={classes.media}
+                            className="card-image"
+                            image={item.image}
+                            title="Paella dish"
+                          />
+                        </NavLink>
+                        <div className="card-container-bottom">
+                          <div className="avatar-group">
+                            <AvatarGroup />
+                          </div>
 
-                        <div className="avatar-group-btn">
-                          <AddBtn />
-                        </div>
+                          <div className="avatar-group-btn">
+                            <AddBtn />
+                          </div>
 
-                        <div className="avatar-group-btn">
-                          <RetirerBtn />
+                          <div className="avatar-group-btn">
+                            <RetirerBtn />
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  </Grid>
+                      </Card>
+                    </Grid>
                   ))}
-
-
                 </Grid>
               </Container>
             </React.Fragment>

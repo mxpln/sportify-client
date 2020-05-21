@@ -27,7 +27,6 @@ export default class MyMap extends Component {
         zoom:11
     })
   }
-    
   }
 
 
