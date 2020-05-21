@@ -39,6 +39,7 @@ ul {
   font-weight: 400;
   position: relative;
   left: -15px;
+  top:1px;
 }
 
 .date-picker-container {
@@ -89,6 +90,9 @@ ul {
   height: 200px;
   margin: 0 auto;
   border-radius: 4px 20px 4px 20px;
+  object-fit: cover;
+  overflow: hidden;
+  filter: grayscale(30%);
 }
 
 .flex-card {
@@ -161,8 +165,11 @@ ul {
   width: 150px;
   max-width: 150px;
   border-radius: 100%;
-  background-color: grey;
+  /* background-color: grey; */
   text-align: center;
+  object-fit: cover;
+  overflow: hidden;
+  filter: grayscale(30%);
 }
 
 .img-container {
@@ -172,7 +179,7 @@ ul {
   width: 100%;
   /* max-width: 150px; */
   border-radius: 4px 20px 4px 20px;
-  background-color: grey;
+  /* background-color: grey; */
   text-align: center;
   background-size: cover;
 }
@@ -184,7 +191,7 @@ ul {
   width: 100%;
   /* max-width: 150px; */
   border-radius: 4px 20px 4px 20px;
-  background-color: grey;
+  /* background-color: grey; */
   text-align: center;
   background-size: cover;
 }
@@ -202,7 +209,7 @@ ul {
   width: 50px;
   max-width: 150px;
   border-radius: 100%;
-  background-color: grey;
+  /* background-color: grey; */
   text-align: center;
   border-radius: 4px 20px 4px 20px;
 }
@@ -228,7 +235,7 @@ ul {
 .img-position img {
   object-fit: cover;
   overflow: hidden;
-  filter: grayscale(60%);
+  filter: grayscale(30%);
 }
 
 /* .img-position img {
@@ -266,6 +273,7 @@ ul {
 
 .favorite-card-position {
   margin: 10px;
+  display: flex;
 }
 
 .test {
@@ -319,9 +327,15 @@ ul {
   width: 100px;
   max-width: 150px;
   border-radius: 100%;
-  background-color: grey;
+  /* background-color: grey; */
   text-align: center;
+  object-fit: cover;
+  overflow: hidden;
+  filter: grayscale(30%);
+
 }
+
+
 
 .title-container-burger {
   text-align: center;
@@ -390,7 +404,7 @@ ul {
 
 .btn-recherche-style-add {
   width: 100%;
-  height: 46px;
+  height: 40px;
 }
 
 .MuiExpansionPanelSummary-expandIcon {
@@ -417,9 +431,10 @@ ul {
 
 .color {
   background-color: white;
-  margin: 0px 3px 0 0;
-  /* box-shadow: 10px 5px 5px red; */
-  /* padding: 10px 0; */
+  /* margin: 0px 3px 0 0; */
+  -moz-box-shadow:0 5px 5px rgba(182, 182, 182, 0.75);
+  -webkit-box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
+  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);  /* padding: 10px 0; */
   /* border-bottom: 1px solid black; */
 }
 .location-icon {
@@ -428,7 +443,7 @@ ul {
 }
 .margin-top {
   /* margin : 16px 20px; */
-  padding: 16px 20px;
+  padding: 10px 20px;
   /* background-color: red; */
 }
 
@@ -441,7 +456,12 @@ ul {
 .position-filtered-container {
   background-color: white;
   padding: 10px 0;
-  margin: 0px 20px 0 0;
+  -moz-box-shadow:0 5px 5px rgba(182, 182, 182, 0.75);
+-webkit-box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
+box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
+  /* margin: 0px 20px 0 0; */
+  /* box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12); */
+
 }
 
 .position-filtered {
@@ -479,4 +499,20 @@ ul {
 }
 .zIndexTest{
   z-index: 100;
+}
+
+.map-position {
+  position: relative;
+  /* top:8px; */
+  z-index: -10;
+}
+
+/* .MuiPaper-root {
+  width:100%;
+} */
+
+.MuiAppBar-colorPrimary {
+  background-color: white !important;
+  color: black !important;
+  box-shadow: none !important;
 }

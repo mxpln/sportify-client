@@ -13,6 +13,8 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import AvatarGroup from "../components/buttons/AvatarGroup";
 import AddBtn from "../components/buttons/AddBtn";
+
+import ViewEventBtn from "../components/buttons/ViewEventBtn";
 import Avatar from "@material-ui/core/Avatar";
 import RetirerBtn from "../components/buttons/RetirerBtn";
 import Modal from "@material-ui/core/Modal";
@@ -344,80 +346,87 @@ class Home extends Component {
               this.state.isSwitchOn ? "toggleDisplayOff" : "toggleDisplayOn"
             }
           >
-            <Map
-              center={[this.state.lng, this.state.lat]}
-              zoom={[zoom]}
-              style={style}
-              containerStyle={{
-                height: "100vh",
-                width: "100vw",
-              }}
-            >
-              {this.state.soloSports.map((item, index) => (
-                <Marker
-                  onClick={() =>
-                    this.handleClickMarkerSolo(
-                      item._id,
-                      item.location.coordinates
-                    )
-                  }
-                  key={index}
-                  coordinates={item.location.coordinates}
-                  anchor="bottom"
-                >
-                  {/* // SI L'IMAGE EST CLIQUEE */}
+            <div className="map-position">
+              <Map
+                center={[this.state.lng, this.state.lat]}
+                zoom={[zoom]}
+                style={style}
+                containerStyle={{
+                  height: "100vh",
+                  width: "100vw",
+                }}
+              >
+                {this.state.soloSports.map((item, index) => (
+                  <Marker
+                    onClick={() =>
+                      this.handleClickMarkerSolo(
+                        item._id,
+                        item.location.coordinates
+                      )
+                    }
+                    key={index}
+                    coordinates={item.location.coordinates}
+                    anchor="bottom"
+                  >
+                    {/* // SI L'IMAGE EST CLIQUEE */}
 
-                  {this.state.imageClicked === item._id ? (
-                    <div>
-                      <Card key={index}>
-                        <CardHeader
-                          avatar={<Avatar aria-label="recipe">R</Avatar>}
-                          title={item.title}
-                          subheader={item.date.slice(11, 16)}
-                        />
-                        <NavLink
-                          place={this.state}
-                          exact
-                          to={`/OneEvent/${item._id}`}
-                        >
-                          <CardMedia
-                            // className={classes.media}
-
-                            className="card-image"
-                            image={item.image}
-                            title="Paella dish"
+                    {this.state.imageClicked === item._id ? (
+                      <div>
+                        <Card key={index}>
+                          <CardHeader
+                            avatar={<Avatar aria-label="recipe">R</Avatar>}
+                            title={item.title}
+                            subheader={item.date.slice(11, 16)}
                           />
-                        </NavLink>
-                        <div className="card-container-bottom">
-                          <div className="avatar-group">
-                            <AvatarGroup />
-                          </div>
+                          <NavLink
+                            place={this.state}
+                            exact
+                            to={`/OneEvent/${item._id}`}
+                          >
+                            <CardMedia
+                              // className={classes.media}
 
-                          <div className="avatar-group-btn">
-                            <AddBtn />
-                          </div>
+                              className="card-image"
+                              image={item.image}
+                              title="Paella dish"
+                            />
+                          </NavLink>
+                          <div className="card-container-bottom">
+                            <div className="avatar-group">
+                            <AvatarGroup max={1}>
+      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+      <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+      <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+      <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
+      <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
+    </AvatarGroup>
+                            </div>
 
-                          <div className="avatar-group-btn">
-                            <RetirerBtn />
+                            <div className="avatar-group-btn">
+                              <AddBtn />
+                            </div>
+
+                            <div className="avatar-group-btn">
+                              <RetirerBtn />
+                            </div>
                           </div>
+                        </Card>
+
+                        <div
+                          onClick={this.handleHidePopup}
+                          className="zIndexTest"
+                        >
+                          X
                         </div>
-                      </Card>
-
-                      <div
-                        onClick={this.handleHidePopup}
-                        className="zIndexTest"
-                      >
-                        X
                       </div>
-                    </div>
-                  ) : (
-                    // SI L IMAGE EST PAS CLIQUEE
-                    <img className="event-icon" src={item.image} />
-                  )}
-                </Marker>
-              ))}
+                    ) : (
+                      // SI L IMAGE EST PAS CLIQUEE
+                      <img className="event-icon" src={item.image} />
+                    )}
+                  </Marker>
+                ))}
 
-              {/* <Marker
+                {/* <Marker
                  onClick= {this.handleClickMarkerSolo}
                   coordinates={coordinatesDisplay}
                   anchor="bottom"
@@ -425,7 +434,8 @@ class Home extends Component {
                
             {imageDisplay}
                 </Marker> */}
-            </Map>
+              </Map>
+            </div>
           </div>
 
           <div
@@ -452,11 +462,7 @@ class Home extends Component {
                             </Moment>
                           }
                         />
-                        <NavLink
-                          place={this.state}
-                          exact
-                          to={`/OneEvent/${item._id}`}
-                        >
+                  
                           <CardMedia
                             // className={classes.media}
 
@@ -464,19 +470,27 @@ class Home extends Component {
                             image={item.image}
                             title="Paella dish"
                           />
-                        </NavLink>
+                     
                         <div className="card-container-bottom">
                           <div className="avatar-group">
-                            <AvatarGroup />
+                          <AvatarGroup max={1}>
+      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+      <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+      <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+      <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
+      <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
+    </AvatarGroup>
                           </div>
 
-                          <div className="avatar-group-btn">
-                            <AddBtn />
-                          </div>
+                          <NavLink exact to={`/OneEvent/${item._id}`}>
+                            <div className="avatar-group-btn">
+                              <ViewEventBtn />
+                            </div>
+                          </NavLink>
 
-                          <div className="avatar-group-btn">
+                          {/* <div className="avatar-group-btn">
                             <RetirerBtn />
-                          </div>
+                          </div> */}
                         </div>
                       </Card>
                     </Grid>
@@ -496,26 +510,33 @@ class Home extends Component {
                             </Moment>
                           }
                         />
-                        <NavLink exact to={`/OneEvent/${item._id}`}>
-                          <CardMedia
-                            // className={classes.media}
-                            className="card-image"
-                            image={item.image}
-                            title="Paella dish"
-                          />
-                        </NavLink>
+
+                        <CardMedia
+                          // className={classes.media}
+                          className="card-image"
+                          image={item.image}
+                          title="Paella dish"
+                        />
+
                         <div className="card-container-bottom">
                           <div className="avatar-group">
-                            <AvatarGroup />
+                          <AvatarGroup max={1}>
+      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+      <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+      <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+      <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg" />
+      <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg" />
+    </AvatarGroup>
                           </div>
 
-                          <div className="avatar-group-btn">
-                            <AddBtn />
-                          </div>
-
-                          <div className="avatar-group-btn">
+                          <NavLink exact to={`/OneEvent/${item._id}`}>
+                            <div className="avatar-group-btn">
+                              <ViewEventBtn />
+                            </div>
+                          </NavLink>
+                          {/* <div className="avatar-group-btn">
                             <RetirerBtn />
-                          </div>
+                          </div> */}
                         </div>
                       </Card>
                     </Grid>

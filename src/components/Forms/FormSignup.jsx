@@ -267,20 +267,25 @@ class FormSignup extends Component {
                 </Grid>
 
                 <div className="favorite-container">
-                  <Grid container>
-                    <Grid xs={12} sm={6} md={4}>
-                      <div className="favorite-card-position">
+                  <Grid container spacing={1}>
+                    
+                      
                         {this.state.sportCards.map((items, index) => {
                           return (
+                            <Grid xs={12} sm={6} md={4}>
+                            <div className="favorite-card-position">
                             <CardsFavorite
                               key={index}
                               name={items.favoriteSportOne}
                               level={items.level}
                             />
+                             </div>
+                            </Grid>
+                            
                           );
                         })}
-                      </div>
-                    </Grid>
+                     
+                    
                   </Grid>
                 </div>
 

@@ -184,17 +184,11 @@ class Profile extends Component {
                   </Grid>
                 </Grid> */}
                 <div className="favorite-container">
-                  {/* {this.props.context.user.preferences.map((items) => {
-                    return (
-                      <li>
-                        <ul>{items.level}</ul>
-                        <ul>{items.favoriteSport}</ul>
-                      </li>
-                    );
-                  })} */}
+               <Grid container spacing={1}>
+
                   {this.props.context.user.preferences.map((items, index) => {
                     return (
-                      <Grid container>
+                     
                         <Grid xs={12} sm={6} md={4}>
                           <div className="favorite-card-position">
                             <CardsFavorite
@@ -204,13 +198,14 @@ class Profile extends Component {
                               level={items.level}
                             />
                           </div>
-                        </Grid>
+                        
                       </Grid>
                     );
                   })}
+                  </Grid>
                 </div>
-                <div className="submit-btn padding-btn">
-                  <SubmitBtn clbk={this.handleSubmit} />
+                <div className="padding-btn">
+                  <UpdateBtn clbk={this.handleSubmit} />
                 </div>
               </form>
             </div>

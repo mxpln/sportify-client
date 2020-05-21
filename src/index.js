@@ -13,14 +13,25 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
+import yellow from '@material-ui/core/colors/yellow';
+
+import orange from '@material-ui/core/colors/orange';
+
+const colorSecondary = "ffc107";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#009ee3',
+      main: '#3f51b5',
+      // main: '#4fc4cf',
     },
-    secondary: red,
-    // testcolor: red,
+    secondary: {
+      // main: '#f50057',
+     
+      main: '#ff3d00',
+      //  main: '#d1d1e9',
+
+    },
   },
   status: {
     danger: 'orange',
