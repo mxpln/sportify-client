@@ -12,12 +12,15 @@ function errorHandler(error) {
   }
   throw error;
 }
+
 function get(endPoint) {
   return service.get(endPoint);
 }
+
 function patch(endPoint) {
   return service.patch(endPoint);
 }
+
 function post(endPoint) {
   return service.post(endPoint);
 }
@@ -57,7 +60,9 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
-
+  getEvents() {
+    return service.get("/api/user/events").then((res) => res.data).catch(errorHandler);
+  },
   getItems() {
     return service
       .get("/api/items")

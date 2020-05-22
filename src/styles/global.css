@@ -87,6 +87,7 @@ ul {
 
 .card-image {
   width: 90%;
+  /* min-width: 200px; */
   height: 200px;
   margin: 0 auto;
   border-radius: 4px 20px 4px 20px;
@@ -133,7 +134,7 @@ ul {
 .main-container {
   background-color: white;
   /* max-width: 800px; */
-  /* margin: 1vh auto 10px; */
+  margin: 1vh auto 10px;
   padding: 0 25px;
   /* max-height: 100vh; */
   /* box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12); */
@@ -225,11 +226,11 @@ ul {
   text-align: center;
   border-radius: 4px 20px 4px 20px */
   padding: 5px;
-  background-color: #d1d1e9;
+  background-color: #b1b1e4;
   border-radius: 6px;
   display: inline-flex;
   font-size: 12px;
-  color: #6246ea;
+  color: #3f51b5;
 }
 
 .img-position img {
@@ -393,7 +394,7 @@ ul {
 .makeStyles-menuButton-2 {
   margin: 0 !important;
   position: relative;
-  top: 5px;
+  /* top: 5px; */
 }
 
 .btn-recherche-style {
@@ -491,8 +492,11 @@ box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
 .event-icon {
   height: 50px;
   width: 50px;
+  padding: 4px;
+  background-color: white;
   border-radius: 100%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
 }
 .space{
   padding-right:4px;
@@ -537,4 +541,57 @@ box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
 .logo-container {
   height: 35px;
   width: auto;
+}
+
+.card-mini-container {
+  min-width: 280px;
+    border-radius: 12px;
+    padding: 3px;
+}
+
+
+.color-menu-icon-deconnexion {
+  background-color: red;
+  width: 85%;
+  height: 40px;
+  margin: 0 auto;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+
+}
+
+.color-menu-icon-inscription {
+  /* background-color: red; */
+  border: 1px solid #3f51b5;
+  width: 85%;
+  height: 40px;
+  margin: 0 auto;
+  color: #3f51b5;
+  border-radius: 4px;
+  /* box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12); */
+  
+}
+
+.margin-burger {
+  /* margin-top:100%; */
+  margin-bottom: 10px;
+  /* position: relative;
+  top:100px */
+}
+
+
+.color-menu-icon-connexion {
+  background-color: #3f51b5;
+  width: 85%;
+  height: 40px;
+  margin: 0 auto;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+
+}
+
+.black-font {
+  color: black;
 }

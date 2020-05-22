@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    width:"50px",
+    height:"50px"
   },
   title: {
     flexGrow: 1,
@@ -96,7 +98,7 @@ const NavMain = (props) => {
               <IconButton
                 edge="start"
                 className={classes.menuButton}
-                color="inherit"
+                color="primary"
                 aria-label="menu"
               >
                 <Burger />

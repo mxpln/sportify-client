@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
+import UserContext from "../Auth/UserContext";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -9,7 +10,7 @@ import Box from "@material-ui/core/Box";
 import Card from "./Card";
 import { NavLink } from "react-router-dom";
 import CardMedia from "@material-ui/core/CardMedia";
-import ViewEventBtn from "../buttons/ViewEventBtn"
+import ViewEventBtn from "../buttons/ViewEventBtn";
 import Moment from "react-moment";
 import "moment-timezone";
 import "moment/locale/fr";
@@ -20,9 +21,7 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Grid from "@material-ui/core/Grid";
-
-
-
+import apiHandler from "../../api/apiHandler";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,141 +62,192 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CenteredTabs() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+class CenteredTabs extends Component {
+  static contextType = UserContext;
+  state = {
+    myEvents: true,
+    myParticipations: false,
+    event: [],
   };
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs
-          className="app-bar"
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          centered
-        >
-          <Tab label="mes évenements" {...a11yProps(0)} />
-          <Tab label="Mes participations" {...a11yProps(1)} />
-        </Tabs>
-      </AppBar>
+  handleTabOne = (event, newValue) => {
+    this.setState({
+      myEvents: true,
+      myParticipations: false,
+    });
+    console.log("click Mes events");
+  };
+  handleTabTwo = (event, newValue) => {
+    this.setState({
+      myEvents: false,
+      myParticipations: true,
+    });
+    console.log("click Mes participations");
+  };
 
-      <React.Fragment>
-        <CssBaseline />
-        <Container maxWidth="md">
-          <TabPanel value={value} index={0}>
-            <h2>INFOS PREMIERE PAGE ICI</h2>
+  componentDidMount() {
+    apiHandler
+      .getEvents()
+      .then((data) => {
+        console.log("data------->", data);
+        console.log("id------->", data._id);
 
-            <Grid container spacing={2}>
-           
+        this.setState({
+          event: data.events,
+          userId: data._id,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
-
-              <Grid item xs={12} sm={6} md={4}>
-
-
-              <Card>
-                        <CardHeader
-                          avatar={<Avatar aria-label="recipe">R</Avatar>}
-                          // title={item.title}
-                          subheader={
-                            <Moment format="DD MMM YYYY - HH:mm">
-                              {/* {item.date} */}
-                            </Moment>
-                          }
-                        />
-                        {/* <NavLink exact to={`/OneEvent/${item._id}`}> */}
-                          <CardMedia
-                            // className={classes.media}
-                            className="card-image"
-                            // image={item.image}
-                            title="Event"
-                          />
-                        {/* </NavLink> */}
-                        <div className="card-container-bottom">
-                          <div className="avatar-group">
-                         <h1>PREMIERE CARTE</h1>
-                          </div>
-
-                          <div className="avatar-group-btn">
-                       
-                            {/* <NavLink exact to={`/OneEvent/${item._id}`}> */}
-                            <ViewEventBtn />
-                            {/* </NavLink> */}
-                         
-                         
-                          </div>
-                        </div>
-                      </Card>
+  render() {
+    if (this.context.user === null) {
+      return null;
+    }
+    console.log("STATE", this.state);
+    const test = this.state.event;
+    const theID = this.state.userId;
+    // const res = test.map((item, index) => {
+    //   return item.creator;
+    // });
+    const resOne = test.map((i)=>{if(i.creator === theID){return i} });
+    const resTwo = test.map((i)=>{if(i.creator !== theID){return i} });
+    const mesParticipations = resTwo.filter(function(x){return x !== undefined});
+    const mesEvents = resOne.filter(function(x){return x !== undefined});
 
 
-              </Grid>
-            </Grid>
+console.log("mesEvents", mesEvents)
+console.log("mesParticipations", mesParticipations)
+        
 
+    return (
+      <div>
+        <AppBar position="static">
+          <Tabs
+            className="app-bar"
+            // value={value}
+            // onChange={this.handleChange}
+
+            indicatorColor="primary"
+            centered
+          >
+            <Tab onClick={this.handleTabOne} label="mes évenements" />
+            <Tab onClick={this.handleTabTwo} label="Mes participations" />
+          </Tabs>
+        </AppBar>
+
+        {this.state.myEvents && (
+          <React.Fragment>
+            <CssBaseline />
+            <Container maxWidth="md">
          
-          </TabPanel>
-        </Container>
-      </React.Fragment>
 
-      <React.Fragment>
-        <CssBaseline />
-        <Container maxWidth="md">
-          <TabPanel value={value} index={1}>
-            <h2>INFOOOOS DEUXIEME PAGE ICI</h2>
-
-            <Grid container spacing={2}>
-             
-
-
-              <Grid item xs={12} sm={6} md={4}>
-
-              {/* <Card key={index}> */}
-              <Card>
-                        <CardHeader
-                          avatar={<Avatar aria-label="recipe">R</Avatar>}
-                          // title={item.title}
-                          subheader={
-                            <Moment format="DD MMM YYYY - HH:mm">
-                              {/* {item.date} */}
-                            </Moment>
-                          }
-                        />
-                            <h1>DEUXIEME CARTE</h1>
-                        {/* <NavLink exact to={`/OneEvent/${item._id}`}> */}
-                          <CardMedia
-                            // className={classes.media}
-                            className="card-image"
-                            // image={item.image}
-                            title="Event"
-                          />
-                        {/* </NavLink> */}
-                        <div className="card-container-bottom">
-                          <div className="avatar-group">
-                         
-                          </div>
-
-                          <div className="avatar-group-btn">
-                       
-                            {/* <NavLink exact to={`/OneEvent/${item._id}`}> */}
-                            <ViewEventBtn />
-                            {/* </NavLink> */}
-                         
-                         
-                          </div>
-                        </div>
-                      </Card>
-
-
-
+              <TabPanel>
                 
-              </Grid>
-            </Grid>
-          </TabPanel>
-        </Container>
-      </React.Fragment>
-    </div>
-  );
+              {mesEvents.map((item, index)=> (
+
+
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6} md={4}>
+                  
+                    <Card>
+                    <h1>{item.title}</h1>
+                      <CardHeader
+                        key={index}
+                        // title={item.title}
+                        subheader={
+                          <Moment format="DD MMM YYYY - HH:mm">
+                            {item.date}
+                          </Moment>
+                        }
+                      />
+                      <NavLink exact to={`/OneEvent/${item._id}`}>
+                      <CardMedia
+                        // className={classes.media}
+                        className="card-image"
+                        image={item.image}
+                        title="Event"
+                      />
+                      </NavLink>
+                      <div className="card-container-bottom">
+                        <div className="avatar-group">
+                      
+                        </div>
+
+                        <div className="avatar-group-btn">
+                          <NavLink exact to={`/OneEvent/${item._id}`}>
+                          <ViewEventBtn />
+                          </NavLink>
+                        </div>
+                      </div>
+                    </Card>
+                  </Grid>
+                </Grid>
+                ))}
+              </TabPanel>
+            </Container>
+          </React.Fragment>
+        )}
+
+        {this.state.myParticipations && (
+          
+          <React.Fragment>
+            <CssBaseline />
+            <Container maxWidth="md">
+              <TabPanel>
+
+              {mesParticipations.map((item, index)=> (
+             
+              
+
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6} md={4}>
+                  
+                    <Card>
+                    <h1>{item.title}</h1>
+                      <CardHeader
+                        avatar={<Avatar aria-label="recipe">R</Avatar>}
+                        // title={item.title}
+                        subheader={
+                          <Moment format="DD MMM YYYY - HH:mm">
+                            {/* {item.date} */}
+                          </Moment>
+                        }
+                      />
+                    
+                      <NavLink exact to={`/OneEvent/${item._id}`}>
+                      <CardMedia
+                        // className={classes.media}
+                        className="card-image"
+                        image={item.image}
+                        title="Event"
+                      />
+                      </NavLink>
+                      <div className="card-container-bottom">
+                        <div className="avatar-group"></div>
+
+                        <div className="avatar-group-btn">
+                          <NavLink exact to={`/OneEvent/${item._id}`}>
+                          <ViewEventBtn />
+                          </NavLink>
+                        </div>
+                      </div>
+                    </Card>
+                  </Grid>
+                </Grid>
+                ))}
+              </TabPanel>
+              
+            </Container>
+          </React.Fragment>
+          
+        )}
+        
+      </div>
+    );
+  }
 }
+
+export default CenteredTabs;

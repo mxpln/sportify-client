@@ -111,9 +111,9 @@ const SwipeableTemporaryDrawer = (props) => {
           <List>
             <ListItem>
               <ListItemIcon>
-                <HomeIcon />
+                <HomeIcon color="primary"/>
               </ListItemIcon>
-              <ListItemText className="text-list">Accueil</ListItemText>
+              <ListItemText className="text-list black-font">Accueil</ListItemText>
             </ListItem>
           </List>
         </NavLink>
@@ -124,9 +124,9 @@ const SwipeableTemporaryDrawer = (props) => {
             <List>
               <ListItem>
                 <ListItemIcon>
-                  <PersonIcon />
+                  <PersonIcon color="primary"/>
                 </ListItemIcon>
-                <ListItemText className="text-list">Mon profil</ListItemText>
+                <ListItemText className="text-list black-font">Mon profil</ListItemText>
               </ListItem>
             </List>
           </NavLink>
@@ -138,9 +138,9 @@ const SwipeableTemporaryDrawer = (props) => {
             <List>
               <ListItem>
                 <ListItemIcon>
-                  <AddIcon />
+                  <AddIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText className="text-list">
+                <ListItemText className="text-list black-font">
                   Créer évenement
                 </ListItemText>
               </ListItem>
@@ -148,15 +148,17 @@ const SwipeableTemporaryDrawer = (props) => {
           </NavLink>
         </div>
       )}
+
+   
       {context.isLoggedIn && (
         <div className="menu-list">
           <NavLink exact to="/myEvents">
             <List>
               <ListItem>
                 <ListItemIcon>
-                  <CheckIcon />
+                  <CheckIcon color="primary"/>
                 </ListItemIcon>
-                <ListItemText className="text-list">
+                <ListItemText className="text-list black-font ">
                   Mes évenements
                 </ListItemText>
               </ListItem>
@@ -168,7 +170,7 @@ const SwipeableTemporaryDrawer = (props) => {
         <Divider />
       </div>
       {!context.isLoggedIn && (
-        <div className="menu-list">
+        <div className="menu-list color-menu-icon-inscription margin-burger">
           <NavLink exact to="/signup">
             <List>
               <ListItem>
@@ -180,8 +182,11 @@ const SwipeableTemporaryDrawer = (props) => {
         </div>
       )}
 
+
       {!context.isLoggedIn && (
-        <div className="menu-list">
+
+        
+        <div className="menu-list color-menu-icon-connexion">
           <NavLink exact to="/signin">
             <List>
               <ListItem>
@@ -194,14 +199,14 @@ const SwipeableTemporaryDrawer = (props) => {
       )}
 
       {context.isLoggedIn && (
-        <div className="menu-list">
+        <div className="menu-list color-menu-icon-deconnexion">
           {" "}
           <NavLink exact to="/" onClick={handleLogout}>
             <List>
               {" "}
-              <ListItem>
+              <ListItem >
                 <ListItemIcon>
-                  <ExitToAppIcon />
+                  {/* <ExitToAppIcon /> */}
                 </ListItemIcon>
                 <ListItemText className="text-list">Déconnexion</ListItemText>
               </ListItem>{" "}
@@ -210,7 +215,10 @@ const SwipeableTemporaryDrawer = (props) => {
         </div>
       )}
     </div>
+    
   );
+
+
 
   return (
     <div>

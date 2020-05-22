@@ -31,16 +31,7 @@ class Profile extends Component {
     image: null,
     // sports: [],
   };
-  // handleChange = (event) => {
-  //   const value =
-  //     event.target.type === "file"
-  //       ? event.target.files[0]
-  //       : event.target.type === "checkbox"
-  //       ? event.target.checked
-  //       : event.target.value;
-  //   const key = event.target.name;
-  //   this.setState({ [key]: value });
-  // };
+
   handleSubmit = (event) => {
     event.preventDefault();
     const email = this.state.email;

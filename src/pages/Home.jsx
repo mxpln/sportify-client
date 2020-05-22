@@ -259,14 +259,18 @@ class Home extends Component {
   };
 
   render() {
+    let allSoloSports = this.state.soloSports;
     let allTeamSports=this.state.teamSports;
     let searchTeamSports=this.state.search;
+    const allSports = allTeamSports.concat(allSoloSports)
 
-    if(allTeamSports.sportType.sport === searchTeamSports) {console.log("YESS")}
 
-    // if (this.state.search===)
+   
+   console.log(allSports)
+
+  
   // console.log("--->", searchResult)
-    console.log("--->", allTeamSports)
+  
   
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -285,7 +289,7 @@ class Home extends Component {
         <React.Fragment>
           <CssBaseline />
           <div className="color margin-top">
-            <Container maxWidth="lg">
+            <Container maxWidth="md">
               <Grid className="test-search" container spacing={2}>
                 <Grid item xs={12} sm={6} md={4}>
                   {/* <div className="margin-top"> */}
@@ -383,7 +387,7 @@ class Home extends Component {
 
                   {this.state.imageClicked === item._id ? (
                    
-                    <div className="zIndexCard">
+                    <div className="zIndexCard card-mini-container">
                       <Card key={index} className="zIndexCard">
                         <CardHeader
                           avatar={<Avatar aria-label="recipe">R</Avatar>}
@@ -454,7 +458,7 @@ class Home extends Component {
                   {/* // SI L'IMAGE EST CLIQUEE */}
 
                   {this.state.imageClicked === item._id ? (
-                    <div className="zIndexCard">
+                    <div className="zIndexCard card-mini-container">
                       <Card  key={index}>
                         <CardHeader
                           avatar={<Avatar aria-label="recipe">R</Avatar>}

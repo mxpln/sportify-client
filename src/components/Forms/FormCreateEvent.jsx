@@ -232,7 +232,7 @@ class BasicTextFields extends Component {
 
             <form noValidate autoComplete="off">
               <Grid container spacing={3}>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     onChange={this.handleTitle}
                     fullWidth
@@ -242,7 +242,7 @@ class BasicTextFields extends Component {
                   />
                 </Grid>
 
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <Search clbk={this.handleSearch} />
                 </Grid>
 
@@ -258,17 +258,17 @@ class BasicTextFields extends Component {
                   />
                 </Grid>
 
-                <Grid item xs={3}>
+                <Grid xs={6} md={3}>
                   <TeamSelector parentCallback={this.handleTeam} fullWidth />
                 </Grid>
 
-                <Grid item xs={3}>
+                <Grid xs={6} md={3}>
                   <Level ratingValue={this.handleRating} />
                 </Grid>
 
                 <Grid
                   item
-                  xs={6}
+                  xs={12} md={6}
                   className={
                     this.state.isSwitchOn
                       ? "toggleFilterOff"
@@ -291,7 +291,7 @@ class BasicTextFields extends Component {
 
                 <Grid
                   item
-                  xs={6}
+                  xs={12} md={6}
                   className={
                     this.state.isSwitchOn
                       ? "toggleDisplayOn"
@@ -312,11 +312,11 @@ class BasicTextFields extends Component {
                 </Grid>
                 {/* </div> */}
 
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <SearchPlace clbk={this.handlePlace} fullWidth />
                 </Grid>
 
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                   <OneDatePicker
                     setDate={this.handleDate}
                     setHour={this.handleHour}

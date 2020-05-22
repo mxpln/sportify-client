@@ -57,7 +57,7 @@ export default class MyMap extends Component {
             coordinates={this.props.place.coordinates}
             anchor="bottom"
           >
-            <img className="location-icon" src="/media/marker.png" />
+            <img className="location-icon" src="/media/marker.svg" />
           </Marker>
         )}
        

@@ -357,7 +357,7 @@ export default class OneEventId extends Component {
                       coordinates={this.state.coordinates}
                       anchor="bottom"
                     >
-                      <img className="location-icon" src="/media/marker.png" />
+                      <img className="location-icon" src="/media/marker.svg" />
                     </Marker>
                   )}
                 </Map>
