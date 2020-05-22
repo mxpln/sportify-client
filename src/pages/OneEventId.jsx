@@ -379,7 +379,7 @@ export default class OneEventId extends Component {
             {this.state.type === "individual" ? (
               <div className="team-container">
                 <Grid container spacing={3}>
-                  <div className="titlflex-between">
+                  <div className="flex-between">
                       {this.state.participants.map((item, index) => (
                     <Grid item xs={12}>
                         <div className="title position-player-participants">
