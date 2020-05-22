@@ -18,9 +18,10 @@ import RetirerBtn from "../components/buttons/RetirerBtn";
 import Modal from "@material-ui/core/Modal";
 import { red } from "@material-ui/core/colors";
 import Moment from "react-moment";
+import moment from "moment";
 import "moment-timezone";
 import "moment/locale/fr";
-import ViewEventBtn from "../components/buttons/ViewEventBtn"
+import ViewEventBtn from "../components/buttons/ViewEventBtn";
 
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -78,10 +79,10 @@ class Home extends Component {
     isSwitchOn: false,
     isFilterOn: false,
     search: "",
-    startDate: "",
-    endDate: "",
+    startDate: null,
+    endDate: null,
     level: "",
-    team: "",
+    team: "individual",
     favoriteSports: false,
     soloSports: [],
     teamSports: [],
@@ -111,6 +112,9 @@ class Home extends Component {
     soloEventPic: [],
     soloParticipantsPics: [],
     soloSportName: [],
+
+    allSports: [],
+    selected: [],
   };
 
   handleClickMarkerSolo = (id, coords) => {
@@ -158,10 +162,7 @@ class Home extends Component {
     }
     this.setState({
       search: res,
-
     });
-
-
   };
   handleEndDate = (date) => {
     this.setState({
@@ -176,11 +177,11 @@ class Home extends Component {
   handleRating = (newValue) => {
     let res;
     if (newValue === null || newValue === 1) {
-      res = "facile";
+      res = "beginner";
     } else if (newValue === 2) {
-      res = "modéré";
+      res = "intermediate";
     } else if (newValue === 3) {
-      res = "confirmé";
+      res = "advanced";
     }
     this.setState({
       level: res,
@@ -195,6 +196,115 @@ class Home extends Component {
     this.setState({
       favoriteSports: value,
     });
+  };
+
+  handleFilters = (value) => {
+    // let recherche = this.state.allSports; /// ARRAYS CONTENANT LA RECHERCHE
+    // let teamType = this.state.allSports; /// ARRAYS CONTENANT SOLO OU TEAM
+    // let level = this.state.allSports;
+    // let startDateSelected = this.state.allSports;
+    // let endDateSelected = this.state.allSports;
+    // //---recherche--V
+    // if (this.state.search !== "") {
+    //   recherche = this.state.allSports.filter((items) => {
+    //     return items.sportType.sport.includes(this.state.search);
+    //   });
+    // }
+    // ///team type ---v
+    // if (this.state.team === "Individuel") {
+    //   teamType = this.state.allSports.filter((items) => {
+    //     return items.type.includes("individual");
+    //   });
+    // }
+    // if (this.state.team === "En équipe") {
+    //   teamType = this.state.allSports.filter((items) => {
+    //     return items.type.includes("collective");
+    //   });
+    // }
+    // ///level --v /// facile modéré confirmé  beginner intermediate advanced
+    // if (this.state.level === "facile") {
+    //   level = this.state.allSports.filter((items) => {
+    //     return items.level.includes("beginner");
+    //   });
+    // }
+    // if (this.state.level === "modéré") {
+    //   level = this.state.allSports.filter((items) => {
+    //     return items.level.includes("intermediate");
+    //   });
+    // }
+    // if (this.state.level === "confirmé") {
+    //   level = this.state.allSports.filter((items) => {
+    //     return items.level.includes("advanced");
+    //   });
+    // }
+    // /// dates --v
+    // if (this.state.startDate !== null) {
+    //   startDateSelected = this.state.allSports.filter((items) => {
+    //     return moment(items.date).isAfter(this.state.startDate);
+    //   });
+    // }
+    // if (this.state.endDate !== null) {
+    //   endDateSelected = this.state.allSports.filter((items) => {
+    //     return moment(items.date).isBefore(this.state.endDate);
+    //   });
+    // }
+    // let megaFilter = this.state.allSports
+    //   .filter((i) => {
+    //     recherche.includes(i);
+    //   })
+    //   .filter((i) => {
+    //     teamType.includes(i);
+    //   })
+    //   .filter((i) => {
+    //     level.includes(i);
+    //   })
+    //   .filter((i) => {
+    //     startDateSelected.includes(i);
+    //   })
+    //   .filter((i) => {
+    //     endDateSelected.includes(i);
+    //   });
+    // console.log(recherche);
+  };
+  //team => event.type
+
+  filterBySports = (item) => {
+    return item.sportType.sport.includes(this.state.search);
+  };
+
+  filterByTeam = (item) => {
+    return item.type.includes(this.state.team);
+  };
+
+  filterByLevel = (item) => {
+    return item.level.includes(this.state.level);
+  };
+
+  filterByDate = (item) => {
+    if (this.state.startDate && this.state.endDate) {
+      return (
+        moment(item.date).isSameOrAfter(
+          this.state.startDate,
+          "year",
+          "month",
+          "day"
+        ) &&
+        moment(item.date).isSameOrBefore(
+          this.state.endDate,
+          "year",
+          "month",
+          "day"
+        )
+      );
+    }
+    if (this.state.startDate && !this.state.endDate) {
+      console.log("start date", item.date);
+      return moment(item.date).isSameOrAfter(this.state.startDate, "day");
+    }
+    if (!this.state.startDate && this.state.endDate) {
+      console.log("end date", item.date);
+      return moment(item.date).isSameOrBefore(this.state.endDate);
+    } else return true;
   };
 
   componentDidMount = () => {
@@ -256,23 +366,30 @@ class Home extends Component {
       .catch((apiError) => {
         console.log(apiError);
       });
+
+    apiHandler
+      .getAllEvents()
+      .then((res) => {
+        this.setState({
+          allSports: res,
+          selected: res,
+        });
+      })
+      .catch((apiError) => {
+        console.log(apiError);
+      });
   };
 
   render() {
-    let allSoloSports = this.state.soloSports;
-    let allTeamSports=this.state.teamSports;
-    let searchTeamSports=this.state.search;
-    const allSports = allTeamSports.concat(allSoloSports)
+    console.log(this.state);
+    const filteredEvents = this.state.allSports
+      .filter(this.filterBySports)
+      .filter(this.filterByLevel)
+      .filter(this.filterByDate)
+      .filter(this.filterByTeam);
+    console.log(filteredEvents, "< this is output");
 
-
-   
-   console.log(allSports)
-
-  
-  // console.log("--->", searchResult)
-  
-  
-
+    // console.log(this.state.allSports.)
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
         lng: position.coords.longitude,
@@ -303,7 +420,8 @@ class Home extends Component {
                   />
                 </Grid>
                 <Grid item xs={12} sm={8} md={2}>
-                  <RechercheBtn />
+                  {/* <RechercheBtn /> */}
+                  <btn onClick={this.handleFilters}>RECHERCHER</btn>
                 </Grid>
                 <Grid item xs={6} sm={2} md={1}>
                   <FilterIconBtn clbk={this.toggleFilter} />
@@ -364,14 +482,13 @@ class Home extends Component {
               zoom={[zoom]}
               style={style}
               containerStyle={{
-                height: "100vh",
+                marginTop: "10px",
+                height: "85vh",
                 width: "100vw",
               }}
-                movingMethod="flyTo"
+              movingMethod="flyTo"
             >
-              {this.state.soloSports.map((item, index) => (
-
-               
+              {filteredEvents.map((item, index) => (
                 <Marker
                   onClick={() =>
                     this.handleClickMarkerSolo(
@@ -386,18 +503,18 @@ class Home extends Component {
                   {/* // SI L'IMAGE EST CLIQUEE */}
 
                   {this.state.imageClicked === item._id ? (
-                   
                     <div className="zIndexCard card-mini-container">
                       <Card key={index} className="zIndexCard">
                         <CardHeader
-                          avatar={<Avatar aria-label="recipe">R</Avatar>}
+                          // avatar={<Avatar aria-label="recipe">R</Avatar>}
                           title={item.title}
-                          subheader={item.date.slice(11, 16)}
+                          subheader={
+                            <Moment format="DD MMM YYYY - HH:mm">
+                              {item.date}
+                            </Moment>
+                          }
                         />
-                        <NavLink
-                          exact
-                          to={`/OneEvent/${item._id}`}
-                        >
+                        <NavLink exact to={`/OneEvent/${item._id}`}>
                           <CardMedia
                             // className={classes.media}
 
@@ -407,98 +524,19 @@ class Home extends Component {
                           />
                         </NavLink>
                         <div className="card-container-bottom">
-                          <div className="avatar-group">
-                           
-                          </div>
+                          <div className="avatar-group"></div>
 
                           <div className="avatar-group-btn">
-
-                          <NavLink
-                          // place={this.state}
-                          exact
-                          to={`/OneEvent/${item._id}`}
-                        >
-                          <ViewEventBtn />
-                          
-                          </NavLink>
+                            <NavLink
+                              // place={this.state}
+                              exact
+                              to={`/OneEvent/${item._id}`}
+                            >
+                              <ViewEventBtn />
+                            </NavLink>
                           </div>
 
-                          <div>
-                            {/* <RetirerBtn /> */}
-                          </div>
-                        </div>
-                      </Card>
-
-                      <div
-                        onClick={this.handleHidePopup}
-                        className="zIndexTest"
-                      >
-                        X
-                      </div>
-                    </div>
-                  ) : (
-                    // SI L IMAGE EST PAS CLIQUEE
-                    <img  className="event-icon zIndexImage" src={item.image} />
-                  )}
-                </Marker>
-              ))}
-
-              {this.state.teamSports.map((item, index) => (
-                <Marker
-                  onClick={() =>
-                    this.handleClickMarkerSolo(
-                      item._id,
-                      item.location.coordinates
-                    )
-                  }
-                  key={index}
-                  coordinates={item.location.coordinates}
-                  anchor="bottom"
-                >
-                  {/* // SI L'IMAGE EST CLIQUEE */}
-
-                  {this.state.imageClicked === item._id ? (
-                    <div className="zIndexCard card-mini-container">
-                      <Card  key={index}>
-                        <CardHeader
-                          avatar={<Avatar aria-label="recipe">R</Avatar>}
-                          title={item.title}
-                          subheader={item.date.slice(11, 16)}
-                        />
-                        <NavLink
-                          place={this.state}
-                          exact
-                          to={`/OneEvent/${item._id}`}
-                        >
-                          <CardMedia
-                            // className={classes.media}
-
-                            className="card-image"
-                            image={item.image}
-                            title="Event"
-                          />
-                        </NavLink>
-                        <div className="card-container-bottom">
-                          <div className="avatar-group">
-                           
-                          </div>
-
-                          <div className="avatar-group-btn">
-                            {/* <AddBtn /> */}
-                          </div>
-
-                          <div className="avatar-group-btn">
-                          <NavLink
-                          // place={this.state}
-                          exact
-                          to={`/OneEvent/${item._id}`}
-                        >
-                          <ViewEventBtn />
-                          </NavLink>
-                        
-                            
-                          </div>
-                          
+                          <div>{/* <RetirerBtn /> */}</div>
                         </div>
                       </Card>
 
@@ -515,9 +553,6 @@ class Home extends Component {
                   )}
                 </Marker>
               ))}
-
-
-
             </Map>
           </div>
 
@@ -529,97 +564,55 @@ class Home extends Component {
             <React.Fragment>
               <CssBaseline />
               <Container maxWidth="md">
-                <h2 className="title">Lundi 17 Mai 2020</h2>
-
-                <Grid container spacing={2}>
-                  {/* ///MAP SUR LES EVENT INDIVIDUELS */}
-                  {this.state.soloSports.map((item, index) => (
-                    <Grid item xs={12} sm={6} md={4}>
-                      <Card key={index}>
-                        <CardHeader
-                          avatar={<Avatar aria-label="recipe"><img src={item.creator.image}/></Avatar>}
-                          title={item.title}
-                          subheader={
-                            <Moment format="DD MMM YYYY - HH:mm">
-                              {item.date}
-                            </Moment>
-                          }
-                        />
-                        <NavLink
-                          place={this.state}
-                          exact
-                          to={`/OneEvent/${item._id}`}
-                        >
-                          <CardMedia
-                            // className={classes.media}
-
-                            className="card-image"
-                            image={item.image}
-                            title="Event"
+                <h2 className="title"></h2>
+                <div className="main-container content-position-view">
+                  <Grid container spacing={2}>
+                    {/* ///MAP SUR LES EVENT INDIVIDUELS */}
+                    {filteredEvents.map((item, index) => (
+                      <Grid item xs={12} sm={6} md={4}>
+                        <Card className="zIndexCard" key={index}>
+                          <CardHeader
+                            // avatar={<Avatar aria-label="recipe"><img src={item.creator.image}/></Avatar>}
+                            title={item.title}
+                            subheader={
+                              <Moment format="DD MMM YYYY - HH:mm">
+                                {item.date}
+                              </Moment>
+                            }
                           />
-                        </NavLink>
-                        <div className="card-container-bottom">
-                          <div className="avatar-group">
-                     
-                          </div>
-                        
-                          <div className="avatar-group-btn">
                           <NavLink
-                          // place={this.state}
-                          exact
-                          to={`/OneEvent/${item._id}`}
-                        >
-                          <ViewEventBtn />
-                        
-                            </NavLink>
+                            place={this.state}
+                            exact
+                            to={`/OneEvent/${item._id}`}
+                          >
+                            <CardMedia
+                              // className={classes.media}
+
+                              className="card-image"
+                              image={item.image}
+                              title="Event"
+                            />
+                          </NavLink>
+                          <div className="card-container-bottom">
+                            <div className="avatar-group"></div>
+
+                            <div className="avatar-group-btn">
+                              <NavLink
+                                // place={this.state}
+                                exact
+                                to={`/OneEvent/${item._id}`}
+                              >
+                                <ViewEventBtn />
+                              </NavLink>
+                            </div>
                           </div>
+                        </Card>
+                      </Grid>
+                    ))}
 
-                         
-                        </div>
-                      </Card>
-                    </Grid>
-                  ))}
-
-                  {/* //MAP SUR LES EVENT EN EQUIPE           */}
-
-                  {this.state.teamSports.map((item, index) => (
-                    <Grid item xs={12} sm={6} md={4}>
-                      <Card key={index}>
-                        <CardHeader
-                          avatar={<Avatar aria-label="recipe">R</Avatar>}
-                          title={item.title}
-                          subheader={
-                            <Moment format="DD MMM YYYY - HH:mm">
-                              {item.date}
-                            </Moment>
-                          }
-                        />
-                        <NavLink exact to={`/OneEvent/${item._id}`}>
-                          <CardMedia
-                            // className={classes.media}
-                            className="card-image"
-                            image={item.image}
-                            title="Event"
-                          />
-                        </NavLink>
-                        <div className="card-container-bottom">
-                          <div className="avatar-group">
-                         
-                          </div>
-
-                          <div className="avatar-group-btn">
-                            {/* <AddBtn /> */}
-                            <NavLink exact to={`/OneEvent/${item._id}`}>
-                            <ViewEventBtn />
-                            </NavLink>
-                         
-                            {/* <RetirerBtn /> */}
-                          </div>
-                        </div>
-                      </Card>
-                    </Grid>
-                  ))}
-                </Grid>
+                    {/* //MAP SUR LES EVENT EN EQUIPE           */}
+                  </Grid>
+                </div>
               </Container>
             </React.Fragment>
           </div>

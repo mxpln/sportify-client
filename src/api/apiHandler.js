@@ -143,4 +143,8 @@ export default {
   //   .then((res)=>res.data)
   //   .catch(errorHandler)
   // }
+
+  getAllEvents() {
+    return service.get("/api/events").then((res) => res.data).catch(errorHandler)
+  }
 };

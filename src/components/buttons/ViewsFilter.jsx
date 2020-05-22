@@ -144,19 +144,19 @@ console.log("mesParticipations", mesParticipations)
             <Container maxWidth="md">
          
 
-              <TabPanel>
-                
+            <div className="main-container content-position-view">
+                <Grid container spacing={2}>
               {mesEvents.map((item, index)=> (
 
 
-                <Grid container spacing={2}>
+                
                   <Grid item xs={12} sm={6} md={4}>
                   
                     <Card>
-                    <h1>{item.title}</h1>
+               
                       <CardHeader
                         key={index}
-                        // title={item.title}
+                        title={item.title}
                         subheader={
                           <Moment format="DD MMM YYYY - HH:mm">
                             {item.date}
@@ -184,9 +184,10 @@ console.log("mesParticipations", mesParticipations)
                       </div>
                     </Card>
                   </Grid>
-                </Grid>
+                
                 ))}
-              </TabPanel>
+                </Grid>
+              </div>
             </Container>
           </React.Fragment>
         )}
@@ -196,20 +197,20 @@ console.log("mesParticipations", mesParticipations)
           <React.Fragment>
             <CssBaseline />
             <Container maxWidth="md">
-              <TabPanel>
-
+            <div className="main-container content-position-view">
+ <Grid container spacing={2}>
               {mesParticipations.map((item, index)=> (
              
               
 
-                <Grid container spacing={2}>
+               
                   <Grid item xs={12} sm={6} md={4}>
                   
                     <Card>
-                    <h1>{item.title}</h1>
+                
                       <CardHeader
-                        avatar={<Avatar aria-label="recipe">R</Avatar>}
-                        // title={item.title}
+                        // avatar={<Avatar aria-label="recipe">R</Avatar>}
+                        title={item.title}
                         subheader={
                           <Moment format="DD MMM YYYY - HH:mm">
                             {/* {item.date} */}
@@ -236,9 +237,10 @@ console.log("mesParticipations", mesParticipations)
                       </div>
                     </Card>
                   </Grid>
-                </Grid>
+             
                 ))}
-              </TabPanel>
+                   </Grid>
+              </div>
               
             </Container>
           </React.Fragment>

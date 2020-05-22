@@ -40,6 +40,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
 const labels = {
+ 
   1: "(débutant)",
   2: "(intermédiaire)",
   3: "(avancé)",
@@ -54,8 +55,8 @@ const useStyles = makeStyles({
 });
 
 const HoverRating = ({ ratingValue }) => {
-  const [value, setValue] = React.useState(1);
-  const [hover, setHover] = React.useState(1);
+  const [value, setValue] = React.useState(0);
+  const [hover, setHover] = React.useState(0);
   const classes = useStyles();
 
   return (

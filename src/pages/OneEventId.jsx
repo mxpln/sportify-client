@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import axios from "axios";
 import apiHandler from "../api/apiHandler";
-
+import Chat from "../components/buttons/Chat"
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import Moment from "react-moment";
 import "moment-timezone";
@@ -13,6 +13,8 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Grid from "@material-ui/core/Grid";
+
+import TestChat from '../components/buttons/TestChat'
 
 
 import UserContext from "../components/Auth/UserContext";
@@ -367,31 +369,30 @@ export default class OneEventId extends Component {
             <h2 className="title">Participants</h2>
 
             {this.state.type === "individual" ? (
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <div className="team-container">
-                    <div className="flex-between">
-                      <div className="flex-between">
-                        {/* <div className="pic-avatar-container"></div>
-                        <h3 className="title"></h3> */}
-                        {this.state.participants.map((item, index) => (
-                          <img
-                            className="pic-avatar-container"
-                            key={index}
-                            src={item.image}
-                          />
-                        ))}
+               
 
-                        {this.state.participants.map((item, index) => (
-                          <h3 className="title" key={index}>
-                            {item.firstName} {item.lastName}
-                          </h3>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </Grid>
-              </Grid>
+               <div className="team-container">
+              <Grid container spacing={3}>
+                 <div className="flex-between">
+                       <Grid item xs={12}>
+                     {this.state.participants.map((item, index) => (
+                   <div className="position-player-participants">
+                   
+                       <img
+                         className="pic-avatar-container"
+                         key={index}
+                         src={item.image}
+                       />
+                       <h3 className="title" key={index}>
+                         {item.firstName} {item.lastName}
+                       </h3>
+                    
+                 </div>
+                     ))}
+             </Grid>
+                   </div>
+           </Grid>
+               </div>
             ) : (
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
@@ -441,9 +442,11 @@ export default class OneEventId extends Component {
             )}
 
             <h2 className="title">Messagerie</h2>
-            <div>
-              <div className="img-container"></div>
-            </div>
+            
+           <div className="chat-container">
+                <TestChat />
+              </div>
+            
 
             <div>
               {this.context.user &&
@@ -469,6 +472,7 @@ export default class OneEventId extends Component {
           </div>
         </Container>
       </React.Fragment>
+     
     );
   }
 }

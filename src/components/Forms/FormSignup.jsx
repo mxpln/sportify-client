@@ -253,15 +253,15 @@ class FormSignup extends Component {
                 <h3 className="title">Sports favoris</h3>
 
                 <Grid container spacing={3}>
-                  <Grid item xs={4}>
+                  <Grid item xs={12} md={6}>
                     <Search clbk={this.handleSearch} />
                   </Grid>
 
-                  <Grid item xs={4}>
+                  <Grid item xs={6} md={3}>
                     <Level ratingValue={this.handleRating} />
                   </Grid>
 
-                  <Grid item xs={4}>
+                  <Grid item xs={6} md={3}>
                     <AddBtn clbk={this.SubmitPref} />
                   </Grid>
                 </Grid>
