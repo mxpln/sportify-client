@@ -419,10 +419,7 @@ class Home extends Component {
                     startDate={this.handleStartDate}
                   />
                 </Grid>
-                <Grid item xs={12} sm={8} md={2}>
-                  {/* <RechercheBtn /> */}
-                  <btn onClick={this.handleFilters}>RECHERCHER</btn>
-                </Grid>
+                
                 <Grid item xs={6} sm={2} md={1}>
                   <FilterIconBtn clbk={this.toggleFilter} />
                   {/* <button className ="largeurTotale" onClick={this.toggleFilter}>Filter</button> */}

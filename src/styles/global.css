@@ -510,7 +510,7 @@ box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
 .zIndexTest{
   z-index: 100;
   position: relative;
-  top: -315px;
+  top: -335px;
   width: 30px;
   height: 30px;
   text-align: center;
@@ -519,7 +519,7 @@ box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
   color: white;
   font-weight: 500;
   border-radius: 100%;
-  left:210px;
+  left:230px;
 }
 
 .map-position {
@@ -627,8 +627,17 @@ box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
   margin-bottom: 20px;
 
 }
-.backGroundChat{
+/* .backGroundChat{
   background-color:#3f51b53f;
   border-radius:8px;
 }
+ */
 
+ .MuiTypography-h5 {
+  display: inline-block !important;
+  max-width: 7em !important;
+  /* height: 1.5em !important; */
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+ }

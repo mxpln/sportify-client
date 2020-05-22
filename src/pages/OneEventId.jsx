@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 
-
 import axios from "axios";
 import apiHandler from "../api/apiHandler";
-import Chat from "../components/buttons/Chat"
+import Chat from "../components/buttons/Chat";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import Moment from "react-moment";
 import "moment-timezone";
@@ -14,8 +13,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Grid from "@material-ui/core/Grid";
 
-import TestChat from '../components/buttons/TestChat'
-
+import TestChat from "../components/buttons/TestChat";
 
 import UserContext from "../components/Auth/UserContext";
 import AddBtn from "../components/buttons/AddBtn";
@@ -66,6 +64,8 @@ export default class OneEventId extends Component {
     teamBLastName: [],
     teamAImage: [],
     teamBImage: [],
+    teamAName: [],
+    teamBName: [],
   };
 
   componentDidMount() {
@@ -109,6 +109,12 @@ export default class OneEventId extends Component {
           }),
           teamBImage: apiRes.data.teamB.map((item) => {
             return item.image;
+          }),
+          teamAName: apiRes.data.teamA.map((item) => {
+            return item.lastName + " " + item.firstName;
+          }),
+          teamBName: apiRes.data.teamB.map((item) => {
+            return item.lastName + " " + item.firstName;
           }),
           _id: apiRes.data._id,
         });
@@ -257,7 +263,9 @@ export default class OneEventId extends Component {
       );
     } else {
       displayImage = this.state.teamBImage.map((item, index) => (
-        <img key={index} className="pic-avatar-container" src={item} />
+        <div className="container-image">
+          <img key={index} className="pic-avatar-container" src={item} />
+        </div>
       ));
       displayOne = this.state.teamBFirstName.map((item, index) => (
         <h3 key={index} className="title space">
@@ -369,30 +377,26 @@ export default class OneEventId extends Component {
             <h2 className="title">Participants</h2>
 
             {this.state.type === "individual" ? (
-               
-
-               <div className="team-container">
-              <Grid container spacing={3}>
-                 <div className="flex-between">
-                       <Grid item xs={12}>
-                     {this.state.participants.map((item, index) => (
-                   <div className="position-player-participants">
-                   
-                       <img
-                         className="pic-avatar-container"
-                         key={index}
-                         src={item.image}
-                       />
-                       <h3 className="title" key={index}>
-                         {item.firstName} {item.lastName}
-                       </h3>
-                    
-                 </div>
-                     ))}
-             </Grid>
-                   </div>
-           </Grid>
-               </div>
+              <div className="team-container">
+                <Grid container spacing={3}>
+                  <div className="titlflex-between">
+                      {this.state.participants.map((item, index) => (
+                    <Grid item xs={12}>
+                        <div className="title position-player-participants">
+                          <img
+                            className="pic-avatar-container"
+                            key={index}
+                            src={item.image}
+                          />
+                          {/* <h3 className="title" key={index}>
+                            {item.firstName} {item.lastName}
+                          </h3> */}
+                        </div>
+                    </Grid>
+                      ))}
+                  </div>
+                </Grid>
+              </div>
             ) : (
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
@@ -408,7 +412,7 @@ export default class OneEventId extends Component {
                             src={item}
                           />
                         ))}
-
+{/* 
                         {this.state.teamAFirstName.map((item, index) => (
                           <h3 key={index} className="title space">
                             {item}
@@ -419,7 +423,7 @@ export default class OneEventId extends Component {
                             {" "}
                             {item}
                           </h3>
-                        ))}
+                        ))} */}
                       </div>
                     </div>
                   </div>
@@ -432,8 +436,8 @@ export default class OneEventId extends Component {
                       <div className="flex-between">
                         {displayImage}
 
-                        {displayOne}
-                        {displayTwo}
+                        {/* {displayOne}
+                        {displayTwo} */}
                       </div>
                     </div>
                   </div>
@@ -442,11 +446,10 @@ export default class OneEventId extends Component {
             )}
 
             <h2 className="title">Messagerie</h2>
-            
-           <div className="chat-container">
-                <TestChat />
-              </div>
-            
+
+            <div className="chat-container">
+              <TestChat />
+            </div>
 
             <div>
               {this.context.user &&
@@ -472,7 +475,6 @@ export default class OneEventId extends Component {
           </div>
         </Container>
       </React.Fragment>
-     
     );
   }
 }
