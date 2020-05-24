@@ -10,7 +10,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import UserContext from "../Auth/UserContext";
 import { withUser } from "../Auth/withUser";
-import ViewEventBtn from "./ViewEventBtn"
 
 import { NavLink } from "react-router-dom";
 
@@ -88,12 +87,6 @@ const SwipeableTemporaryDrawer = (props) => {
         {context.isLoggedIn && (
           <img src={context.user.image} className="img-container-burger"></img>
         )}
-        {!context.isLoggedIn && (
-          <img
-            src="/media/standard_profile.png"
-            className="img-container-burger"
-          ></img>
-        )}
 
         <div className="title-container-burger">
           {/* <ConsumingContext /> */}
@@ -103,31 +96,41 @@ const SwipeableTemporaryDrawer = (props) => {
         </div>
       </div>
 
+
+      {context.isLoggedIn && (
+<>
       <div className="divider-section">
         <Divider />
       </div>
 
-      <div className="menu-list">
-        <NavLink exact to="/">
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <HomeIcon color="primary"/>
-              </ListItemIcon>
-              <ListItemText className="text-list black-font">Accueil</ListItemText>
-            </ListItem>
-          </List>
-        </NavLink>
-      </div>
+        <div className="menu-list">
+          <NavLink exact to="/">
+            <List>
+              <ListItem>
+                <ListItemIcon>
+                  <HomeIcon color="primary" />
+                </ListItemIcon>
+                <ListItemText className="text-list black-font">
+                  Accueil
+                </ListItemText>
+              </ListItem>
+            </List>
+          </NavLink>
+        </div>
+        </>
+      )}
+
       {context.isLoggedIn && (
         <div className="menu-list">
           <NavLink exact to="/profile">
             <List>
               <ListItem>
                 <ListItemIcon>
-                  <PersonIcon color="primary"/>
+                  <PersonIcon color="primary" />
                 </ListItemIcon>
-                <ListItemText className="text-list black-font">Mon profil</ListItemText>
+                <ListItemText className="text-list black-font">
+                  Mon profil
+                </ListItemText>
               </ListItem>
             </List>
           </NavLink>
@@ -150,14 +153,14 @@ const SwipeableTemporaryDrawer = (props) => {
         </div>
       )}
 
-   
       {context.isLoggedIn && (
+        <>
         <div className="menu-list">
           <NavLink exact to="/myEvents">
             <List>
               <ListItem>
                 <ListItemIcon>
-                  <CheckIcon color="primary"/>
+                  <CheckIcon color="primary" />
                 </ListItemIcon>
                 <ListItemText className="text-list black-font ">
                   Mes évenements
@@ -166,11 +169,14 @@ const SwipeableTemporaryDrawer = (props) => {
             </List>
           </NavLink>
         </div>
-      )}
       <div className="divider-section">
         <Divider />
       </div>
+      </>
+      )}
+      
       {!context.isLoggedIn && (
+       
         <div className="menu-list color-menu-icon-inscription margin-burger">
           <NavLink exact to="/signup">
             <List>
@@ -181,12 +187,10 @@ const SwipeableTemporaryDrawer = (props) => {
             </List>
           </NavLink>
         </div>
+      
       )}
 
-
       {!context.isLoggedIn && (
-
-        
         <div className="menu-list color-menu-icon-connexion">
           <NavLink exact to="/signin">
             <List>
@@ -205,10 +209,8 @@ const SwipeableTemporaryDrawer = (props) => {
           <NavLink exact to="/" onClick={handleLogout}>
             <List>
               {" "}
-              <ListItem >
-                <ListItemIcon>
-                  {/* <ExitToAppIcon /> */}
-                </ListItemIcon>
+              <ListItem>
+                <ListItemIcon>{/* <ExitToAppIcon /> */}</ListItemIcon>
                 <ListItemText className="text-list">Déconnexion</ListItemText>
               </ListItem>{" "}
             </List>
@@ -216,10 +218,7 @@ const SwipeableTemporaryDrawer = (props) => {
         </div>
       )}
     </div>
-    
   );
-
-
 
   return (
     <div>
