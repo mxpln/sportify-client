@@ -653,7 +653,7 @@ box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
 .margin-pic-participants {
   margin: 0 10px;
   display:flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 
