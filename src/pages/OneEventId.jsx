@@ -15,6 +15,12 @@ import Grid from "@material-ui/core/Grid";
 
 import TestChat from "../components/buttons/TestChat";
 
+
+import ReturnBtn from "../components/buttons/ReturnBtn"
+
+import { NavLink } from "react-router-dom";
+
+
 import UserContext from "../components/Auth/UserContext";
 import AddBtn from "../components/buttons/AddBtn";
 import RetirerBtn from "../components/buttons/RetirerBtn";
@@ -290,6 +296,14 @@ export default class OneEventId extends Component {
         <Container maxWidth="md">
           <div className="main-container">
             <h2 className="title-container"></h2>
+
+            <NavLink exact to="/myEvents">
+
+            <div className="return-btn">
+          <ReturnBtn />
+            </div>
+</NavLink>
+
             <div className="img-position">
               <img className="img-container" src={this.state.image} />
             </div>
@@ -379,7 +393,7 @@ export default class OneEventId extends Component {
             {this.state.type === "individual" ? (
               <div className="team-container">
                 <Grid container spacing={3}>
-                  <div className="flex-between">
+                  <div className="flex-between margin-pic-participants">
                       {this.state.participants.map((item, index) => (
                     <Grid item xs={12}>
                         <div className="title position-player-participants">
@@ -406,11 +420,15 @@ export default class OneEventId extends Component {
                     <div className="flex-between">
                       <div className="flex-between">
                         {this.state.teamAImage.map((item, index) => (
-                          <img
-                            key={index}
-                            className="pic-avatar-container"
-                            src={item}
-                          />
+                          <div className="margin-pic-participants-team ">
+
+                          
+<img
+  key={index}
+  className="pic-avatar-container"
+  src={item}
+/>
+</div>
                         ))}
 {/* 
                         {this.state.teamAFirstName.map((item, index) => (
@@ -434,7 +452,12 @@ export default class OneEventId extends Component {
                     <h3 className="title">Team 2</h3>
                     <div className="flex-between">
                       <div className="flex-between">
-                        {displayImage}
+                      <div className="margin-pic-participants-team ">
+
+                          
+{displayImage}
+
+    </div>
 
                         {/* {displayOne}
                         {displayTwo} */}

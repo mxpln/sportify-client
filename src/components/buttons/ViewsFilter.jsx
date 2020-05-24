@@ -65,8 +65,8 @@ const useStyles = makeStyles({
 class CenteredTabs extends Component {
   static contextType = UserContext;
   state = {
-    myEvents: true,
-    myParticipations: false,
+    myEvents: false,
+    myParticipations: true,
     event: [],
   };
 
@@ -133,64 +133,11 @@ console.log("mesParticipations", mesParticipations)
             indicatorColor="primary"
             centered
           >
-            <Tab onClick={this.handleTabOne} label="mes évenements" />
+          
             <Tab onClick={this.handleTabTwo} label="Mes participations" />
+            <Tab onClick={this.handleTabOne} label="mes évenements" />
           </Tabs>
         </AppBar>
-
-        {this.state.myEvents && (
-          <React.Fragment>
-            <CssBaseline />
-            <Container maxWidth="md">
-         
-
-            <div className="main-container content-position-view">
-                <Grid container spacing={2}>
-              {mesEvents.map((item, index)=> (
-
-
-                
-                  <Grid item xs={12} sm={6} md={4}>
-                  
-                    <Card>
-               
-                      <CardHeader
-                        key={index}
-                        title={item.title}
-                        subheader={
-                          <Moment format="DD MMM YYYY - HH:mm">
-                            {item.date}
-                          </Moment>
-                        }
-                      />
-                      <NavLink exact to={`/OneEvent/${item._id}`}>
-                      <CardMedia
-                        // className={classes.media}
-                        className="card-image"
-                        image={item.image}
-                        title="Event"
-                      />
-                      </NavLink>
-                      <div className="card-container-bottom">
-                        <div className="avatar-group">
-                      
-                        </div>
-
-                        <div className="avatar-group-btn">
-                          <NavLink exact to={`/OneEvent/${item._id}`}>
-                          <ViewEventBtn />
-                          </NavLink>
-                        </div>
-                      </div>
-                    </Card>
-                  </Grid>
-                
-                ))}
-                </Grid>
-              </div>
-            </Container>
-          </React.Fragment>
-        )}
 
         {this.state.myParticipations && (
           
@@ -246,6 +193,62 @@ console.log("mesParticipations", mesParticipations)
           </React.Fragment>
           
         )}
+
+        {this.state.myEvents && (
+          <React.Fragment>
+            <CssBaseline />
+            <Container maxWidth="md">
+         
+
+            <div className="main-container content-position-view">
+                <Grid container spacing={2}>
+              {mesEvents.map((item, index)=> (
+
+
+                
+                  <Grid item xs={12} sm={6} md={4}>
+                  
+                    <Card>
+               
+                      <CardHeader
+                        key={index}
+                        title={item.title}
+                        subheader={
+                          <Moment format="DD MMM YYYY - HH:mm">
+                            {item.date}
+                          </Moment>
+                        }
+                      />
+                      <NavLink exact to={`/OneEvent/${item._id}`}>
+                      <CardMedia
+                        // className={classes.media}
+                        className="card-image"
+                        image={item.image}
+                        title="Event"
+                      />
+                      </NavLink>
+                      <div className="card-container-bottom">
+                        <div className="avatar-group">
+                      
+                        </div>
+
+                        <div className="avatar-group-btn">
+                          <NavLink exact to={`/OneEvent/${item._id}`}>
+                          <ViewEventBtn />
+                          </NavLink>
+                        </div>
+                      </div>
+                    </Card>
+                  </Grid>
+                
+                ))}
+                </Grid>
+              </div>
+            </Container>
+          </React.Fragment>
+        )}
+
+        
         
       </div>
     );

@@ -234,6 +234,7 @@ ul {
   display: inline-flex;
   font-size: 12px;
   color: #3f51b5;
+  margin-bottom: 10px
 }
 
 .img-position img {
@@ -640,4 +641,19 @@ box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
+ }
+
+ 
+ .return-btn{
+  margin-bottom: 30px;
+  height: 30px;
+}
+
+.margin-pic-participants {
+  margin: 0 10px;
+}
+
+
+.margin-pic-participants-team {
+  margin-bottom: 10px ;
  }

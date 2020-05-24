@@ -75,6 +75,7 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+
   // deleteSports() {
   //   return service
   //     .patch(`/api/user/sports/${id}`)
@@ -138,11 +139,11 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
-  // getUserSport() {
-  //   return service.get(`/api/user/${id}/sports`)
-  //   .then((res)=>res.data)
-  //   .catch(errorHandler)
-  // }
+  getUserSport() {
+    return service.get(`/api/user/sports`)
+      .then((res) => res.data)
+      .catch(errorHandler)
+  },
 
   getAllEvents() {
     return service.get("/api/events").then((res) => res.data).catch(errorHandler)

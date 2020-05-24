@@ -11,6 +11,10 @@ import { NavLink } from "react-router-dom";
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
+import BurgerTwo from "../components/buttons/BurgerTwo";
+import { withUser } from "../components/Auth/withUser";
+import UserContext from "../components/Auth/UserContext";
+
 
 import AddBtn from "../components/buttons/AddBtn";
 import Avatar from "@material-ui/core/Avatar";
@@ -75,6 +79,7 @@ const Map = ReactMapboxGl({
 // }));
 
 class Home extends Component {
+  static contextType = UserContext;
   state = {
     isSwitchOn: false,
     isFilterOn: false,
@@ -105,7 +110,7 @@ class Home extends Component {
     teamB: [],
     allTeamsPics: [],
     teamSportName: [],
-
+    preferences:[],
     soloCreatorPic: [],
     soloTitleEvent: [],
     soloDate: [],
@@ -129,7 +134,7 @@ class Home extends Component {
     this.setState({
       imageClicked: null,
     });
-    console.log("CLICK");
+    // console.log("CLICK");
   };
 
   toggle = () => {
@@ -192,81 +197,36 @@ class Home extends Component {
       team: newValue,
     });
   };
-  handleFavorite = (value) => {
-    this.setState({
-      favoriteSports: value,
-    });
-  };
+  handleFavoriteToggle = (event)=> {
+    if (this.state.favoriteSports==false) {
+      this.setState({
+        favoriteSports : true
+      })
+    }
+    else {
+      this.setState({
+        favoriteSports : false
+      })
+    }
+  }
+  filterByFavorite = (item) => {
+    console.log(item);
+    // console.log(this.state);
+    if (this.state.favoriteSports)
+    {
+      console.log('-------------');
+      console.log(item.sportType.sport);
+      console.log(this.state.preferences);
+      if(this.state.preferences.find(x => x.favoriteSport.sport === item.sportType.sport && x.level === item.level)) {
+       return item;
+      }
+    } else { return item}
+   
+  }
+      
+      //  item.sportType.sport.includes(this.state.favoriteSport.sport.map((i)=>{return i})) 
+      //  && item.level.includes(this.state.preferences.map((i)=>{return i.favoriteSport.level}))} else {return item}
 
-  handleFilters = (value) => {
-    // let recherche = this.state.allSports; /// ARRAYS CONTENANT LA RECHERCHE
-    // let teamType = this.state.allSports; /// ARRAYS CONTENANT SOLO OU TEAM
-    // let level = this.state.allSports;
-    // let startDateSelected = this.state.allSports;
-    // let endDateSelected = this.state.allSports;
-    // //---recherche--V
-    // if (this.state.search !== "") {
-    //   recherche = this.state.allSports.filter((items) => {
-    //     return items.sportType.sport.includes(this.state.search);
-    //   });
-    // }
-    // ///team type ---v
-    // if (this.state.team === "Individuel") {
-    //   teamType = this.state.allSports.filter((items) => {
-    //     return items.type.includes("individual");
-    //   });
-    // }
-    // if (this.state.team === "En équipe") {
-    //   teamType = this.state.allSports.filter((items) => {
-    //     return items.type.includes("collective");
-    //   });
-    // }
-    // ///level --v /// facile modéré confirmé  beginner intermediate advanced
-    // if (this.state.level === "facile") {
-    //   level = this.state.allSports.filter((items) => {
-    //     return items.level.includes("beginner");
-    //   });
-    // }
-    // if (this.state.level === "modéré") {
-    //   level = this.state.allSports.filter((items) => {
-    //     return items.level.includes("intermediate");
-    //   });
-    // }
-    // if (this.state.level === "confirmé") {
-    //   level = this.state.allSports.filter((items) => {
-    //     return items.level.includes("advanced");
-    //   });
-    // }
-    // /// dates --v
-    // if (this.state.startDate !== null) {
-    //   startDateSelected = this.state.allSports.filter((items) => {
-    //     return moment(items.date).isAfter(this.state.startDate);
-    //   });
-    // }
-    // if (this.state.endDate !== null) {
-    //   endDateSelected = this.state.allSports.filter((items) => {
-    //     return moment(items.date).isBefore(this.state.endDate);
-    //   });
-    // }
-    // let megaFilter = this.state.allSports
-    //   .filter((i) => {
-    //     recherche.includes(i);
-    //   })
-    //   .filter((i) => {
-    //     teamType.includes(i);
-    //   })
-    //   .filter((i) => {
-    //     level.includes(i);
-    //   })
-    //   .filter((i) => {
-    //     startDateSelected.includes(i);
-    //   })
-    //   .filter((i) => {
-    //     endDateSelected.includes(i);
-    //   });
-    // console.log(recherche);
-  };
-  //team => event.type
 
   filterBySports = (item) => {
     return item.sportType.sport.includes(this.state.search);
@@ -298,11 +258,11 @@ class Home extends Component {
       );
     }
     if (this.state.startDate && !this.state.endDate) {
-      console.log("start date", item.date);
+      // console.log("start date", item.date);
       return moment(item.date).isSameOrAfter(this.state.startDate, "day");
     }
     if (!this.state.startDate && this.state.endDate) {
-      console.log("end date", item.date);
+      // console.log("end date", item.date);
       return moment(item.date).isSameOrBefore(this.state.endDate);
     } else return true;
   };
@@ -378,18 +338,35 @@ class Home extends Component {
       .catch((apiError) => {
         console.log(apiError);
       });
+
+    apiHandler
+      .getUserSport()
+      .then((res) => {
+        // console.log("getUserSports------->", res.preferences);
+        this.setState({
+          preferences: res.preferences,
+        })
+      })
+      .catch((apiError) => {
+        console.log(apiError);
+      });
   };
 
   render() {
-    console.log(this.state);
+    // if (this.context.user === null) {
+    //   return false;
+    // }
+    console.log('allsport', this.state.favoriteSports);
+    // console.log("USER", this)
     const filteredEvents = this.state.allSports
       .filter(this.filterBySports)
       .filter(this.filterByLevel)
       .filter(this.filterByDate)
-      .filter(this.filterByTeam);
-    console.log(filteredEvents, "< this is output");
+      .filter(this.filterByTeam)
+      .filter(this.filterByFavorite);
+console.log('FILTRES', filteredEvents)
+console.log("FAVORIS", this.state.preferences)
 
-    // console.log(this.state.allSports.)
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
         lng: position.coords.longitude,
@@ -408,17 +385,14 @@ class Home extends Component {
           <div className="color margin-top">
             <Container maxWidth="md">
               <Grid className="test-search" container spacing={2}>
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid item xs={12} sm={8} md={10}>
                   {/* <div className="margin-top"> */}
                   <Search clbk={this.handleChange} />
                   {/* </div> */}
                 </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                  <DatePicker
-                    endDate={this.handleEndDate}
-                    startDate={this.handleStartDate}
-                  />
-                </Grid>
+                {/* <Grid item xs={2} sm={4} md={2}>
+                <TeamSelector parentCallback={this.handleTeam} />
+                </Grid> */}
                 
                 <Grid item xs={6} sm={2} md={1}>
                   <FilterIconBtn clbk={this.toggleFilter} />
@@ -444,18 +418,34 @@ class Home extends Component {
             <div className="position-filtered-container">
               <Container maxWidth="md">
                 <Grid container spacing={2}>
+
+                <Grid
+                    className="position-filtered"
+                    item
+                    xs={12}
+                    sm={6}
+                    md={6}
+                  >
+<DatePicker
+                    endDate={this.handleEndDate}
+                    startDate={this.handleStartDate}
+                  />
+</Grid>
                   <Grid
                     className="position-filtered"
                     item
                     xs={12}
-                    sm={12}
-                    md={12}
+                    sm={6}
+                    md={6}
                   >
                     <Level ratingValue={this.handleRating} />
                     <TeamSelector parentCallback={this.handleTeam} />
 
+                    
+                    
+
                     <FavoriteSportsFilter
-                      parentCallback={this.handleFavorite}
+                      parentCallback={this.handleFavoriteToggle}
                     />
                   </Grid>
                 </Grid>
@@ -511,7 +501,7 @@ class Home extends Component {
                             </Moment>
                           }
                         />
-                        <NavLink exact to={`/OneEvent/${item._id}`}>
+                        
                           <CardMedia
                             // className={classes.media}
 
@@ -519,22 +509,29 @@ class Home extends Component {
                             image={item.image}
                             title="event"
                           />
-                        </NavLink>
+                     
+                        {this.context.isLoggedIn === false && (
                         <div className="card-container-bottom">
                           <div className="avatar-group"></div>
-
                           <div className="avatar-group-btn">
-                            <NavLink
-                              // place={this.state}
-                              exact
-                              to={`/OneEvent/${item._id}`}
-                            >
+                                <BurgerTwo />
+                          </div>
+                          </div>
+                        )}
+
+                        {this.context.isLoggedIn === true && (
+                        <div className="card-container-bottom">
+                          <div className="avatar-group"></div>
+                          <div className="avatar-group-btn">
+                          <NavLink exact to={`/OneEvent/${item._id}`}> 
                               <ViewEventBtn />
                             </NavLink>
                           </div>
+                          </div>
+                        )}
 
-                          <div>{/* <RetirerBtn /> */}</div>
-                        </div>
+                       
+                       
                       </Card>
 
                       <div
@@ -561,7 +558,7 @@ class Home extends Component {
             <React.Fragment>
               <CssBaseline />
               <Container maxWidth="md">
-                <h2 className="title"></h2>
+                {/* <h2 className="title"></h2> */}
                 <div className="main-container content-position-view">
                   <Grid container spacing={2}>
                     {/* ///MAP SUR LES EVENT INDIVIDUELS */}
@@ -577,32 +574,33 @@ class Home extends Component {
                               </Moment>
                             }
                           />
-                          <NavLink
-                            place={this.state}
-                            exact
-                            to={`/OneEvent/${item._id}`}
-                          >
+                       
                             <CardMedia
-                              // className={classes.media}
-
                               className="card-image"
                               image={item.image}
                               title="Event"
                             />
-                          </NavLink>
-                          <div className="card-container-bottom">
-                            <div className="avatar-group"></div>
-
-                            <div className="avatar-group-btn">
-                              <NavLink
-                                // place={this.state}
-                                exact
-                                to={`/OneEvent/${item._id}`}
-                              >
-                                <ViewEventBtn />
-                              </NavLink>
-                            </div>
+                         
+                         {this.context.isLoggedIn === false && (
+                        <div className="card-container-bottom">
+                          <div className="avatar-group"></div>
+                          <div className="avatar-group-btn">
+                                <BurgerTwo />
                           </div>
+                          </div>
+                        )}
+
+                        {this.context.isLoggedIn === true && (
+                        <div className="card-container-bottom">
+                          <div className="avatar-group"></div>
+                          <div className="avatar-group-btn">
+                          <NavLink exact to={`/OneEvent/${item._id}`}> 
+                              <ViewEventBtn />
+                            </NavLink>
+                          </div>
+                          </div>
+                        )}
+                       
                         </Card>
                       </Grid>
                     ))}
