@@ -9,7 +9,7 @@
     "@material-ui/lab": "^4.0.0-alpha.53",
     "@material-ui/pickers": "^3.2.10",
     "@material-ui/styles": "^4.9.14",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "date-fns": "^2.13.0",
     "litepicker": "^1.3.4",
     "litepicker-module-ranges": "0.0.3",
